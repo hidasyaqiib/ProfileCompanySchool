@@ -1,0 +1,19 @@
+{
+  "title": "Sambutan Kepala Madrasah",
+  "headmaster": {
+    "name": "Rahmawati, S.Pd.I., M.Pd.",
+    "position": "Kepala Madrasah",
+    "school": "MI NU 02 Situwangi",
+    "image": "/assets/image/headmaster.webp"
+  },
+  "speech": {
+    "greeting": "Assalamu'alaikum warahmatullahi wabarakatuh",
+    "content": [
+      "Alhamdulillahi robbil'alamiin, segala puji syukur kita panjatkan ke hadirat Alloh SWT karena atas rahmat dan karunia-Nya, website resmi MI NU 02 Situwangi ini dapat hadir sebagai sarana informasi, komunikasi, dan publikasi bagi seluruh warga madrasah/sekolah serta masyarakat luas.",
+      "Website madrasah ini kami kembangkan sebagai wujud komitmen dalam meningkatkan layanan pendidikan yang transparan, informatif, dan adaptif terhadap perkembangan teknologi informasi. Melalui media ini, kami berharap berbagai informasi terkait kegiatan madrasah, prestasi peserta didik, tenaga pendidik, serta program-program unggulan madrasah dapat diakses dengan mudah dan cepat.",
+      "MI NU 02 Situwangi senantiasa berupaya menciptakan lingkungan belajar yang rapi, bersih dan berkarakter, guna membentuk peserta didik yang berilmu, berakhlaklakul karimah, mampu membaca Al Quran, menguasai teknologi serta berwawasan lingkungan. Peran serta orang tua, alumni, dan masyarakat sangat kami harapkan demi kemajuan dan keberhasilan pendidikan di madrasah ini.",
+      "Akhir kata, kami mengucapkan terima kasih kepada seluruh pihak yang telah berkontribusi dalam pengembangan website madrasah ini. Semoga dapat memberikan manfaat dan menjadi jembatan komunikasi yang efektif bagi kita semua."
+    ],
+    "closing": "Wassalamu'alaikum warahmatullahi wabarakatuh."
+  }
+}   
