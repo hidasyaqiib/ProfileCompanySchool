@@ -115,7 +115,7 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
     );
 
     return (
-        <section className={`relative min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 lg:py-24 ${className} overflow-visible`}>
+        <section className={`relative min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 lg:py-24 pt-32 ${className} overflow-visible`}>
             <div className="container mx-auto px-4">
                 <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${imagePosition === 'right' ? 'lg:grid-flow-col-dense' : ''
                     }`}>

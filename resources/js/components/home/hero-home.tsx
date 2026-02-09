@@ -29,7 +29,7 @@ const HeroSection: React.FC = () => {
 
             {/* information card */}
 
-            <div className="grid grid-cols-3 absolute w-2xl h-32 bottom-[-50px] left-1/2 transform -translate-x-1/2 bg-[#2ECC71] bg-opacity-90 backdrop-blur-md rounded-2xl shadow-lg p-6 space-x-8 z-0">
+            <div className="grid grid-cols-3 absolute w-2xl h-32 bottom-[-50px] left-1/2 transform -translate-x-1/2 bg-[#2ECC71] bg-opacity-90 backdrop-blur-md rounded-2xl shadow-lg p-6 space-x-8 z-50">
                 <div className="flex flex-col items-center justify-center">
                     <span className="text-white font-bold text-2xl">500+</span>
                     <span className="text-white font-medium text-sm">Siswa Aktif</span>
