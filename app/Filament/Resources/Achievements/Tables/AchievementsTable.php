@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -23,6 +24,18 @@ class AchievementsTable
 
                 TextColumn::make('name_student')
                     ->label('Nama Peserta')
+                    ->listWithLineBreaks()
+                    ->bulleted()
+                    ->state(function ($record) {
+                        $names = $record->name_student;
+                        if (is_string($names)) {
+                            return explode(',', $names);
+                        }
+                        if (is_array($names) && count($names) === 1 && str_contains($names[0] ?? '', ',')) {
+                            return explode(',', $names[0]);
+                        }
+                        return $names;
+                    })
                     ->searchable(),
 
                 TextColumn::make('description')
@@ -41,7 +54,7 @@ class AchievementsTable
 
                 ImageColumn::make('image')
                     ->label('Bukti Foto')
-                    ->disk('public') 
+                    ->disk('public')
                     ->height(70)
                     ->width(70),
             ])
@@ -49,6 +62,7 @@ class AchievementsTable
                 //
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
             ])

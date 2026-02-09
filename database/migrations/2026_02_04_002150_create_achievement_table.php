@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('achievement', function (Blueprint $table) {
             $table->id();
             $table->string('title_achievement');
-            $table->string('name_student');
+            $table->json('name_student');
             $table->text('description')->nullable();
             $table->date('date_achievement');
             $table->enum('level_achievement', ['District', 'Provincial', 'National', 'International']);

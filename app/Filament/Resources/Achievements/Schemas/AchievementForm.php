@@ -6,6 +6,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -19,8 +20,11 @@ class AchievementForm
                     ->label('Nama Lomba')
                     ->required(),
 
-                TextInput::make('name_student')
-                    ->label('Nama Peserta')
+                TagsInput::make('name_student')
+                    ->label('Nama Peserta (bisa banyak)')
+                    ->placeholder('Ketik nama lalu tekan enter')
+                    ->splitKeys(['Tab', ',', 'Enter', ' '])
+                    ->separator(',')
                     ->required(),
 
                 DatePicker::make('date_achievement')
@@ -47,7 +51,7 @@ class AchievementForm
                     ->imageResizeTargetHeight('1080')
                     ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
-                    ->helperText('Maksimal 5MB. Gambar akan otomatis dikonversi ke WebP.')
+                    ->helperText('Maksimal 5MB. Format file: jpg, jpeg, png, webp.')
                     ->required(),
 
                 RichEditor::make('description')

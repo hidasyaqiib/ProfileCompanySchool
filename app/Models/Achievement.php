@@ -21,6 +21,7 @@ class Achievement extends Model
     ];
 
     protected $casts = [
+        'name_student' => 'array',
         'date_achievement' => 'date',
     ];
 
