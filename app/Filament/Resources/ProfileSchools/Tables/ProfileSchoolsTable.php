@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,13 +16,14 @@ class ProfileSchoolsTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->searchable(),
                 TextColumn::make('content')
-                    ->limit(75)
+                    ->limit(80)
                     ->wrap(),
-                TextColumn::make('address')
-                    ->searchable(),
+                ImageColumn::make('image')
+                    ->label('Foto Profil Sekolah')
+                    ->disk('public')
+                    ->height(150)
+                    ->width(150),
             ])
             ->filters([
                 //
