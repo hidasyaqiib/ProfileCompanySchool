@@ -9,7 +9,9 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use \Filament\Notifications\Notification;
 
 class FacilitiesTable
 {
@@ -17,6 +19,17 @@ class FacilitiesTable
     {
         return $table
             ->columns([
+                ToggleColumn::make('is_featured')
+                    ->label('Ditampilkan ke Home Page ?')
+                    ->onColor('success')
+                    ->offColor('secondary')
+                    ->afterStateUpdated(function ($state) {
+                        Notification::make()
+                            ->title('Status Berhasil Diperbarui')
+                            ->success()
+                            ->send();
+                    }),
+
                 TextColumn::make('name')
                     ->label('Nama Fasilitas')
                     ->searchable(),

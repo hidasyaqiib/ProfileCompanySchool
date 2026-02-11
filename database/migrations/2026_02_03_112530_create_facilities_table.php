@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->json('image');
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });
     }

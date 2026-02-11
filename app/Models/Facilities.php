@@ -15,10 +15,12 @@ class Facilities extends Model
         'name',
         'description',
         'image',
+        'is_featured',
     ];
 
     protected $casts = [
         'image' => 'array',
+        'is_featured' => 'boolean',
     ];
 
     protected static function booted(): void
