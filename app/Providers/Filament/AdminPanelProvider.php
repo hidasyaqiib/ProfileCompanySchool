@@ -26,7 +26,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('portal-admin')
             ->brandName("MI NU 02 SITUWANGI")
             ->login()
             ->colors([
