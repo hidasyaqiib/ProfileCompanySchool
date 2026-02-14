@@ -23,7 +23,7 @@ class AchievementForm
                 TagsInput::make('name_student')
                     ->label('Nama Peserta (bisa banyak)')
                     ->placeholder('Ketik nama lalu tekan enter')
-                    ->splitKeys(['Tab', ',', 'Enter', ' '])
+                    ->splitKeys(['Tab', ',', 'Enter'])
                     ->separator(',')
                     ->required(),
 

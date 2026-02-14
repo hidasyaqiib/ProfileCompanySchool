@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('portal-admin')
             ->brandName("MI NU 02 SITUWANGI")
             ->login()
+            ->passwordReset()
             ->colors([
                 'primary' => Color::Amber,
             ])
