@@ -18,7 +18,7 @@ class StructureResource extends Resource
 {
     protected static ?string $model = Structure::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-group';
 
     protected static ?string $recordTitleAttribute = 'Struktur Organsasi';
 
@@ -27,6 +27,13 @@ class StructureResource extends Resource
     protected static ?string $modelLabel = 'Struktur Organisasi';
 
     protected static ?string $pluralModelLabel = 'Struktur Organisasi';
+
+    protected static ?int $navigationSort = 7;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Data Kepegawaian';
+    }
 
     public static function form(Schema $schema): Schema
     {

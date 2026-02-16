@@ -18,7 +18,7 @@ class AdmissionResource extends Resource
 {
     protected static ?string $model = Admission::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-plus';
 
     protected static ?string $recordTitleAttribute = 'Penerimaan Siswa Baru';
 
@@ -27,6 +27,13 @@ class AdmissionResource extends Resource
     protected static ?string $modelLabel = 'Penerimaan Siswa Baru';
 
     protected static ?string $pluralModelLabel = 'Penerimaan Siswa Baru';
+
+    protected static ?int $navigationSort = 9;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Penerimaan Siswa Baru';
+    }
 
     public static function form(Schema $schema): Schema
     {
