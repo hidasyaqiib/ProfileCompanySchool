@@ -18,7 +18,7 @@ class FacilitiesResource extends Resource
 {
     protected static ?string $model = Facilities::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-building-office-2';
 
     protected static ?string $recordTitleAttribute = 'Fasilitas Sekolah';
 
@@ -27,6 +27,13 @@ class FacilitiesResource extends Resource
     protected static ?string $modelLabel = 'Fasilitas Sekolah';
 
     protected static ?string $pluralModelLabel = 'Fasilitas Sekolah';
+
+    protected static ?int $navigationSort = 5;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Profil Madrasah';
+    }
 
     public static function form(Schema $schema): Schema
     {

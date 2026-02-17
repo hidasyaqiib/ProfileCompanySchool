@@ -52,6 +52,7 @@ class AchievementForm
                     ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
                     ->helperText('Maksimal 5MB. Format file: jpg, jpeg, png, webp.')
+                    ->columnSpanFull()
                     ->required(),
 
                 RichEditor::make('description')

@@ -18,7 +18,7 @@ class TeacherResource extends Resource
 {
     protected static ?string $model = Teacher::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $recordTitleAttribute = 'List Guru & Staff';
 
@@ -27,7 +27,14 @@ class TeacherResource extends Resource
     protected static ?string $modelLabel = 'Guru & Staff';
 
     protected static ?string $pluralModelLabel = 'Guru & Staff';
-    
+
+    protected static ?int $navigationSort = 8;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Data Kepegawaian';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return TeacherForm::configure($schema);
