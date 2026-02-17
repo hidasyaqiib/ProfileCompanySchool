@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
 import { Link } from "@inertiajs/react";
 import { Download, Phone } from "lucide-react";
-import path from "path";
 
 const menus = [
     { label: "Beranda", path: "/" },
@@ -9,7 +8,6 @@ const menus = [
         label: "Tentang Kami",
         submenu: [
             { label: "Profil", path: "/profil" },
-            { label: "Visi & Misi", path: "/visi-misi" },
             { label: "Fasilitas", path: "/fasilitas" },
             { label: "Prestasi", path: "/prestasi" }
         ],
@@ -38,36 +36,68 @@ const Navbar: React.FC = () => {
     const [openMenu, setOpenMenu] = useState<number | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const menuRefs = useRef<(HTMLLIElement | null)[]>([]);
+    const navbarRef = useRef<HTMLElement | null>(null);
 
-    // Function to calculate distance from mouse to menu area
-    const getDistanceFromMenuArea = useCallback((mouseX: number, mouseY: number, menuIndex: number) => {
+    // Function to check if mouse is within navbar and dropdown area
+    const isMouseInNavbarArea = useCallback((mouseX: number, mouseY: number, menuIndex: number) => {
+        const navbarElement = navbarRef.current;
         const menuElement = menuRefs.current[menuIndex];
-        if (!menuElement) return Infinity;
 
-        const rect = menuElement.getBoundingClientRect();
-        // Create expanded area (padding around menu)
-        const padding = 20;
-        const expandedRect = {
-            left: rect.left - padding,
-            right: rect.right + padding,
-            top: rect.top - padding,
-            bottom: rect.bottom + padding
-        };
+        if (!navbarElement || !menuElement) return false;
 
-        // Check if mouse is within expanded area
-        if (
-            mouseX >= expandedRect.left &&
-            mouseX <= expandedRect.right &&
-            mouseY >= expandedRect.top &&
-            mouseY <= expandedRect.bottom
-        ) {
-            return 0; // Mouse is within tolerance area
+        const navbarRect = navbarElement.getBoundingClientRect();
+
+        // Get dropdown element (submenu)
+        const dropdownElement = menuElement.querySelector('ul') as HTMLElement;
+        let dropdownRect = null;
+        if (dropdownElement) {
+            dropdownRect = dropdownElement.getBoundingClientRect();
         }
 
-        // Calculate minimum distance to expanded area
-        const dx = Math.max(0, Math.max(expandedRect.left - mouseX, mouseX - expandedRect.right));
-        const dy = Math.max(0, Math.max(expandedRect.top - mouseY, mouseY - expandedRect.bottom));
-        return Math.sqrt(dx * dx + dy * dy);
+        // Reduced padding for more strict detection
+        const padding = 10;
+
+        // More strict navbar area - especially for top boundary
+        const navbarArea = {
+            left: navbarRect.left - padding,
+            right: navbarRect.right + padding,
+            top: navbarRect.top - 5, // Very small tolerance above navbar
+            bottom: navbarRect.bottom + padding
+        };
+
+        // Create dropdown area if exists
+        let dropdownArea = null;
+        if (dropdownRect) {
+            dropdownArea = {
+                left: dropdownRect.left - padding,
+                right: dropdownRect.right + padding,
+                top: dropdownRect.top - 5,
+                bottom: dropdownRect.bottom + padding
+            };
+        }
+
+        // Check if mouse is within navbar area
+        const inNavbar = (
+            mouseX >= navbarArea.left &&
+            mouseX <= navbarArea.right &&
+            mouseY >= navbarArea.top &&
+            mouseY <= navbarArea.bottom
+        );
+
+        // Check if mouse is within dropdown area
+        const inDropdown = dropdownArea && (
+            mouseX >= dropdownArea.left &&
+            mouseX <= dropdownArea.right &&
+            mouseY >= dropdownArea.top &&
+            mouseY <= dropdownArea.bottom
+        );
+
+        // Additional check: if mouse is above navbar (even slightly), close dropdown
+        if (mouseY < navbarRect.top - 5) {
+            return false;
+        }
+
+        return inNavbar || inDropdown;
     }, []);
 
     const handleMouseEnter = useCallback((index: number) => {
@@ -84,13 +114,13 @@ const Navbar: React.FC = () => {
             clearTimeout(timeoutRef.current);
         }
 
-        // Set timeout with mouse position tracking
+        // Much faster timeout with immediate mouse position tracking
         timeoutRef.current = setTimeout(() => {
             const handleMouseMove = (e: MouseEvent) => {
-                const distance = getDistanceFromMenuArea(e.clientX, e.clientY, index);
+                const isInArea = isMouseInNavbarArea(e.clientX, e.clientY, index);
 
-                // If mouse is more than 50px away from menu area, close dropdown
-                if (distance > 50) {
+                // If mouse is outside navbar and dropdown area, close dropdown
+                if (!isInArea) {
                     setOpenMenu(null);
                     document.removeEventListener('mousemove', handleMouseMove);
                 }
@@ -99,13 +129,41 @@ const Navbar: React.FC = () => {
             // Add temporary mouse tracking
             document.addEventListener('mousemove', handleMouseMove);
 
-            // Clean up after 500ms regardless
+            // Clean up after shorter time
             setTimeout(() => {
                 document.removeEventListener('mousemove', handleMouseMove);
-            }, 500);
+            }, 200);
 
-        }, 100); // Small delay before starting distance check
-    }, [getDistanceFromMenuArea]);
+        }, 10); // Much faster response - almost immediate
+    }, [isMouseInNavbarArea]);
+
+    // Global mouse movement detector for immediate response
+    React.useEffect(() => {
+        if (openMenu === null) return;
+
+        const globalMouseHandler = (e: MouseEvent) => {
+            if (navbarRef.current) {
+                const navbarRect = navbarRef.current.getBoundingClientRect();
+
+                // If mouse is above navbar (with very small tolerance), immediately close
+                if (e.clientY < navbarRect.top - 10) {
+                    setOpenMenu(null);
+                }
+
+                // Also check if mouse is too far from navbar area
+                const isInArea = isMouseInNavbarArea(e.clientX, e.clientY, openMenu);
+                if (!isInArea) {
+                    setOpenMenu(null);
+                }
+            }
+        };
+
+        document.addEventListener('mousemove', globalMouseHandler);
+
+        return () => {
+            document.removeEventListener('mousemove', globalMouseHandler);
+        };
+    }, [openMenu, isMouseInNavbarArea]);
 
     // Clean up timeout on unmount
     React.useEffect(() => {
@@ -116,8 +174,32 @@ const Navbar: React.FC = () => {
         };
     }, []);
 
+    // Add global mouse leave detection for navbar
+    const handleNavbarMouseLeave = useCallback(() => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+
+        timeoutRef.current = setTimeout(() => {
+            setOpenMenu(null);
+        }, 20); // Much faster - almost immediate
+    }, []);
+
+    // Cancel close timeout when mouse enters navbar
+    const handleNavbarMouseEnter = useCallback(() => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+            timeoutRef.current = null;
+        }
+    }, []);
+
     return (
-        <nav className="w-full flex justify-center bg-transparent py-6 fixed top-0 left-0 z-30">
+        <nav
+            ref={navbarRef}
+            className="w-full flex justify-center bg-transparent py-6 fixed top-0 left-0 z-100000"
+            onMouseEnter={handleNavbarMouseEnter}
+            onMouseLeave={handleNavbarMouseLeave}
+        >
             <div className="flex items-center bg-white rounded-full shadow px-4 py-2 min-h-[64px]">
                 {/* Logo */}
                 <Link href="/" className="flex items-center mr-4">
@@ -180,7 +262,7 @@ const Navbar: React.FC = () => {
                                             >
                                                 <Link
                                                     href={sub.path}
-                                                    className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#4FD488] whitespace-nowrap transition-colors duration-200"
+                                                    className="block px-5 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#27ae60] whitespace-nowrap transition-colors duration-200"
                                                 >
                                                     {sub.label}
                                                 </Link>
@@ -191,7 +273,7 @@ const Navbar: React.FC = () => {
                             ) : (
                                 <Link
                                     href={menu.path!}
-                                    className="font-medium text-gray-700 hover:text-[#4FD488] transition-colors duration-200"
+                                    className="font-medium text-gray-700 hover:text-[#27ae60] transition-colors duration-200"
                                 >
                                     {menu.label}
                                 </Link>
@@ -203,7 +285,7 @@ const Navbar: React.FC = () => {
                 <div className="ml-8">
                     <a
                         href="/contact-us"
-                        className="flex items-center bg-[#2ECC71] hover:bg-[#27AE60] text-white font-semibold rounded-full px-6 py-2 transition-all duration-200"
+                        className="flex items-center bg-gradient-to-b from-[#2ECC71] to-[#27ae60] text-white font-semibold rounded-full px-6 py-2 transition-all duration-200"
                     >
                         Kontak Kami
                         <Phone className="ml-2 w-4 h-4" />

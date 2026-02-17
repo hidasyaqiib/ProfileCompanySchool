@@ -56,11 +56,11 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
     const ImageSection = () => (
         <div className="flex items-center justify-center p-4 lg:p-8">
             <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-600 to-green-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 min-w-full w-full"></div>
                 <img
                     src={speechData.headmaster.image}
                     alt={`${speechData.headmaster.name} - ${speechData.headmaster.position}`}
-                    className="relative rounded-2xl shadow-2xl max-h-[70vh] w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="relative max-h-[100vh] w-full object-cover"
                     loading="lazy"
                 />
             </div>
@@ -85,7 +85,7 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
                         {speechData.speech.content.map((paragraph, index) => (
                             <p
                                 key={index}
-                                className="font-poppins text-gray-700 text-base lg:text-lg leading-relaxed text-justify"
+                                className="font-poppins text-gray-700 text-[12px] lg:text-[16px] leading-relaxed text-justify"
                             >
                                 {paragraph}
                             </p>

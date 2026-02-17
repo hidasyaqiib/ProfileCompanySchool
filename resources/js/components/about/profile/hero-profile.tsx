@@ -5,7 +5,7 @@ const SpeechSection: React.FC = () => {
         <section className="flex grid grid-cols-2 item-center justify-center h-150 px-16 pt-32 bg-gray-100">
             {/* left column */}
             <div className="px-16 py-2">
-                <img src="/assets/image/hero-profile.webp" alt="Hero Profile" className="w-full h-auto rounded-lg shadow-lg" />
+                <img src="/assets/image/model-profile-dummy.webp" alt="Hero Profile" className="w-md h-auto absolute bottom-64 left-40 rounded-lg " />
             </div>
 
             {/* right column */}
