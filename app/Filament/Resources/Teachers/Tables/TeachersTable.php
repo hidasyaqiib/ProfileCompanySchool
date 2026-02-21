@@ -34,7 +34,7 @@ class TeachersTable
                     ->badge()
                     ->formatStateUsing(fn(string $state): string => match ($state) {
                         'Teacher' => 'Guru Pengajar',
-                        'Staff' => 'Staf Tata Usaha',
+                        'Staff' => 'Pengurus dan Administrasi',
                         'Chief' => 'Kepala Sekolah',
                         default => $state,
                     })
