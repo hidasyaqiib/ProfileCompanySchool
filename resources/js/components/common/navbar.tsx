@@ -28,7 +28,7 @@ const menus = [
         label: "Galeri",
         path: "/galeri",
     },
-    { label: "Lab Tour", path: "/lab-tour" },
+    { label: "Tour Sekolah", path: "/school-tour" },
     { label: "PPDB", path: "/ppdb" },
 ];
 

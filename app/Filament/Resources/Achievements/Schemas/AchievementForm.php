@@ -24,8 +24,7 @@ class AchievementForm
                     ->label('Nama Peserta (bisa banyak)')
                     ->placeholder('Ketik nama lalu tekan enter')
                     ->splitKeys(['Tab', ',', 'Enter'])
-                    ->separator(',')
-                    ->required(),
+                    ->separator(','),
 
                 DatePicker::make('date_achievement')
                     ->label('Tanggal Perolehan')
@@ -52,8 +51,7 @@ class AchievementForm
                     ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
                     ->helperText('Maksimal 5MB. Format file: jpg, jpeg, png, webp.')
-                    ->columnSpanFull()
-                    ->required(),
+                    ->columnSpanFull(),
 
                 RichEditor::make('description')
                     ->label('Deskripsi')

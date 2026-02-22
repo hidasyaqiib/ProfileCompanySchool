@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SchooltourController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,8 +18,10 @@ Route::get('/berita', function () {
 
 // STAFF ROUTES
 Route::get('/struktur-organisasi', [StaffController::class, 'structure'])->name('structure');
-
 Route::get('/guru', [StaffController::class, 'teacher'])->name('teacher');
+
+// SCHOOL TOUR ROUTE
+Route::get('/school-tour', [SchooltourController::class, 'schooltour'])->name('schooltour');
 
 // Authenticated routes
 Route::get('dashboard', function () {
