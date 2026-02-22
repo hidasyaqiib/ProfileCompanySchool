@@ -1,10 +1,12 @@
 import React from "react";
+import { FiEye } from "react-icons/fi";
+import { HiOutlineClipboardList } from "react-icons/hi";
 
 const VisiMission: React.FC = () => {
     return (
-        <section className="flex grid grid-cols-2 item-center justify-center h-150 px-16 pt-32 bg-white">
+        <section className="grid grid-cols-2 gap-8 px-16 py-16 bg-white">
             {/* left column */}
-            <div className="px-16 py-2">
+            <div className="flex flex-col justify-center">
                 <h1 className="text-[#2ECC71] font-poppins text-4xl font-semibold">
                     Visi <span className="text-black">&</span> Misi <span className="text-black">Sekolah</span>
                 </h1>
@@ -14,11 +16,7 @@ const VisiMission: React.FC = () => {
                     {/* Icon bulat hijau visi (eye/vision) */}
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#2ECC71] flex items-center justify-center">
                         {/* Eye icon (vision) */}
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path d="M1.5 12s4-7 10.5-7 10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12Z" stroke="currentColor" strokeWidth="2" fill="none" />
-                            <circle cx="12" cy="12" r="3" fill="white" stroke="currentColor" strokeWidth="2" />
-                            <circle cx="12" cy="12" r="1.5" fill="#2ECC71" />
-                        </svg>
+                       <FiEye className="text-white w-6 h-6"/>
                     </div>
                     <div className="flex-1">
                         <h2 className="font-poppins text-2xl text-black font-semibold mb-1">Visi Sekolah</h2>
@@ -33,27 +31,43 @@ const VisiMission: React.FC = () => {
                     {/* Icon bulat hijau misi (checklist) */}
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#2ECC71] flex items-center justify-center mt-1">
                         {/* Checklist icon */}
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" strokeWidth="2" fill="none" />
-                            <path d="M8 12l2 2 4-4" stroke="white" strokeWidth="2" fill="none" />
-                        </svg>
+                        <HiOutlineClipboardList className="text-white w-6 h-6"
+                        />
                     </div>
                     <div className="flex-1">
-                        <h2 className="font-poppins text-2xl text-black font-semibold mb-1">Misi Sekolah</h2>
-                        <ul className="custom-green-list font-poppins text-gray-700">
-                            <li>Menyelenggarakan proses pembelajaran yang inovatif dan berpusat pada siswa.</li>
-                            <li>Mengembangkan karakter dan nilai-nilai moral pada setiap siswa.</li>
-                            <li>Menyediakan fasilitas pendidikan yang mendukung pembelajaran efektif.</li>
-                            <li>Mendorong partisipasi aktif dari komunitas sekolah, termasuk orang tua dan masyarakat.</li>
-                            <li>Mempersiapkan siswa untuk menghadapi tantangan global melalui penguasaan teknologi dan bahasa asing.</li>
-                        </ul>
+                        <h2 className="font-poppins text-2xl text-black font-semibold mb-4">Misi Sekolah</h2>
+                        <ol className="font-poppins text-gray-700 space-y-3">
+                            <li className="flex items-start gap-3">
+                                <span className="text-red-500 font-bold text-lg min-w-[24px]">1.</span>
+                                <span>Menyelenggarakan proses pembelajaran yang inovatif dan berpusat pada siswa.</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="text-red-500 font-bold text-lg min-w-[24px]">2.</span>
+                                <span>Mengembangkan karakter dan nilai-nilai moral pada setiap siswa.</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="text-red-500 font-bold text-lg min-w-[24px]">3.</span>
+                                <span>Menyediakan fasilitas pendidikan yang mendukung pembelajaran efektif.</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="text-red-500 font-bold text-lg min-w-[24px]">4.</span>
+                                <span>Mendorong partisipasi aktif dari komunitas sekolah, termasuk orang tua dan masyarakat.</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="text-red-500 font-bold text-lg min-w-[24px]">5.</span>
+                                <span>Mempersiapkan siswa untuk menghadapi tantangan global melalui penguasaan teknologi dan bahasa asing.</span>
+                            </li>
+                        </ol>
                     </div>
+                </div>
+                <div className="mt-6 text-gray-600 font-poppins text-sm">
+                    Visi dan misi ini menjadi arah langkah MI NU 02 Situwangi dalam mencetak generasi unggul.
                 </div>
             </div>
 
             {/* right column */}
-            <div className="px-16 py-2">
-                <img src="/assets/image/visi-mission.webp" alt="Visi Mission" className="w-full h-auto rounded-lg shadow-lg" />
+            <div className="flex justify-center items-center">
+                <img src="/assets/image/visi-mission.webp" alt="Visi Mission" className="w-full h-auto max-w-md rounded-lg shadow-lg" />
             </div>
         </section>
     )

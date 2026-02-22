@@ -53,14 +53,14 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
 
     const speechData = data || defaultData;
 
-    const ImageSection = () => (
+        const ImageSection = () => (
         <div className="flex items-center justify-center p-4 lg:p-8">
             <div className="relative group">
                 <div className="absolute inset-0 min-w-full w-full"></div>
                 <img
                     src={speechData.headmaster.image}
                     alt={`${speechData.headmaster.name} - ${speechData.headmaster.position}`}
-                    className="relative max-h-[100vh] w-full object-cover"
+                    className="relative max-h-[50vh] sm:max-h-[60vh] lg:max-h-[100vh] w-full object-cover"
                     loading="lazy"
                 />
             </div>
@@ -97,7 +97,7 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
                     </p>
 
                     <div className="mt-8 pt-6 border-t border-gray-200">
-                        <div className="text-right">
+                        <div className="text-left">
                             <p className="font-poppins text-gray-800 font-semibold text-lg">
                                 {speechData.headmaster.name}
                             </p>
@@ -115,9 +115,9 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
     );
 
     return (
-        <section className={`relative min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 lg:py-24 pt-32 ${className} overflow-visible`}>
+        <section className={`relative min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 lg:py-24 pt-24  ${className} overflow-visible`}>
             <div className="container mx-auto px-4">
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${imagePosition === 'right' ? 'lg:grid-flow-col-dense' : ''
+                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-center ${imagePosition === 'right' ? 'lg:grid-flow-col-dense' : ''
                     }`}>
                     <div className={imagePosition === 'right' ? 'lg:col-start-2' : ''}>
                         <ImageSection />

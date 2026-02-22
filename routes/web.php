@@ -3,16 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
-use App\Http\Controllers\GlobalController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\NewsController;
 
 // Public routes
-Route::get('/', [GlobalController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('/profil', [GlobalController::class, 'profile'])->name('profile');
+Route::get('/profil', [AboutUsController::class, 'profile'])->name('profile');
 
-Route::get('/berita', function () {
-    return Inertia::render('public/news/news');
-})->name('news');
+Route::get('/berita', [NewsController::class, 'news'])->name('news');
 
 // Authenticated routes
 Route::get('dashboard', function () {

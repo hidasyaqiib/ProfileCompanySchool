@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import FacilityCard from '../components/facility/facility-card';
+import { IoIosArrowForward } from "react-icons/io";
 
 interface Facility {
     id: number;
