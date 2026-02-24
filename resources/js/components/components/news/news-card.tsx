@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from '@inertiajs/react';
+import { FiArrowRight } from 'react-icons/fi';
 
 interface NewsCardProps {
     id: number;
@@ -12,19 +13,16 @@ interface NewsCardProps {
     status: 'Draft' | 'Published' | 'Archived';
 }
 
-const statusConfig: Record<string, { label: string; className: string }> = {
-    Published: {
-        label: 'Published',
-        className: 'bg-none outline outline-1 outline-[#2ECC71] text-[#2ECC71]',
-    },
-    Draft: {
-        label: 'Draft',
-        className: 'bg-none outline outline-1 outline-amber-500 text-amber-500',
-    },
-    Archived: {
-        label: 'Archived',
-        className: 'bg-none outline outline-1 outline-gray-500 text-gray-500',
-    },
+const statusDotColor: Record<string, string> = {
+    Published: 'bg-emerald-500',
+    Draft: 'bg-amber-500',
+    Archived: 'bg-gray-400',
+};
+
+const statusLabelColor: Record<string, string> = {
+    Published: 'text-emerald-600',
+    Draft: 'text-amber-600',
+    Archived: 'text-gray-500',
 };
 
 const NewsCard: React.FC<NewsCardProps> = ({
@@ -37,7 +35,22 @@ const NewsCard: React.FC<NewsCardProps> = ({
     status,
 }) => {
     const formatDate = (dateString: string): string => {
+        const now = new Date();
         const date = new Date(dateString);
+        const diffMs = now.getTime() - date.getTime();
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+        if (diffHours < 1) {
+            return 'Baru saja';
+        }
+        if (diffHours < 24) {
+            return `${diffHours} jam lalu`;
+        }
+        if (diffDays < 7) {
+            return `${diffDays} hari lalu`;
+        }
+
         return date.toLocaleDateString('id-ID', {
             year: 'numeric',
             month: 'long',
@@ -45,93 +58,57 @@ const NewsCard: React.FC<NewsCardProps> = ({
         });
     };
 
-    const badge = statusConfig[status] ?? statusConfig.Published;
+    const stripHtml = (html: string): string => html.replace(/<[^>]*>/g, '');
 
-    // Function to truncate title with 18 characters per line, max 2 lines, "..." only on last line
-    const truncateTitle = (title: string): string => {
-        const maxCharsPerLine = 18;
-        const maxLines = 2;
-        const maxTotalChars = maxCharsPerLine * maxLines;
-
-        if (title.length <= maxCharsPerLine) {
-            return title;
-        }
-
-        if (title.length <= maxTotalChars) {
-            return title;
-        }
-
-        // Truncate and add "..." only at the end
-        return title.substring(0, maxTotalChars - 3).trim() + '...';
+    const estimateReadTime = (text: string): number => {
+        const words = stripHtml(text).split(/\s+/).filter(Boolean).length;
+        return Math.max(1, Math.ceil(words / 200));
     };
 
-    // Function to truncate content with 18 characters per line, max 2 lines
-    const truncateContent = (content: string): string => {
-        // Remove HTML tags if any
-        const plainText = content.replace(/<[^>]*>/g, '');
-        const maxCharsPerLine = 20;
-        const maxLines = 3;
-        const maxTotalChars = maxCharsPerLine * maxLines;
-
-        if (plainText.length <= maxCharsPerLine) {
-            return plainText;
-        }
-
-        if (plainText.length <= maxTotalChars) {
-            return plainText;
-        }
-
-        return plainText.substring(0, maxTotalChars - 3).trim() + '...';
-    };
+    const dotColor = statusDotColor[status] ?? statusDotColor.Published;
+    const labelColor = statusLabelColor[status] ?? statusLabelColor.Published;
 
     return (
-        <article className="group w-54 h-[440px] flex flex-col overflow-hidden rounded-2xl bg-none transition-all duration-300 hover:-translate-y-1">
-            {/* Thumbnail */}
-            <div className="relative h-52 overflow-hidden flex-shrink-0">
-                <img
-                    src={thumbnail ?? '/assets/image/hero-home.webp'}
-                    alt={title}
-                    className="h-full w-full rounded-lg object-cover transition-transform duration-500"
-                    loading="lazy"
-                />
-            </div>
-
-            {/* Content */}
-            <div className="mb-3 grid grid-cols-1 sm:grid-cols-2 gap-1 sm:items-center">
-                {/* Status Badge and Date */}
-                <div className="mb-3 flex items-center justify-between flex-shrink-0">
-                    <div
-                        className={`w-fit h-fit rounded-lg px-2 py-1 text-xs font-medium ${badge.className}`}
-                    >
-                        {badge.label}
-                    </div>
-
-                    <time className="text-xs text-gray-500" dateTime={published_at}>
-                        {formatDate(published_at)}
-                    </time>
+        <Link href={`/berita/${slug}`} className="group block rounded-xl bg-white p-4 shadow h-full">
+            <article className="flex h-full flex-col">
+                {/* Thumbnail */}
+                <div className="relative mb-4 aspect-4/3 overflow-hidden rounded-xl">
+                    <img
+                        src={thumbnail ?? '/assets/image/hero-home.webp'}
+                        alt={title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                    />
                 </div>
 
-                {/* Title - Fixed height with proper line breaking */}
-                <h3 className="mb-2 text-base font-poppins font-semibold leading-tight text-gray-900 flex-shrink-0 line-clamp-2 h-12 overflow-hidden break-words">
-                    {truncateTitle(title)}
+                {/* Source & Date */}
+                <div className="mb-2 flex items-center gap-2 text-xs text-gray-500">
+                    <span className={`inline-block h-2.5 w-2.5 shrink-0 rounded-full ${dotColor}`} />
+                    {/* <span className={`font-semibold ${labelColor}`}>{status}</span> */}
+                    <span className="font-semibold text-gray-800 truncate">{author}</span>
+                    <span aria-hidden="true">·</span>
+                    <time dateTime={published_at}>{formatDate(published_at)}</time>
+                </div>
+
+                {/* Title */}
+                <h3 className="mb-2 text-base font-bold leading-snug text-gray-900 line-clamp-2 break-all group-hover:text-emerald-700 transition-colors">
+                    {title}
                 </h3>
 
-                {/* Content - Fixed height with line clamp, max 2 lines */}
-                <p className="mb-2 text-sm leading-relaxed text-gray-600 flex-1 line-clamp-2 h-10 overflow-hidden break-words">
-                    {truncateContent(content)}
+                {/* Excerpt */}
+                <p className="mb-4 grow text-sm leading-relaxed text-gray-500 line-clamp-3 break-all">
+                    {stripHtml(content)}
                 </p>
 
-                {/* Author - pushed to bottom */}
-                <div className="flex items-center gap-2 border-t border-gray-100 pt-3 flex-shrink-0 mt-auto">
-                    <div className="flex h-4 w-4 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                        <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                        </svg>
-                    </div>
-                    <span className="text-xs font-medium text-gray-700 truncate">{author}</span>
+                {/* Footer: category + read time */}
+                <div className="mt-auto flex items-center justify-end text-xs">
+                    <span className="flex items-center gap-1 text-emerald-700 font-semibold group-hover:underline transition-all">
+                        Baca selengkapnya
+                        <FiArrowRight className="h-4 w-4 text-emerald-700 group-hover:translate-x-1 transition-transform" />
+                    </span>
                 </div>
-            </div>
-        </article>
+            </article>
+        </Link>
     );
 };
 

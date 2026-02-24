@@ -28,7 +28,7 @@ interface NewsInShortProps {
 function SkeletonCard(): React.ReactElement {
     return (
         <div className="animate-pulse overflow-hidden rounded-2xl bg-white shadow-md w-54 h-96">
-            <div className="h-52 bg-gray-200 flex-shrink-0" />
+            <div className="h-52 bg-gray-200 shrink-0" />
             <div className="space-y-3 p-3 px-0.5 flex flex-col h-44">
                 <div className="flex items-center justify-between">
                     <div className="h-6 w-16 rounded bg-gray-200" />
@@ -96,7 +96,7 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
     }, [fetchFromApi, limit]);
 
     return (
-        <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white py-16">
+        <section className="relative overflow-hidden bg-linear-to-br from-gray-50 to-white py-16">
             {/* Background blobs */}
             <div className="pointer-events-none absolute top-10 left-10 h-32 w-32 rounded-full bg-emerald-400 opacity-5 blur-3xl" />
             <div className="pointer-events-none absolute right-20 bottom-20 h-40 w-40 rounded-full bg-emerald-500 opacity-5 blur-3xl" />
@@ -169,7 +169,7 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
 
                 {/* News grid */}
                 {!loading && !error && news.length > 0 && (
-                    <div className="flex flex-wrap gap-4 justify-start">
+                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                         {news.map((item) => (
                             <NewsCard
                                 key={item.id}
