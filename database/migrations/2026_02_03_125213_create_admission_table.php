@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('admission', function (Blueprint $table) {
             $table->id();
             $table->string('image');
+            $table->string('whatsapp_number')->nullable();
             $table->timestamps();
         });
     }

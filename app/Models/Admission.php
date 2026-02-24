@@ -13,6 +13,7 @@ class Admission extends Model
 
     protected $fillable = [
         'image',
+        'whatsapp_number',
     ];
 
     protected static function booted(): void
@@ -34,13 +35,11 @@ class Admission extends Model
 
                         $image = $manager->read($disk->path($originalPath));
 
-                        $image->scaleDown(width: 1080);
-
                         $pathInfo = pathinfo($originalPath);
                         $newFilename = $pathInfo['filename'] . '.webp';
                         $newPath = $pathInfo['dirname'] . '/' . $newFilename;
 
-                        $encoded = $image->toWebp(quality: 80);
+                        $encoded = $image->toWebp(quality: 100);
 
                         $disk->put($newPath, (string) $encoded);
 
