@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface HeroFacilityProps {
+interface HeroAchievementProps {
     breadcrumbs?: Array<{ label: string; href?: string }>;
     title?: string;
     description?: string;
@@ -10,16 +10,16 @@ interface HeroFacilityProps {
     className?: string;
 }
 
-const HeroFacility: React.FC<HeroFacilityProps> = ({
+const HeroAchievement: React.FC<HeroAchievementProps> = ({
     breadcrumbs = [
         { label: 'Tentang Kami' },
-        { label: 'Fasilitas' }
+        { label: 'Prestasi' }
     ],
-    title = 'Fasilitas',
-    description = 'SMK Telkom Sidoarjo menyediakan fasilitas modern yang lengkap untuk mendukung pembelajaran Teknologi dan Informatika (TI). Kami memiliki Laboratorium (Lab) praktik up-to-date (Lab Komputer, Jaringan, Telekomunikasi) dengan perangkat standar industri. Fasilitas ini memastikan siswa mendapat pengalaman praktikal maksimal, membuat lulusan siap kerja dan unggul dalam keterampilan teknis.',
-    ctaText = 'Jelajahi',
-    ctaLink = '#all-facilities',
-    heroImage = '/images/facility-hero.jpg',
+    title = 'Prestasi',
+    description = 'SMK Telkom Sidoarjo bangga dengan berbagai prestasi yang telah diraih siswa-siswi kami di bidang teknologi informasi, kompetisi akademik, dan kegiatan ekstrakurikuler. Prestasi ini membuktikan kualitas pendidikan dan dedikasi dalam mengembangkan potensi siswa untuk bersaing di tingkat lokal, nasional, maupun internasional.',
+    ctaText = 'Lihat Prestasi',
+    ctaLink = '#all-achievements',
+    heroImage = '/images/achievement-hero.jpg',
     className = ''
 }) => {
     const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -37,9 +37,9 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
         <section className={`relative min-h-screen bg-gray-50 overflow-hidden ${className}`}>
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 to-transparent" />
                 <div className="absolute inset-0" style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232ECC71' fill-opacity='0.1'%3E%3Cpath d='M30 5l6.18 12.52L50 20l-10.82 10.54L42 44l-12-6.32L18 44l2.82-13.46L10 20l13.82-2.48z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
                 }} />
             </div>
 
@@ -54,23 +54,22 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                                     {index > 0 && (
                                         <svg
                                             className="w-4 h-4 text-gray-400"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
                                             aria-hidden="true"
                                         >
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                                         </svg>
                                     )}
                                     {crumb.href ? (
                                         <a
                                             href={crumb.href}
-                                            className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                                            className="text-gray-500 hover:text-gray-700 transition-colors"
                                         >
                                             {crumb.label}
                                         </a>
                                     ) : (
-                                        <span className={index === breadcrumbs.length - 1 ? 'text-gray-900 font-medium' : 'text-gray-600'}>
+                                        <span className={index === breadcrumbs.length - 1 ? "text-[#2ECC71] font-medium" : "text-gray-500"}>
                                             {crumb.label}
                                         </span>
                                     )}
@@ -96,7 +95,7 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                                 href={ctaLink}
                                 onClick={handleCtaClick}
                                 className="inline-flex items-center px-8 py-4 bg-[#2ECC71] hover:bg-[#27ae60] text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                                aria-label={`${ctaText} - Jelajahi semua fasilitas`}
+                                aria-label={`${ctaText} - Lihat semua prestasi`}
                             >
                                 <span>{ctaText}</span>
                                 <svg
@@ -116,33 +115,23 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                     <div className="relative lg:order-last">
                         {/* 3D Perspective Container */}
                         <div className="relative transform perspective-1000 rotate-y-12">
-                            {/* Red Base Platform */}
-                            {/* <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-96 h-16 bg-gradient-to-r from-red-600 via-red-500 to-red-600 rounded-3xl shadow-2xl"
-                                 style={{
-                                     clipPath: 'polygon(10% 0%, 90% 0%, 95% 100%, 5% 100%)',
-                                     transform: 'rotateX(75deg) translateZ(-20px)'
-                                 }}> */}
-                                {/* Platform shine effect */}
-                                {/* <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-3xl" /> */}
-                            {/* </div> */}
-
-                            {/* Main Building Image */}
+                            {/* Main Achievement Image */}
                             <div className="relative z-10">
                                 <img
                                     src='/assets/image/logo.webp'
-                                    alt="Fasilitas SMK Telkom Sidoarjo - Gedung sekolah modern dengan laboratorium lengkap"
+                                    alt="Prestasi SMK Telkom Sidoarjo - Pencapaian siswa dalam berbagai kompetisi"
                                     className="w-full h-auto max-w-lg mx-auto object-cover"
                                     loading="eager"
                                     fetchPriority="high"
                                 />
-
-                                {/* Image overlay for depth */}
-                                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent rounded-2xl" /> */}
+                                {/* Achievement Trophy Overlay */}
+                                {/* <div className="absolute top-4 right-4 bg-[#2ECC71] text-white p-3 rounded-full shadow-lg">
+                                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M10 2L7.5 7H2l4.5 3.5L5 16l5-3 5 3-1.5-5.5L18 7h-5.5L10 2z" clipRule="evenodd" />
+                                    </svg>
+                                </div> */}
                             </div>
                         </div>
-
-                        {/* Background Glow Effect */}
-                        {/* <div className="absolute inset-0 bg-gradient-radial from-red-500/10 via-transparent to-transparent blur-3xl transform scale-150" /> */}
                     </div>
                 </div>
             </div>
@@ -157,4 +146,4 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
     );
 };
 
-export default HeroFacility;
+export default HeroAchievement;

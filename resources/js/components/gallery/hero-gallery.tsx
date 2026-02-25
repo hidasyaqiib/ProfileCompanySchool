@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface HeroFacilityProps {
+interface HeroGalleryProps {
     breadcrumbs?: Array<{ label: string; href?: string }>;
     title?: string;
     description?: string;
@@ -8,19 +8,23 @@ interface HeroFacilityProps {
     ctaLink?: string;
     heroImage?: string;
     className?: string;
+    totalImages?: number;
+    categories?: string[];
 }
 
-const HeroFacility: React.FC<HeroFacilityProps> = ({
+const HeroGallery: React.FC<HeroGalleryProps> = ({
     breadcrumbs = [
-        { label: 'Tentang Kami' },
-        { label: 'Fasilitas' }
+        { label: 'Home', href: '/' },
+        { label: 'Galeri' }
     ],
-    title = 'Fasilitas',
-    description = 'SMK Telkom Sidoarjo menyediakan fasilitas modern yang lengkap untuk mendukung pembelajaran Teknologi dan Informatika (TI). Kami memiliki Laboratorium (Lab) praktik up-to-date (Lab Komputer, Jaringan, Telekomunikasi) dengan perangkat standar industri. Fasilitas ini memastikan siswa mendapat pengalaman praktikal maksimal, membuat lulusan siap kerja dan unggul dalam keterampilan teknis.',
-    ctaText = 'Jelajahi',
-    ctaLink = '#all-facilities',
-    heroImage = '/images/facility-hero.jpg',
-    className = ''
+    title = 'Galeri MI NU 02 Situwangi',
+    description = 'Jelajahi momen-momen terbaik, kegiatan sekolah, prestasi siswa, dan fasilitas modern MI NU 02 Situwangi melalui dokumentasi visual yang menginspirasi. Saksikan perjalanan pendidikan teknologi informasi terdepan.',
+    ctaText = 'Jelajahi Galeri',
+    ctaLink = '#gallery-showcase',
+    heroImage = '/images/gallery-hero.jpg',
+    className = '',
+    totalImages = 150,
+    categories = ['Kegiatan Sekolah', 'Fasilitas', 'Prestasi', 'Pembelajaran']
 }) => {
     const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         if (ctaLink?.startsWith('#')) {
@@ -37,16 +41,16 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
         <section className={`relative min-h-screen bg-gray-50 overflow-hidden ${className}`}>
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent" />
                 <div className="absolute inset-0" style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%233b82f6' fill-opacity='0.1'%3E%3Cpath d='M20 4a16 16 0 100 32 16 16 0 000-32zm0 2a14 14 0 110 28 14 14 0 010-28z'/%3E%3Cpath d='M20 10a10 10 0 100 20 10 10 0 000-20zm0 2a8 8 0 110 16 8 8 0 010-16z'/%3E%3C/g%3E%3C/svg%3E")`,
                 }} />
             </div>
 
             <div className="relative max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 py-16 lg:py-24">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     {/* Content Column */}
-                    <div className="mt-24 space-y-4 lg:pr-8">
+                    <div className="mt-24 space-y-6 lg:pr-8">
                         {/* Breadcrumbs */}
                         <nav aria-label="Breadcrumb" className="flex items-center space-x-2 text-sm">
                             {breadcrumbs.map((crumb, index) => (
@@ -54,23 +58,22 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                                     {index > 0 && (
                                         <svg
                                             className="w-4 h-4 text-gray-400"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
                                             aria-hidden="true"
                                         >
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                                         </svg>
                                     )}
                                     {crumb.href ? (
                                         <a
                                             href={crumb.href}
-                                            className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                                            className="text-gray-500 hover:text-gray-700 transition-colors"
                                         >
                                             {crumb.label}
                                         </a>
                                     ) : (
-                                        <span className={index === breadcrumbs.length - 1 ? 'text-gray-900 font-medium' : 'text-gray-600'}>
+                                        <span className={index === breadcrumbs.length - 1 ? "text-[#2ECC71] font-medium" : "text-gray-500"}>
                                             {crumb.label}
                                         </span>
                                     )}
@@ -90,13 +93,37 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                             <p>{description}</p>
                         </div>
 
+                        {/* Gallery Stats */}
+                        {/* <div className="grid grid-cols-2 gap-6 py-4">
+                            <div className="text-center p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/20">
+                                <div className="text-2xl font-bold text-blue-600 mb-1">{totalImages}+</div>
+                                <div className="text-sm text-gray-600 font-medium">Total Foto</div>
+                            </div>
+                            <div className="text-center p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/20">
+                                <div className="text-2xl font-bold text-blue-600 mb-1">{categories?.length}+</div>
+                                <div className="text-sm text-gray-600 font-medium">Kategori</div>
+                            </div>
+                        </div> */}
+
+                        {/* Categories Tags */}
+                        {/* <div className="flex flex-wrap gap-2">
+                            {categories?.map((category, index) => (
+                                <span
+                                    key={index}
+                                    className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full"
+                                >
+                                    {category}
+                                </span>
+                            ))}
+                        </div> */}
+
                         {/* CTA Button */}
                         <div>
                             <a
                                 href={ctaLink}
                                 onClick={handleCtaClick}
-                                className="inline-flex items-center px-8 py-4 bg-[#2ECC71] hover:bg-[#27ae60] text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                                aria-label={`${ctaText} - Jelajahi semua fasilitas`}
+                                className="inline-flex items-center px-8 py-4 bg-[#2ECC71] hover:bg-[#27AE60] text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                                aria-label={`${ctaText} - Lihat semua galeri`}
                             >
                                 <span>{ctaText}</span>
                                 <svg
@@ -116,33 +143,23 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                     <div className="relative lg:order-last">
                         {/* 3D Perspective Container */}
                         <div className="relative transform perspective-1000 rotate-y-12">
-                            {/* Red Base Platform */}
-                            {/* <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-96 h-16 bg-gradient-to-r from-red-600 via-red-500 to-red-600 rounded-3xl shadow-2xl"
-                                 style={{
-                                     clipPath: 'polygon(10% 0%, 90% 0%, 95% 100%, 5% 100%)',
-                                     transform: 'rotateX(75deg) translateZ(-20px)'
-                                 }}> */}
-                                {/* Platform shine effect */}
-                                {/* <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-3xl" /> */}
-                            {/* </div> */}
-
-                            {/* Main Building Image */}
+                            {/* Main Gallery Image */}
                             <div className="relative z-10">
                                 <img
                                     src='/assets/image/logo.webp'
-                                    alt="Fasilitas SMK Telkom Sidoarjo - Gedung sekolah modern dengan laboratorium lengkap"
+                                    alt="Galeri MI NU 02 Situwangi - Dokumentasi kegiatan dan fasilitas sekolah"
                                     className="w-full h-auto max-w-lg mx-auto object-cover"
                                     loading="eager"
                                     fetchPriority="high"
                                 />
-
-                                {/* Image overlay for depth */}
-                                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent rounded-2xl" /> */}
+                                {/* Camera Icon Overlay */}
+                                {/* <div className="absolute top-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg">
+                                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2h-5L9 1H4zm5 5a3 3 0 106 0 3 3 0 00-6 0z" clipRule="evenodd" />
+                                    </svg>
+                                </div> */}
                             </div>
                         </div>
-
-                        {/* Background Glow Effect */}
-                        {/* <div className="absolute inset-0 bg-gradient-radial from-red-500/10 via-transparent to-transparent blur-3xl transform scale-150" /> */}
                     </div>
                 </div>
             </div>
@@ -157,4 +174,4 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
     );
 };
 
-export default HeroFacility;
+export default HeroGallery;

@@ -1,17 +1,20 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\NewsController;
 
 // Public routes
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('/profil', [AboutUsController::class, 'profile'])->name('profile');
 Route::get('/fasilitas', [AboutUsController::class, 'facility'])->name('facility');
+Route::get('/prestasi', [AboutUsController::class, 'achievement'])->name('achievement');
+
+Route::get('/galeri', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/berita', [NewsController::class, 'news'])->name('news');
 

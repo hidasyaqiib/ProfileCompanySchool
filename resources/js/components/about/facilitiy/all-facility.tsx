@@ -69,7 +69,7 @@ const AllFacility: React.FC<AllFacilityProps> = ({
     const facilitiesData = facilities.length > 0 ? facilities : defaultFacilities;
 
     return (
-        <section 
+        <section
             id="all-facilities"
             className={`py-16 lg:py-24 bg-white ${className}`}
             aria-labelledby="all-facilities-title"
@@ -77,13 +77,13 @@ const AllFacility: React.FC<AllFacilityProps> = ({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 max-w-3xl mx-auto">
-                    <h2 
+                    <h2
                         id="all-facilities-title"
                         className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
                     >
                         {title}
                     </h2>
-                    
+
                     {subtitle && (
                         <p className="text-lg text-gray-600 leading-relaxed">
                             {subtitle}
@@ -92,12 +92,12 @@ const AllFacility: React.FC<AllFacilityProps> = ({
 
                     {/* Decorative line */}
                     <div className="mt-8 flex justify-center">
-                        <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full" />
+                        <div className="w-24 h-1 bg-gradient-to-r from-[#2ECC71] to-[#27ae60] rounded-full" />
                     </div>
                 </div>
 
                 {/* Statistics Bar */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+                {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                     <div className="text-center">
                         <div className="text-3xl font-bold text-red-600 mb-2">15+</div>
                         <div className="text-sm text-gray-600 font-medium">Laboratorium</div>
@@ -114,7 +114,7 @@ const AllFacility: React.FC<AllFacilityProps> = ({
                         <div className="text-3xl font-bold text-red-600 mb-2">100%</div>
                         <div className="text-sm text-gray-600 font-medium">Berstandar Industri</div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Facility Carousel */}
                 <div className="relative">
@@ -130,18 +130,18 @@ const AllFacility: React.FC<AllFacilityProps> = ({
 
                 {/* Call to Action */}
                 <div className="text-center mt-16">
-                    <div className="bg-gray-50 rounded-2xl p-8 lg:p-12">
+                    <div className="bg-none rounded-2xl p-8 lg:p-12">
                         <h3 className="text-2xl font-bold text-gray-900 mb-4">
                             Ingin Melihat Fasilitas Secara Langsung?
                         </h3>
                         <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                            Kunjungi sekolah kami untuk melihat langsung semua fasilitas modern 
+                            Kunjungi sekolah kami untuk melihat langsung semua fasilitas modern
                             yang akan mendukung perjalanan pendidikan Anda.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a
                                 href="/contact"
-                                className="inline-flex items-center justify-center px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-red-500/25"
+                                className="inline-flex items-center justify-center px-8 py-3 bg-[#2ECC71] hover:bg-[#27ae60] text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-red-500/25"
                             >
                                 Hubungi Kami
                             </a>
