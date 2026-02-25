@@ -11,6 +11,7 @@ use App\Http\Controllers\NewsController;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('/profil', [AboutUsController::class, 'profile'])->name('profile');
+Route::get('/fasilitas', [AboutUsController::class, 'facility'])->name('facility');
 
 Route::get('/berita', [NewsController::class, 'news'])->name('news');
 
