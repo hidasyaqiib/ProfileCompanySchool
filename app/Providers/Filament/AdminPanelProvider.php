@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->darkModeBrandLogo(asset('assets/image/logo-mi-dark.webp'))
             ->brandLogoHeight('3rem')
             ->favicon(asset('assets/image/logo-kemenag.webp'))
+            ->sidebarCollapsibleOnDesktop()
             ->login()
             ->passwordReset()
             ->navigationGroups([
@@ -44,6 +45,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->colors([
                 'primary' => Color::hex('#2DC86F'),
+                'info'    => Color::hex('#3B82F6'),
+                'success' => Color::hex('#2DC86F'),
+                'warning' => Color::hex('#F59E0B'),
+                'danger'  => Color::hex('#EF4444'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
