@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
+import { ArrowUpRight, Clock, User } from 'lucide-react';
 import React from 'react';
-import { FiArrowRight } from 'react-icons/fi';
 
 export interface NewsCardProps {
     id: number;
@@ -12,29 +12,18 @@ export interface NewsCardProps {
     slug: string;
     status: 'Draft' | 'Published' | 'Archived';
     image_url?: string;
+    featured?: boolean;
 }
-
-const statusDotColor: Record<string, string> = {
-    Published: 'bg-emerald-500',
-    Draft: 'bg-amber-500',
-    Archived: 'bg-gray-400',
-};
-
-const statusLabelColor: Record<string, string> = {
-    Published: 'text-emerald-600',
-    Draft: 'text-amber-600',
-    Archived: 'text-gray-500',
-};
 
 const NewsCard: React.FC<NewsCardProps> = ({
     title,
     content,
-    thumbnail,
     published_at,
     author,
     slug,
     status,
     image_url,
+    featured = false,
 }) => {
     const formatDate = (dateString: string): string => {
         const now = new Date();
@@ -43,19 +32,13 @@ const NewsCard: React.FC<NewsCardProps> = ({
         const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
         const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-        if (diffHours < 1) {
-            return 'Baru saja';
-        }
-        if (diffHours < 24) {
-            return `${diffHours} jam lalu`;
-        }
-        if (diffDays < 7) {
-            return `${diffDays} hari lalu`;
-        }
+        if (diffHours < 1) return 'Baru saja';
+        if (diffHours < 24) return `${diffHours} jam lalu`;
+        if (diffDays < 7) return `${diffDays} hari lalu`;
 
         return date.toLocaleDateString('id-ID', {
             year: 'numeric',
-            month: 'long',
+            month: 'short',
             day: 'numeric',
         });
     };
@@ -67,58 +50,143 @@ const NewsCard: React.FC<NewsCardProps> = ({
         return Math.max(1, Math.ceil(words / 200));
     };
 
-    const dotColor = statusDotColor[status] ?? statusDotColor.Published;
-    const labelColor = statusLabelColor[status] ?? statusLabelColor.Published;
+    const isNew = (): boolean => {
+        const diffMs = Date.now() - new Date(published_at).getTime();
+        return diffMs < 1000 * 60 * 60 * 48; // 48 hours
+    };
+
+    if (featured) {
+        return (
+            <Link href={`/berita/${slug}`} className="group block">
+                <article className="relative overflow-hidden rounded-3xl bg-gray-900">
+                    {/* Image */}
+                    <div className="relative aspect-video overflow-hidden">
+                        <img
+                            src={image_url || '/assets/image/hero-home.webp'}
+                            alt={title}
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            loading="eager"
+                        />
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/50 to-transparent" />
+                    </div>
+
+                    {/* Content overlay */}
+                    <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                        {/* Badges */}
+                        <div className="mb-4 flex items-center gap-2">
+                            <span
+                                className="rounded-full px-3 py-1 text-xs font-bold text-white"
+                                style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                            >
+                                Featured
+                            </span>
+                            {isNew() && (
+                                <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                                    Baru
+                                </span>
+                            )}
+                        </div>
+
+                        <h2 className="mb-3 text-xl font-black leading-tight text-white md:text-2xl lg:text-3xl group-hover:opacity-90 transition-opacity line-clamp-3">
+                            {title}
+                        </h2>
+
+                        <p className="mb-4 line-clamp-2 text-sm text-white/70 leading-relaxed">
+                            {stripHtml(content)}
+                        </p>
+
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3 text-xs text-white/60">
+                                <span className="flex items-center gap-1">
+                                    <User className="h-3.5 w-3.5" />
+                                    {author}
+                                </span>
+                                <span>·</span>
+                                <span>{formatDate(published_at)}</span>
+                                <span>·</span>
+                                <span className="flex items-center gap-1">
+                                    <Clock className="h-3.5 w-3.5" />
+                                    {estimateReadTime(content)} mnt
+                                </span>
+                            </div>
+                            <div
+                                className="flex h-9 w-9 items-center justify-center rounded-full transition-transform group-hover:scale-110"
+                                style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                            >
+                                <ArrowUpRight className="h-4 w-4 text-white" />
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </Link>
+        );
+    }
 
     return (
-        <Link
-            href={`/berita/${slug}`}
-            className="group block h-full rounded-xl bg-white overflow-hidden shadow"
-        >
-            <article className="flex h-full flex-col">
-                {/* Thumbnail */}
-                <div className="relative aspect-4/3 overflow-hidden">
+        <Link href={`/berita/${slug}`} className="group block h-full">
+            <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gray-200/80 hover:ring-emerald-100">
+                {/* Image */}
+                <div className="relative aspect-4/3 overflow-hidden bg-gray-100">
                     <img
                         src={image_url || '/assets/image/hero-home.webp'}
                         alt={title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                     />
-                </div>
-
-                {/* Content with padding */}
-                <div className="p-4 flex-1 flex flex-col">
-                    {/* Source & Date */}
-                    <div className="mb-2 flex items-center gap-2 text-xs text-gray-500">
-                    <span
-                        className={`inline-block h-2.5 w-2.5 shrink-0 rounded-full ${dotColor}`}
-                    />
-                    {/* <span className={`font-semibold ${labelColor}`}>{status}</span> */}
-                    <span className="truncate font-semibold text-gray-800">
-                        {author}
-                    </span>
-                    <span aria-hidden="true">·</span>
-                    <time dateTime={published_at}>
-                        {formatDate(published_at)}
-                    </time>
-                </div>
-
-                {/* Title */}
-                <h3 className="mb-2 line-clamp-2 text-base leading-snug font-bold break-all text-gray-900 transition-colors group-hover:text-emerald-700">
-                    {title}
-                </h3>
-
-                {/* Excerpt */}
-                <p className="mb-4 line-clamp-3 grow text-sm leading-relaxed break-all text-gray-500">
-                    {stripHtml(content)}
-                </p>
-
-                    {/* Footer: category + read time */}
-                    <div className="mt-auto flex items-center justify-end text-xs">
-                        <span className="flex items-center gap-1 font-semibold text-emerald-700 transition-all group-hover:underline">
-                            Baca selengkapnya
-                            <FiArrowRight className="h-4 w-4 text-emerald-700 transition-transform group-hover:translate-x-1" />
+                    {/* New badge */}
+                    {isNew() && (
+                        <div className="absolute top-3 left-3">
+                            <span
+                                className="rounded-full px-2.5 py-1 text-xs font-bold text-white shadow"
+                                style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                            >
+                                Baru
+                            </span>
+                        </div>
+                    )}
+                    {/* Read time */}
+                    <div className="absolute bottom-3 right-3">
+                        <span className="flex items-center gap-1 rounded-full bg-black/40 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                            <Clock className="h-3 w-3" />
+                            {estimateReadTime(content)} mnt
                         </span>
+                    </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-1 flex-col p-5">
+                    {/* Meta */}
+                    <div className="mb-3 flex items-center gap-2 text-xs text-gray-400">
+                        <span className="flex items-center gap-1 font-medium text-gray-600 truncate">
+                            <User className="h-3 w-3 shrink-0" />
+                            {author}
+                        </span>
+                        <span className="text-gray-200">·</span>
+                        <time dateTime={published_at} className="shrink-0">{formatDate(published_at)}</time>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="mb-2.5 line-clamp-2 text-base font-bold leading-snug text-gray-900 transition-colors group-hover:text-[#27ae60]">
+                        {title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="mb-5 line-clamp-3 grow text-sm leading-relaxed text-gray-500">
+                        {stripHtml(content)}
+                    </p>
+
+                    {/* CTA */}
+                    <div className="mt-auto flex items-center justify-between border-t border-gray-50 pt-4">
+                        <span className="text-xs font-semibold text-[#27ae60] transition-all group-hover:underline">
+                            Baca selengkapnya
+                        </span>
+                        <div
+                            className="flex h-7 w-7 items-center justify-center rounded-full opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0.5"
+                            style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                        >
+                            <ArrowUpRight className="h-3.5 w-3.5 text-white" />
+                        </div>
                     </div>
                 </div>
             </article>

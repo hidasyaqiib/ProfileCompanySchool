@@ -2,6 +2,7 @@ import { Head, router } from '@inertiajs/react';
 import React, { useState, useCallback, useMemo } from 'react';
 import HeroNews from '@/components/news/hero-news';
 import NewsList, { type NewsItem } from '@/components/news/news-list';
+
 import MainLayout from '@/layouts/main-layout';
 
 interface PaginationMeta {
@@ -180,7 +181,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 />
             </Head>
 
-            {/* Hero Section */}
+            {/* ── Magazine Masthead ─────────────────────────────────── */}
             <HeroNews
                 search={searchValue}
                 onSearchChange={setSearchValue}
@@ -188,132 +189,56 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 totalNews={news?.meta?.total || 0}
             />
 
-            {/* News List Section */}
-            <main className="bg-gray-50">
-                {/* Results Summary */}
-                <section className="border-b border-gray-200 bg-white py-6">
-                    <div className="container mx-auto px-4">
-                        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                            <div>
-                                <p className="text-sm text-gray-600">
-                                    {filters.search ? (
-                                        <>
-                                            Menampilkan {paginationInfo.showing} dari {paginationInfo.total} hasil
-                                            untuk "<span className="font-semibold text-emerald-600">{filters.search}</span>"
-                                        </>
-                                    ) : (
-                                        <>
-                                            Menampilkan {paginationInfo.showing} dari {paginationInfo.total} berita terbaru
-                                        </>
-                                    )}
-                                </p>
-                            </div>
+            {/* ── Main content ─────────────────────────────────────── */}
+            <main className="bg-white">
+                <div className="container mx-auto px-4 py-10">
+
+                    {/* Results summary / filter chip */}
+                    {(filters.search || paginationInfo.total > 0) && (
+                        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <p className="text-sm text-gray-500">
+                                {filters.search ? (
+                                    <>
+                                        <span className="font-semibold text-gray-800">{paginationInfo.showing}</span> hasil untuk{' '}
+                                        <span className="font-semibold text-[#27ae60]">&ldquo;{filters.search}&rdquo;</span>
+                                        {' '}dari {paginationInfo.total} berita
+                                    </>
+                                ) : (
+                                    <>
+                                        Menampilkan{' '}
+                                        <span className="font-semibold text-gray-800">{paginationInfo.showing}</span> dari{' '}
+                                        <span className="font-semibold text-gray-800">{paginationInfo.total}</span> berita
+                                    </>
+                                )}
+                            </p>
 
                             {filters.search && (
                                 <button
-                                    onClick={() => {
-                                        setSearchValue('');
-                                        handleSearch('');
-                                    }}
-                                    className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                                    onClick={() => { setSearchValue(''); handleSearch(''); }}
+                                    className="inline-flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-600 transition-colors hover:border-gray-300 hover:bg-gray-50"
                                 >
-                                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                     Hapus Filter
                                 </button>
                             )}
                         </div>
-                    </div>
-                </section>
+                    )}
 
-                {/* News List */}
-                <NewsList
-                    newsItems={news?.data || []}
-                    loading={isSearching}
-                />
-
-                {/* Pagination Navigation */}
-                {paginationInfo.totalPages > 1 && (
-                    <section className="border-t border-gray-200 bg-white py-8">
-                        <div className="container mx-auto px-4">
-                            <nav className="flex items-center justify-center">
-                                <div className="flex items-center gap-2">
-                                    {/* Previous button */}
-                                    {news?.links?.prev && (
-                                        <button
-                                            onClick={() => handlePageChange(paginationInfo.currentPage - 1)}
-                                            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
-                                        >
-                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                            </svg>
-                                            Sebelumnya
-                                        </button>
-                                    )}
-
-                                    {/* Page numbers */}
-                                    <div className="flex items-center gap-1">
-                                        {Array.from({ length: Math.min(5, paginationInfo.totalPages) }, (_, i) => {
-                                            let pageNum;
-                                            if (paginationInfo.totalPages <= 5) {
-                                                pageNum = i + 1;
-                                            } else {
-                                                const current = paginationInfo.currentPage;
-                                                const total = paginationInfo.totalPages;
-
-                                                if (current <= 3) {
-                                                    pageNum = i + 1;
-                                                } else if (current > total - 3) {
-                                                    pageNum = total - 4 + i;
-                                                } else {
-                                                    pageNum = current - 2 + i;
-                                                }
-                                            }
-
-                                            const isActive = pageNum === paginationInfo.currentPage;
-
-                                            return (
-                                                <button
-                                                    key={pageNum}
-                                                    onClick={() => handlePageChange(pageNum)}
-                                                    className={`h-10 w-10 rounded-lg text-sm font-medium transition-colors ${
-                                                        isActive
-                                                            ? 'bg-emerald-500 text-white'
-                                                            : 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-                                                    }`}
-                                                >
-                                                    {pageNum}
-                                                </button>
-                                            );
-                                        })}
-                                    </div>
-
-                                    {/* Next button */}
-                                    {news?.links?.next && (
-                                        <button
-                                            onClick={() => handlePageChange(paginationInfo.currentPage + 1)}
-                                            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
-                                        >
-                                            Selanjutnya
-                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                            </svg>
-                                        </button>
-                                    )}
-                                </div>
-                            </nav>
-
-                            {/* Page info */}
-                            <div className="mt-4 text-center">
-                                <p className="text-sm text-gray-600">
-                                    Halaman {paginationInfo.currentPage} dari {paginationInfo.totalPages} •{' '}
-                                    Menampilkan {paginationInfo.showing} dari {paginationInfo.total} berita
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-                )}
+                    {/* News grid + inline pagination */}
+                    <NewsList
+                        newsItems={news?.data || []}
+                        loading={isSearching}
+                        pagination={{
+                            currentPage: paginationInfo.currentPage,
+                            totalPages: paginationInfo.totalPages,
+                            hasPrev: !!news?.links?.prev,
+                            hasNext: !!news?.links?.next,
+                            onPageChange: handlePageChange,
+                        }}
+                    />
+                </div>
             </main>
         </MainLayout>
     );
