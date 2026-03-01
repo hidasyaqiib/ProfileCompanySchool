@@ -1,10 +1,16 @@
-import React from 'react';
 import { Head } from '@inertiajs/react';
-import HeroGallery from '@/components/gallery/hero-gallery';
-import GalleryShowcase from '@/components/gallery/gallery-showcase';
+import React from 'react';
 import GalleryGrid from '@/components/gallery/gallery-grid';
+import HeroGallery from '@/components/gallery/hero-gallery';
 import MainLayout from '@/layouts/main-layout';
-import { GalleryItem } from '@/components/gallery/gallery-showcase';
+
+export interface GalleryItem {
+    id: number;
+    title: string;
+    image: string;
+    description: string;
+    date?: string;
+}
 
 interface GalleryPageProps {
     galleryItems?: GalleryItem[];
@@ -17,12 +23,12 @@ interface GalleryPageProps {
 
 const Gallery: React.FC<GalleryPageProps> = ({
     galleryItems = [],
-    meta = {}
+    meta = {},
 }) => {
     const {
         title = 'Galeri - SMK Telkom Sidoarjo',
         description = 'Jelajahi dokumentasi visual kegiatan sekolah, prestasi siswa, dan fasilitas modern SMK Telkom Sidoarjo. Koleksi foto dan video terlengkap dari berbagai momen bersejarah institusi pendidikan teknologi terdepan.',
-        keywords = 'galeri sekolah, SMK Telkom Sidoarjo, dokumentasi kegiatan, foto sekolah, video kegiatan, prestasi siswa, fasilitas sekolah, teknologi informasi, pendidikan vokasi, gallery'
+        keywords = 'galeri sekolah, SMK Telkom Sidoarjo, dokumentasi kegiatan, foto sekolah, video kegiatan, prestasi siswa, fasilitas sekolah, teknologi informasi, pendidikan vokasi, gallery',
     } = meta;
 
     return (
@@ -40,7 +46,6 @@ const Gallery: React.FC<GalleryPageProps> = ({
             <meta name="twitter:image" content="/images/gallery-og.jpg" />
 
             <HeroGallery />
-            {/* <GalleryShowcase galleryItems={galleryItems} /> */}
             <GalleryGrid galleryItems={galleryItems} />
         </MainLayout>
     );

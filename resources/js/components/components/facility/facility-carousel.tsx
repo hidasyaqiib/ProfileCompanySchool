@@ -27,7 +27,7 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
     showPagination = true,
     className = '',
     cardClassName = '',
-    ariaLabel = 'Facility carousel'
+    ariaLabel = 'Facility carousel',
 }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -37,35 +37,39 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
     const totalPages = Math.ceil(facilities.length / itemsPerPage);
     const hasMultipleSlides = facilities.length > itemsPerPage;
 
-    const animateToIndex = useCallback((targetIndex: number): void => {
-        if (!containerRef.current || isAnimating) return;
+    const animateToIndex = useCallback(
+        (targetIndex: number): void => {
+            if (!containerRef.current || isAnimating) return;
 
-        const container = containerRef.current;
-        const cardWidth = container.scrollWidth / facilities.length;
-        const targetScrollLeft = targetIndex * cardWidth;
+            const container = containerRef.current;
+            const cardWidth = container.scrollWidth / facilities.length;
+            const targetScrollLeft = targetIndex * cardWidth;
 
-        setIsAnimating(true);
+            setIsAnimating(true);
 
-        const startScrollLeft = container.scrollLeft;
-        const scrollDistance = targetScrollLeft - startScrollLeft;
-        const startTime = performance.now();
+            const startScrollLeft = container.scrollLeft;
+            const scrollDistance = targetScrollLeft - startScrollLeft;
+            const startTime = performance.now();
 
-        const animateScroll = (currentTime: number): void => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / ANIMATION_DURATION, 1);
-            const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+            const animateScroll = (currentTime: number): void => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / ANIMATION_DURATION, 1);
+                const easeOutCubic = 1 - Math.pow(1 - progress, 3);
 
-            container.scrollLeft = startScrollLeft + (scrollDistance * easeOutCubic);
+                container.scrollLeft =
+                    startScrollLeft + scrollDistance * easeOutCubic;
 
-            if (progress < 1) {
-                requestAnimationFrame(animateScroll);
-            } else {
-                setIsAnimating(false);
-            }
-        };
+                if (progress < 1) {
+                    requestAnimationFrame(animateScroll);
+                } else {
+                    setIsAnimating(false);
+                }
+            };
 
-        requestAnimationFrame(animateScroll);
-    }, [facilities.length, isAnimating]);
+            requestAnimationFrame(animateScroll);
+        },
+        [facilities.length, isAnimating],
+    );
 
     const goToPrevious = useCallback((): void => {
         const newIndex = Math.max(0, currentIndex - 1);
@@ -79,23 +83,29 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
         animateToIndex(newIndex);
     }, [currentIndex, maxIndex, animateToIndex]);
 
-    const goToPage = useCallback((pageIndex: number): void => {
-        const newIndex = pageIndex * itemsPerPage;
-        const clampedIndex = Math.min(newIndex, maxIndex);
-        setCurrentIndex(clampedIndex);
-        animateToIndex(clampedIndex);
-    }, [itemsPerPage, maxIndex, animateToIndex]);
+    const goToPage = useCallback(
+        (pageIndex: number): void => {
+            const newIndex = pageIndex * itemsPerPage;
+            const clampedIndex = Math.min(newIndex, maxIndex);
+            setCurrentIndex(clampedIndex);
+            animateToIndex(clampedIndex);
+        },
+        [itemsPerPage, maxIndex, animateToIndex],
+    );
 
     const getCurrentPage = useCallback((): number => {
         return Math.floor(currentIndex / itemsPerPage);
     }, [currentIndex, itemsPerPage]);
 
-    const handleKeyDown = useCallback((event: React.KeyboardEvent, action: () => void): void => {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            action();
-        }
-    }, []);
+    const handleKeyDown = useCallback(
+        (event: React.KeyboardEvent, action: () => void): void => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                action();
+            }
+        },
+        [],
+    );
 
     // Keyboard navigation for entire carousel
     useEffect(() => {
@@ -120,14 +130,18 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
 
     if (facilities.length === 0) {
         return (
-            <div className="text-center py-8" role="alert">
-                <p className="text-gray-500">No facilities available to display.</p>
+            <div className="py-8 text-center" role="alert">
+                <p className="text-gray-500">
+                    No facilities available to display.
+                </p>
             </div>
         );
     }
 
     return (
-        <div className={`relative ${hasMultipleSlides ? 'pb-16' : ''} ${className}`}>
+        <div
+            className={`relative ${hasMultipleSlides ? 'pb-16' : ''} ${className}`}
+        >
             {/* Navigation Buttons */}
             {showNavigation && hasMultipleSlides && (
                 <>
@@ -135,19 +149,26 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
                         onClick={goToPrevious}
                         onKeyDown={(e) => handleKeyDown(e, goToPrevious)}
                         disabled={currentIndex === 0 || isAnimating}
-                        className={`
-                            absolute bottom-[-1rem] left-4 z-20 w-12 h-12 rounded-xl shadow-lg
-                            transition-all duration-300 flex items-center justify-center
-                            ${currentIndex === 0 || isAnimating
-                                ? 'bg-gray-400 cursor-not-allowed'
-                                : 'bg-[#2ECC71] hover:bg-[#27ae60] hover:shadow-xl cursor-pointer'
-                            }
-                        `}
+                        className={`absolute bottom-[-1rem] left-4 z-20 flex h-12 w-12 items-center justify-center rounded-xl shadow-lg transition-all duration-300 ${
+                            currentIndex === 0 || isAnimating
+                                ? 'cursor-not-allowed bg-gray-400'
+                                : 'cursor-pointer bg-[#2ECC71] hover:bg-[#27ae60] hover:shadow-xl'
+                        } `}
                         aria-label={`Previous slide. Currently showing slide ${currentIndex + 1}`}
                         type="button"
                     >
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                        <svg
+                            className="h-6 w-6 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2.5}
+                                d="M15 19l-7-7 7-7"
+                            />
                         </svg>
                     </button>
 
@@ -155,19 +176,26 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
                         onClick={goToNext}
                         onKeyDown={(e) => handleKeyDown(e, goToNext)}
                         disabled={currentIndex >= maxIndex || isAnimating}
-                        className={`
-                            absolute bottom-[-1rem] right-4 z-20 w-12 h-12 rounded-xl shadow-lg
-                            transition-all duration-300 flex items-center justify-center
-                            ${currentIndex >= maxIndex || isAnimating
-                                ? 'bg-gray-400 cursor-not-allowed'
-                                : 'bg-[#2ECC71] hover:bg-[#27ae60] hover:shadow-xl cursor-pointer'
-                            }
-                        `}
+                        className={`absolute right-4 bottom-[-1rem] z-20 flex h-12 w-12 items-center justify-center rounded-xl shadow-lg transition-all duration-300 ${
+                            currentIndex >= maxIndex || isAnimating
+                                ? 'cursor-not-allowed bg-gray-400'
+                                : 'cursor-pointer bg-[#2ECC71] hover:bg-[#27ae60] hover:shadow-xl'
+                        } `}
                         aria-label={`Next slide. Currently showing slide ${currentIndex + 1}`}
                         type="button"
                     >
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                        <svg
+                            className="h-6 w-6 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2.5}
+                                d="M9 5l7 7-7 7"
+                            />
                         </svg>
                     </button>
                 </>
@@ -176,7 +204,7 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
             {/* Pagination Dots */}
             {showPagination && hasMultipleSlides && (
                 <div
-                    className="absolute bottom-[-1rem] left-1/2 -translate-x-1/2 flex items-center gap-2 z-20"
+                    className="absolute bottom-[-1rem] left-1/2 z-20 flex -translate-x-1/2 items-center gap-2"
                     role="tablist"
                     aria-label={`Page navigation. ${totalPages} pages total`}
                 >
@@ -184,18 +212,19 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
                         <button
                             key={`page-${index}`}
                             onClick={() => goToPage(index)}
-                            onKeyDown={(e) => handleKeyDown(e, () => goToPage(index))}
+                            onKeyDown={(e) =>
+                                handleKeyDown(e, () => goToPage(index))
+                            }
                             disabled={isAnimating}
-                            className={`
-                                w-3 h-3 rounded-full transition-all duration-300
-                                ${getCurrentPage() === index
-                                    ? 'bg-[#27ae60] scale-110'
+                            className={`h-3 w-3 rounded-full transition-all duration-300 ${
+                                getCurrentPage() === index
+                                    ? 'scale-110 bg-[#27ae60]'
                                     : 'bg-gray-400 hover:bg-gray-500'
-                                }
-                                ${isAnimating ? 'cursor-not-allowed' : 'cursor-pointer'}
-                            `}
+                            } ${isAnimating ? 'cursor-not-allowed' : 'cursor-pointer'} `}
                             aria-label={`Go to page ${index + 1}`}
-                            aria-current={getCurrentPage() === index ? 'page' : undefined}
+                            aria-current={
+                                getCurrentPage() === index ? 'page' : undefined
+                            }
                             role="tab"
                             type="button"
                         />
@@ -204,7 +233,7 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
             )}
 
             {/* Facilities Container */}
-            <div className="overflow-hidden py-4 px-8">
+            <div className="overflow-hidden px-8 py-4">
                 <div
                     ref={containerRef}
                     className="flex gap-6"
@@ -221,7 +250,9 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
                         <div
                             key={facility.id}
                             className="flex-none"
-                            style={{ width: `calc((100% - ${(itemsPerPage - 1) * 24}px) / ${itemsPerPage})` }}
+                            style={{
+                                width: `calc((100% - ${(itemsPerPage - 1) * 24}px) / ${itemsPerPage})`,
+                            }}
                         >
                             <FacilityCard
                                 title={facility.title}
@@ -236,8 +267,11 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
 
             {/* Screen Reader Information */}
             <div className="sr-only" aria-live="polite">
-                Showing slide {currentIndex + 1} to {Math.min(currentIndex + itemsPerPage, facilities.length)} of {facilities.length} facilities.
-                {hasMultipleSlides && `Page ${getCurrentPage() + 1} of ${totalPages}.`}
+                Showing slide {currentIndex + 1} to{' '}
+                {Math.min(currentIndex + itemsPerPage, facilities.length)} of{' '}
+                {facilities.length} facilities.
+                {hasMultipleSlides &&
+                    `Page ${getCurrentPage() + 1} of ${totalPages}.`}
             </div>
         </div>
     );

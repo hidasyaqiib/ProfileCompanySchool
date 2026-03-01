@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface Headmaster {
     name: string;
@@ -27,40 +27,40 @@ interface SpeechSectionProps {
 
 const SpeechSection: React.FC<SpeechSectionProps> = ({
     data,
-    className = "",
-    imagePosition = 'left'
+    className = '',
+    imagePosition = 'left',
 }) => {
     // Default data fallback
     const defaultData: SpeechData = {
-        title: "Sambutan Kepala Madrasah",
+        title: 'Sambutan Kepala Madrasah',
         headmaster: {
-            name: "Rahmawati, S.Pd.I., M.Pd.",
-            position: "Kepala Madrasah",
-            school: "MI NU 02 Situwangi",
-            image: "/assets/image/headmaster.webp"
+            name: 'Rahmawati, S.Pd.I., M.Pd.',
+            position: 'Kepala Madrasah',
+            school: 'MI NU 02 Situwangi',
+            image: '/assets/image/headmaster.webp',
         },
         speech: {
             greeting: "Assalamu'alaikum warahmatullahi wabarakatuh",
             content: [
                 "Alhamdulillahi robbil'alamiin, segala puji syukur kita panjatkan ke hadirat Alloh SWT karena atas rahmat dan karunia-Nya, website resmi MI NU 02 Situwangi ini dapat hadir sebagai sarana informasi, komunikasi, dan publikasi bagi seluruh warga madrasah/sekolah serta masyarakat luas.",
-                "Website madrasah ini kami kembangkan sebagai wujud komitmen dalam meningkatkan layanan pendidikan yang transparan, informatif, dan adaptif terhadap perkembangan teknologi informasi. Melalui media ini, kami berharap berbagai informasi terkait kegiatan madrasah, prestasi peserta didik, tenaga pendidik, serta program-program unggulan madrasah dapat diakses dengan mudah dan cepat.",
-                "MI NU 02 Situwangi senantiasa berupaya menciptakan lingkungan belajar yang rapi, bersih dan berkarakter, guna membentuk peserta didik yang berilmu, berakhlaklakul karimah, mampu membaca Al Quran, menguasai teknologi serta berwawasan lingkungan. Peran serta orang tua, alumni, dan masyarakat sangat kami harapkan demi kemajuan dan keberhasilan pendidikan di madrasah ini.",
-                "Akhir kata, kami mengucapkan terima kasih kepada seluruh pihak yang telah berkontribusi dalam pengembangan website madrasah ini. Semoga dapat memberikan manfaat dan menjadi jembatan komunikasi yang efektif bagi kita semua."
+                'Website madrasah ini kami kembangkan sebagai wujud komitmen dalam meningkatkan layanan pendidikan yang transparan, informatif, dan adaptif terhadap perkembangan teknologi informasi. Melalui media ini, kami berharap berbagai informasi terkait kegiatan madrasah, prestasi peserta didik, tenaga pendidik, serta program-program unggulan madrasah dapat diakses dengan mudah dan cepat.',
+                'MI NU 02 Situwangi senantiasa berupaya menciptakan lingkungan belajar yang rapi, bersih dan berkarakter, guna membentuk peserta didik yang berilmu, berakhlaklakul karimah, mampu membaca Al Quran, menguasai teknologi serta berwawasan lingkungan. Peran serta orang tua, alumni, dan masyarakat sangat kami harapkan demi kemajuan dan keberhasilan pendidikan di madrasah ini.',
+                'Akhir kata, kami mengucapkan terima kasih kepada seluruh pihak yang telah berkontribusi dalam pengembangan website madrasah ini. Semoga dapat memberikan manfaat dan menjadi jembatan komunikasi yang efektif bagi kita semua.',
             ],
-            closing: "Wassalamu'alaikum warahmatullahi wabarakatuh."
-        }
+            closing: "Wassalamu'alaikum warahmatullahi wabarakatuh.",
+        },
     };
 
     const speechData = data || defaultData;
 
-        const ImageSection = () => (
+    const ImageSection = () => (
         <div className="flex items-center justify-center p-4 lg:p-8">
-            <div className="relative group">
-                <div className="absolute inset-0 min-w-full w-full"></div>
+            <div className="group relative">
+                <div className="absolute inset-0 w-full min-w-full"></div>
                 <img
                     src={speechData.headmaster.image}
                     alt={`${speechData.headmaster.name} - ${speechData.headmaster.position}`}
-                    className="relative max-h-[50vh] sm:max-h-[60vh] lg:max-h-[100vh] w-full object-cover"
+                    className="relative max-h-[50vh] w-full object-cover sm:max-h-[60vh] lg:max-h-[100vh]"
                     loading="lazy"
                 />
             </div>
@@ -71,13 +71,13 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
         <div className="flex items-center justify-center p-4 lg:p-8">
             <div className="max-w-2xl">
                 <div className="mb-8">
-                    <h2 className="font-poppins text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                    <h2 className="font-poppins mb-2 text-3xl font-bold text-gray-900 lg:text-4xl">
                         {speechData.title}
                     </h2>
                 </div>
 
                 <div className="space-y-6">
-                    <p className="font-poppins text-lg text-gray-700 font-medium italic">
+                    <p className="font-poppins text-lg font-medium text-gray-700 italic">
                         {speechData.speech.greeting}
                     </p>
 
@@ -85,26 +85,26 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
                         {speechData.speech.content.map((paragraph, index) => (
                             <p
                                 key={index}
-                                className="font-poppins text-gray-700 text-[12px] lg:text-[16px] leading-relaxed text-justify"
+                                className="font-poppins text-justify text-[12px] leading-relaxed text-gray-700 lg:text-[16px]"
                             >
                                 {paragraph}
                             </p>
                         ))}
                     </div>
 
-                    <p className="font-poppins text-lg text-gray-700 font-medium italic">
+                    <p className="font-poppins text-lg font-medium text-gray-700 italic">
                         {speechData.speech.closing}
                     </p>
 
-                    <div className="mt-8 pt-6 border-t border-gray-200">
+                    <div className="mt-8 border-t border-gray-200 pt-6">
                         <div className="text-left">
-                            <p className="font-poppins text-gray-800 font-semibold text-lg">
+                            <p className="font-poppins text-lg font-semibold text-gray-800">
                                 {speechData.headmaster.name}
                             </p>
-                            <p className="font-poppins text-gray-600 text-sm">
+                            <p className="font-poppins text-sm text-gray-600">
                                 {speechData.headmaster.position}
                             </p>
-                            <p className="font-poppins text-gray-600 text-sm">
+                            <p className="font-poppins text-sm text-gray-600">
                                 {speechData.headmaster.school}
                             </p>
                         </div>
@@ -115,14 +115,29 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
     );
 
     return (
-        <section className={`relative min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 lg:py-24 pt-24  ${className} overflow-visible`}>
+        <section
+            className={`relative min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 pt-24 lg:py-24 ${className} overflow-visible`}
+        >
             <div className="container mx-auto px-4">
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-center ${imagePosition === 'right' ? 'lg:grid-flow-col-dense' : ''
-                    }`}>
-                    <div className={imagePosition === 'right' ? 'lg:col-start-2' : ''}>
+                <div
+                    className={`grid grid-cols-1 items-center gap-2 lg:grid-cols-2 lg:gap-12 ${
+                        imagePosition === 'right'
+                            ? 'lg:grid-flow-col-dense'
+                            : ''
+                    }`}
+                >
+                    <div
+                        className={
+                            imagePosition === 'right' ? 'lg:col-start-2' : ''
+                        }
+                    >
                         <ImageSection />
                     </div>
-                    <div className={imagePosition === 'right' ? 'lg:col-start-1' : ''}>
+                    <div
+                        className={
+                            imagePosition === 'right' ? 'lg:col-start-1' : ''
+                        }
+                    >
                         <ContentSection />
                     </div>
                 </div>

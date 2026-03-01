@@ -1,5 +1,5 @@
-import React from 'react';
 import { Search } from 'lucide-react';
+import React from 'react';
 
 interface HeroNewsProps {
     search: string;
@@ -27,7 +27,7 @@ const HeroNews: React.FC<HeroNewsProps> = ({
             <div className="pointer-events-none absolute -right-20 -bottom-20 h-80 w-80 rounded-full bg-emerald-600/10 blur-3xl" />
             <div className="pointer-events-none absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/5 blur-3xl" />
 
-            <div className="container relative z-10 mx-auto px-5">
+            <div className="relative z-10 container mx-auto px-5">
                 <div className="mx-auto max-w-2xl text-center">
                     {/* Badge */}
                     <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
@@ -47,7 +47,8 @@ const HeroNews: React.FC<HeroNewsProps> = ({
                         </span>
                     </h1>
                     <p className="mb-8 text-base text-gray-400 md:text-lg">
-                        Ikuti perkembangan dan update terbaru seputar kegiatan dan prestasi SMK Telkom Sidoarjo
+                        Ikuti perkembangan dan update terbaru seputar kegiatan
+                        dan prestasi MI NU 02 Situwangi
                     </p>
 
                     {/* Search */}
@@ -75,11 +76,28 @@ const HeroNews: React.FC<HeroNewsProps> = ({
                     {totalNews !== undefined && (
                         <p className="mt-5 text-sm text-gray-500">
                             Menampilkan{' '}
-                            <span className="font-semibold text-emerald-400">{totalNews}</span>{' '}
+                            <span className="font-semibold text-emerald-400">
+                                {totalNews}
+                            </span>{' '}
                             berita tersedia
                         </p>
                     )}
                 </div>
+            </div>
+
+            {/* Bottom Wave Separator */}
+            <div className="absolute right-0 bottom-0 left-0">
+                <svg
+                    viewBox="0 0 1440 120"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-auto w-full"
+                >
+                    <path
+                        d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V120Z"
+                        fill="#f9fafb"
+                    />
+                </svg>
             </div>
         </section>
     );

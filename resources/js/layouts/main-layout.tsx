@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '@/components/common/navbar';
 import Footer from '@/components/common/footer';
+import Navbar from '@/components/common/navbar';
 
 interface MainLayoutProps {
     children: React.ReactNode;
@@ -12,9 +12,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             <header>
                 <Navbar />
             </header>
-            <main className="flex-1">
-                {children}
-            </main>
+            <main className="flex-1">{children}</main>
             <Footer />
         </div>
     );

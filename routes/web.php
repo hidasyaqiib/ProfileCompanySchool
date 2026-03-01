@@ -17,6 +17,7 @@ Route::get('/prestasi', [AboutUsController::class, 'achievement'])->name('achiev
 Route::get('/galeri', [GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/berita', [NewsController::class, 'news'])->name('news');
+Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('news.show');
 
 // Authenticated routes
 Route::get('dashboard', function () {

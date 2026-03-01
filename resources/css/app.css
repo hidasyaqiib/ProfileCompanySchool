@@ -148,7 +148,8 @@
 
 /* Custom styles for school website */
 .bg-grid-pattern {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
     background-size: 20px 20px;
 }
@@ -183,12 +184,16 @@
     .animate-tilt-right {
         transform: perspective(1000px) rotateY(-5deg) scale(0.98);
         filter: brightness(0.9);
-        transition: transform 0.2s ease-out, filter 0.2s ease-out;
+        transition:
+            transform 0.2s ease-out,
+            filter 0.2s ease-out;
     }
 
     .animate-tilt-left {
         transform: perspective(1000px) rotateY(5deg) scale(0.98);
         filter: brightness(0.9);
-        transition: transform 0.2s ease-out, filter 0.2s ease-out;
+        transition:
+            transform 0.2s ease-out,
+            filter 0.2s ease-out;
     }
 }

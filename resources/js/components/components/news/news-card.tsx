@@ -1,8 +1,8 @@
-import React from "react";
 import { Link } from '@inertiajs/react';
+import React from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 
-interface NewsCardProps {
+export interface NewsCardProps {
     id: number;
     title: string;
     content: string;
@@ -11,6 +11,7 @@ interface NewsCardProps {
     author: string;
     slug: string;
     status: 'Draft' | 'Published' | 'Archived';
+    image_url?: string;
 }
 
 const statusDotColor: Record<string, string> = {
@@ -33,6 +34,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
     author,
     slug,
     status,
+    image_url,
 }) => {
     const formatDate = (dateString: string): string => {
         const now = new Date();
@@ -69,12 +71,15 @@ const NewsCard: React.FC<NewsCardProps> = ({
     const labelColor = statusLabelColor[status] ?? statusLabelColor.Published;
 
     return (
-        <Link href={`/berita/${slug}`} className="group block rounded-xl bg-white p-4 shadow h-full">
+        <Link
+            href={`/berita/${slug}`}
+            className="group block h-full rounded-xl bg-white p-4 shadow"
+        >
             <article className="flex h-full flex-col">
                 {/* Thumbnail */}
                 <div className="relative mb-4 aspect-4/3 overflow-hidden rounded-xl">
                     <img
-                        src={thumbnail ?? '/assets/image/hero-home.webp'}
+                        src={image_url || '/assets/image/hero-home.webp'}
                         alt={title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
@@ -83,28 +88,34 @@ const NewsCard: React.FC<NewsCardProps> = ({
 
                 {/* Source & Date */}
                 <div className="mb-2 flex items-center gap-2 text-xs text-gray-500">
-                    <span className={`inline-block h-2.5 w-2.5 shrink-0 rounded-full ${dotColor}`} />
+                    <span
+                        className={`inline-block h-2.5 w-2.5 shrink-0 rounded-full ${dotColor}`}
+                    />
                     {/* <span className={`font-semibold ${labelColor}`}>{status}</span> */}
-                    <span className="font-semibold text-gray-800 truncate">{author}</span>
+                    <span className="truncate font-semibold text-gray-800">
+                        {author}
+                    </span>
                     <span aria-hidden="true">·</span>
-                    <time dateTime={published_at}>{formatDate(published_at)}</time>
+                    <time dateTime={published_at}>
+                        {formatDate(published_at)}
+                    </time>
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-2 text-base font-bold leading-snug text-gray-900 line-clamp-2 break-all group-hover:text-emerald-700 transition-colors">
+                <h3 className="mb-2 line-clamp-2 text-base leading-snug font-bold break-all text-gray-900 transition-colors group-hover:text-emerald-700">
                     {title}
                 </h3>
 
                 {/* Excerpt */}
-                <p className="mb-4 grow text-sm leading-relaxed text-gray-500 line-clamp-3 break-all">
+                <p className="mb-4 line-clamp-3 grow text-sm leading-relaxed break-all text-gray-500">
                     {stripHtml(content)}
                 </p>
 
                 {/* Footer: category + read time */}
                 <div className="mt-auto flex items-center justify-end text-xs">
-                    <span className="flex items-center gap-1 text-emerald-700 font-semibold group-hover:underline transition-all">
+                    <span className="flex items-center gap-1 font-semibold text-emerald-700 transition-all group-hover:underline">
                         Baca selengkapnya
-                        <FiArrowRight className="h-4 w-4 text-emerald-700 group-hover:translate-x-1 transition-transform" />
+                        <FiArrowRight className="h-4 w-4 text-emerald-700 transition-transform group-hover:translate-x-1" />
                     </span>
                 </div>
             </article>

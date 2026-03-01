@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from '@inertiajs/react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import NewsCard from '@/components/components/news/news-card';
 
 export interface NewsItem {
@@ -27,9 +27,9 @@ interface NewsInShortProps {
 
 function SkeletonCard(): React.ReactElement {
     return (
-        <div className="animate-pulse overflow-hidden rounded-2xl bg-white shadow-md w-54 h-96">
-            <div className="h-52 bg-gray-200 shrink-0" />
-            <div className="space-y-3 p-3 px-0.5 flex flex-col h-44">
+        <div className="h-96 w-54 animate-pulse overflow-hidden rounded-2xl bg-white shadow-md">
+            <div className="h-52 shrink-0 bg-gray-200" />
+            <div className="flex h-44 flex-col space-y-3 p-3 px-0.5">
                 <div className="flex items-center justify-between">
                     <div className="h-6 w-16 rounded bg-gray-200" />
                     <div className="h-3 w-20 rounded bg-gray-200" />
@@ -38,12 +38,12 @@ function SkeletonCard(): React.ReactElement {
                     <div className="h-5 w-full rounded bg-gray-200" />
                     <div className="h-5 w-3/4 rounded bg-gray-200" />
                 </div>
-                <div className="space-y-1 flex-1">
+                <div className="flex-1 space-y-1">
                     <div className="h-4 w-full rounded bg-gray-200" />
                     <div className="h-4 w-full rounded bg-gray-200" />
                     <div className="h-4 w-5/6 rounded bg-gray-200" />
                 </div>
-                <div className="flex items-center gap-2 border-t border-gray-100 pt-4 mt-auto">
+                <div className="mt-auto flex items-center gap-2 border-t border-gray-100 pt-4">
                     <div className="h-4 w-4 rounded-full bg-gray-200" />
                     <div className="h-3 w-20 rounded bg-gray-200" />
                 </div>
@@ -74,10 +74,13 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
                 setLoading(true);
                 setError(null);
 
-                const response = await axios.get<{ data: NewsItem[] }>('/api/news', {
-                    params: { limit },
-                    signal: controller.signal,
-                });
+                const response = await axios.get<{ data: NewsItem[] }>(
+                    '/api/news',
+                    {
+                        params: { limit },
+                        signal: controller.signal,
+                    },
+                );
 
                 setNews(response.data.data);
             } catch (err) {
@@ -101,15 +104,17 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
             <div className="pointer-events-none absolute top-10 left-10 h-32 w-32 rounded-full bg-emerald-400 opacity-5 blur-3xl" />
             <div className="pointer-events-none absolute right-20 bottom-20 h-40 w-40 rounded-full bg-emerald-500 opacity-5 blur-3xl" />
 
-            <div className="container relative z-10 mx-auto px-5">
+            <div className="relative z-10 container mx-auto px-5">
                 {/* Header */}
                 <div className="mb-10 flex items-end justify-between">
                     <div>
                         <h2 className="text-3xl font-bold text-gray-900 lg:text-4xl">
-                            Berita <span className="text-emerald-600">Terkini</span>
+                            Berita{' '}
+                            <span className="text-emerald-600">Terkini</span>
                         </h2>
                         <p className="mt-2 max-w-xl text-gray-500">
-                            Ikuti perkembangan dan update terbaru seputas kegiatan MI NU 2 Situwangi
+                            Ikuti perkembangan dan update terbaru seputas
+                            kegiatan MI NU 2 Situwangi
                         </p>
                     </div>
 
@@ -119,8 +124,18 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
                             className="hidden items-center gap-1 text-sm font-semibold text-emerald-600 transition-colors hover:text-emerald-700 sm:inline-flex"
                         >
                             Lihat semua
-                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            <svg
+                                className="h-4 w-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M9 5l7 7-7 7"
+                                />
                             </svg>
                         </Link>
                     )}
@@ -154,7 +169,12 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
                 {/* Empty state */}
                 {!loading && !error && news.length === 0 && (
                     <div className="flex flex-col items-center justify-center rounded-2xl bg-white py-16 shadow-sm">
-                        <svg className="mb-4 h-16 w-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg
+                            className="mb-4 h-16 w-16 text-gray-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -162,8 +182,12 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
                                 d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
                             />
                         </svg>
-                        <p className="text-lg font-medium text-gray-500">Belum ada berita tersedia</p>
-                        <p className="mt-1 text-sm text-gray-400">Berita terbaru akan muncul di sini</p>
+                        <p className="text-lg font-medium text-gray-500">
+                            Belum ada berita tersedia
+                        </p>
+                        <p className="mt-1 text-sm text-gray-400">
+                            Berita terbaru akan muncul di sini
+                        </p>
                     </div>
                 )}
 
@@ -194,8 +218,18 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
                             className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:bg-emerald-700 hover:shadow-lg"
                         >
                             Lihat Semua Berita
-                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            <svg
+                                className="h-4 w-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                />
                             </svg>
                         </Link>
                     </div>

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import FacilityCarousel, { FacilityItem } from '../../components/facility/facility-carousel';
+import type { FacilityItem } from '../../components/facility/facility-carousel';
+import FacilityCarousel from '../../components/facility/facility-carousel';
 
 export interface AchievementItem {
     id: number;
@@ -23,109 +24,121 @@ const AllAchievement: React.FC<AllAchievementProps> = ({
     achievements = [],
     title = 'Semua Prestasi',
     subtitle = 'Bangga dengan pencapaian siswa-siswi SMK Telkom Sidoarjo dalam berbagai kompetisi dan kegiatan',
-    className = ''
+    className = '',
 }) => {
     // Default achievements data if none provided
-    const defaultAchievements: AchievementItem[] = useMemo(() => [
-        {
-            id: 1,
-            title: 'Juara 1 Lomba Web Design',
-            category: 'Teknologi Informasi',
-            year: '2024',
-            level: 'Nasional',
-            description: 'Meraih juara pertama dalam kompetisi web design tingkat nasional dengan tema "Digital Innovation for Education"',
-            image: '/images/achievements/web-design.jpg',
-            award: 'Emas'
-        },
-        {
-            id: 2,
-            title: 'Juara 2 Kompetisi Jaringan',
-            category: 'Teknik Komputer Jaringan',
-            year: '2024',
-            level: 'Provinsi',
-            description: 'Berhasil meraih peringkat kedua dalam lomba konfigurasi jaringan tingkat Jawa Timur',
-            image: '/images/achievements/network.jpg',
-            award: 'Perak'
-        },
-        {
-            id: 3,
-            title: 'Juara 1 Mobile App Development',
-            category: 'Rekayasa Perangkat Lunak',
-            year: '2024',
-            level: 'Regional',
-            description: 'Aplikasi mobile untuk edukasi lingkungan meraih juara pertama se-Jawa Timur',
-            image: '/images/achievements/mobile-app.jpg',
-            award: 'Emas'
-        },
-        {
-            id: 4,
-            title: 'Juara 3 Robotika',
-            category: 'Teknik Otomasi Industri',
-            year: '2023',
-            level: 'Nasional',
-            description: 'Tim robotika berhasil masuk 3 besar dalam kompetisi robot line follower nasional',
-            image: '/images/achievements/robotics.jpg',
-            award: 'Perunggu'
-        },
-        {
-            id: 5,
-            title: 'Best Innovation Award',
-            category: 'Multimedia',
-            year: '2023',
-            level: 'Internasional',
-            description: 'Proyek video dokumenter meraih penghargaan inovasi terbaik di festival film pelajar ASEAN',
-            image: '/images/achievements/multimedia.jpg',
-            award: 'Khusus'
-        },
-        {
-            id: 6,
-            title: 'Juara 1 Cyber Security',
-            category: 'Keamanan Siber',
-            year: '2023',
-            level: 'Nasional',
-            description: 'Tim cyber security menjadi champion dalam kompetisi ethical hacking tingkat nasional',
-            image: '/images/achievements/cybersec.jpg',
-            award: 'Emas'
-        }
-    ], []);
+    const defaultAchievements: AchievementItem[] = useMemo(
+        () => [
+            {
+                id: 1,
+                title: 'Juara 1 Lomba Web Design',
+                category: 'Teknologi Informasi',
+                year: '2024',
+                level: 'Nasional',
+                description:
+                    'Meraih juara pertama dalam kompetisi web design tingkat nasional dengan tema "Digital Innovation for Education"',
+                image: '/images/achievements/web-design.jpg',
+                award: 'Emas',
+            },
+            {
+                id: 2,
+                title: 'Juara 2 Kompetisi Jaringan',
+                category: 'Teknik Komputer Jaringan',
+                year: '2024',
+                level: 'Provinsi',
+                description:
+                    'Berhasil meraih peringkat kedua dalam lomba konfigurasi jaringan tingkat Jawa Timur',
+                image: '/images/achievements/network.jpg',
+                award: 'Perak',
+            },
+            {
+                id: 3,
+                title: 'Juara 1 Mobile App Development',
+                category: 'Rekayasa Perangkat Lunak',
+                year: '2024',
+                level: 'Regional',
+                description:
+                    'Aplikasi mobile untuk edukasi lingkungan meraih juara pertama se-Jawa Timur',
+                image: '/images/achievements/mobile-app.jpg',
+                award: 'Emas',
+            },
+            {
+                id: 4,
+                title: 'Juara 3 Robotika',
+                category: 'Teknik Otomasi Industri',
+                year: '2023',
+                level: 'Nasional',
+                description:
+                    'Tim robotika berhasil masuk 3 besar dalam kompetisi robot line follower nasional',
+                image: '/images/achievements/robotics.jpg',
+                award: 'Perunggu',
+            },
+            {
+                id: 5,
+                title: 'Best Innovation Award',
+                category: 'Multimedia',
+                year: '2023',
+                level: 'Internasional',
+                description:
+                    'Proyek video dokumenter meraih penghargaan inovasi terbaik di festival film pelajar ASEAN',
+                image: '/images/achievements/multimedia.jpg',
+                award: 'Khusus',
+            },
+            {
+                id: 6,
+                title: 'Juara 1 Cyber Security',
+                category: 'Keamanan Siber',
+                year: '2023',
+                level: 'Nasional',
+                description:
+                    'Tim cyber security menjadi champion dalam kompetisi ethical hacking tingkat nasional',
+                image: '/images/achievements/cybersec.jpg',
+                award: 'Emas',
+            },
+        ],
+        [],
+    );
 
-    const achievementsData = achievements.length > 0 ? achievements : defaultAchievements;
+    const achievementsData =
+        achievements.length > 0 ? achievements : defaultAchievements;
 
     // Convert achievement data to facility format for carousel
-    const facilityFormattedData: FacilityItem[] = useMemo(() =>
-        achievementsData.map(achievement => ({
-            id: achievement.id,
-            title: achievement.title,
-            image: achievement.image || '/images/achievements/default.jpg',
-            description: `${achievement.category} • ${achievement.year} • ${achievement.level} • ${achievement.award || 'Prestasi'} - ${achievement.description}`
-        })), [achievementsData]
+    const facilityFormattedData: FacilityItem[] = useMemo(
+        () =>
+            achievementsData.map((achievement) => ({
+                id: achievement.id,
+                title: achievement.title,
+                image: achievement.image || '/images/achievements/default.jpg',
+                description: `${achievement.category} • ${achievement.year} • ${achievement.level} • ${achievement.award || 'Prestasi'} - ${achievement.description}`,
+            })),
+        [achievementsData],
     );
 
     return (
         <section
             id="all-achievements"
-            className={`py-16 lg:py-24 bg-white ${className}`}
+            className={`bg-white py-16 lg:py-24 ${className}`}
             aria-labelledby="all-achievements-title"
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="text-center mb-16 max-w-3xl mx-auto">
+                <div className="mx-auto mb-16 max-w-3xl text-center">
                     <h2
                         id="all-achievements-title"
-                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+                        className="mb-6 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl"
                     >
                         {title}
                     </h2>
 
                     {subtitle && (
-                        <p className="text-lg text-gray-600 leading-relaxed">
+                        <p className="text-lg leading-relaxed text-gray-600">
                             {subtitle}
                         </p>
                     )}
 
                     {/* Decorative line */}
                     <div className="mt-8 flex justify-center">
-                        <div className="w-24 h-1 bg-linear-to-r from-[#2ECC71] to-[#27ae60] rounded-full" />
+                        <div className="h-1 w-24 rounded-full bg-linear-to-r from-[#2ECC71] to-[#27ae60]" />
                     </div>
                 </div>
 
@@ -162,25 +175,26 @@ const AllAchievement: React.FC<AllAchievementProps> = ({
                 </div>
 
                 {/* Call to Action */}
-                <div className="text-center mt-16">
-                    <div className="bg-none rounded-2xl p-8 lg:p-12">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <div className="mt-16 text-center">
+                    <div className="rounded-2xl bg-none p-8 lg:p-12">
+                        <h3 className="mb-4 text-2xl font-bold text-gray-900">
                             Ingin Meraih Prestasi Seperti Mereka?
                         </h3>
-                        <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                            Bergabunglah dengan SMK Telkom Sidoarjo dan kembangkan potensi terbaikmu
-                            dalam bidang teknologi informasi dan komunikasi.
+                        <p className="mx-auto mb-6 max-w-2xl text-gray-600">
+                            Bergabunglah dengan SMK Telkom Sidoarjo dan
+                            kembangkan potensi terbaikmu dalam bidang teknologi
+                            informasi dan komunikasi.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <div className="flex flex-col justify-center gap-4 sm:flex-row">
                             <a
                                 href="/contact"
-                                className="inline-flex items-center justify-center px-8 py-3 bg-[#2ECC71] hover:bg-[#27ae60] text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-green-500/25"
+                                className="inline-flex transform items-center justify-center rounded-xl bg-[#2ECC71] px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#27ae60] hover:shadow-xl focus:ring-4 focus:ring-green-500/25 focus:outline-none"
                             >
                                 Daftar Sekarang
                             </a>
                             <a
                                 href="/profil"
-                                className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-50 text-gray-900 font-semibold rounded-xl border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-gray-500/25"
+                                className="inline-flex transform items-center justify-center rounded-xl border-2 border-gray-200 bg-white px-8 py-3 font-semibold text-gray-900 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:bg-gray-50 hover:shadow-xl focus:ring-4 focus:ring-gray-500/25 focus:outline-none"
                             >
                                 Pelajari Lebih Lanjut
                             </a>

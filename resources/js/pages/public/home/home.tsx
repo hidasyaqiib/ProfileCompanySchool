@@ -1,11 +1,11 @@
+import type { PageProps } from '@inertiajs/core';
+import { Head, usePage } from '@inertiajs/react';
 import React, { useState, useEffect } from 'react';
-import { Head, usePage, } from '@inertiajs/react';
-import { PageProps } from '@inertiajs/core';
-import HeroSection from '@/components/home/hero-home';
-import MainLayout from '@/layouts/main-layout';
-import SpeechSection from '@/components/home/speech';
 import FacilityInShort from '@/components/home/facility-in-short';
+import HeroSection from '@/components/home/hero-home';
 import NewsInShort from '@/components/home/news-in-short';
+import SpeechSection from '@/components/home/speech';
+import MainLayout from '@/layouts/main-layout';
 import facilities from '@/routes/filament/admin/resources/facilities';
 
 interface SpeechData {
@@ -77,17 +77,14 @@ const Home: React.FC = () => {
                 />
             )}
             <FacilityInShort
-                facilities={featuredFacilities.map(facility => ({
+                facilities={featuredFacilities.map((facility) => ({
                     id: facility.id,
                     title: facility.name,
                     image: facility.image, // perbaiki di sini
                     description: facility.description,
                 }))}
             />
-            <NewsInShort
-                initialNews={latestNews || []}
-                fetchFromApi={false}
-            />
+            <NewsInShort initialNews={latestNews || []} fetchFromApi={false} />
         </MainLayout>
     );
 };
