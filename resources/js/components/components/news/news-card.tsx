@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { ArrowUpRight, Clock, User } from 'lucide-react';
+import { ArrowUpRight, User } from 'lucide-react';
 import React from 'react';
 
 export interface NewsCardProps {
@@ -45,11 +45,6 @@ const NewsCard: React.FC<NewsCardProps> = ({
 
     const stripHtml = (html: string): string => html.replace(/<[^>]*>/g, '');
 
-    const estimateReadTime = (text: string): number => {
-        const words = stripHtml(text).split(/\s+/).filter(Boolean).length;
-        return Math.max(1, Math.ceil(words / 200));
-    };
-
     const isNew = (): boolean => {
         const diffMs = Date.now() - new Date(published_at).getTime();
         return diffMs < 1000 * 60 * 60 * 48; // 48 hours
@@ -75,12 +70,6 @@ const NewsCard: React.FC<NewsCardProps> = ({
                     <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
                         {/* Badges */}
                         <div className="mb-4 flex items-center gap-2">
-                            <span
-                                className="rounded-full px-3 py-1 text-xs font-bold text-white"
-                                style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
-                            >
-                                Featured
-                            </span>
                             {isNew() && (
                                 <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
                                     Baru
@@ -104,11 +93,6 @@ const NewsCard: React.FC<NewsCardProps> = ({
                                 </span>
                                 <span>·</span>
                                 <span>{formatDate(published_at)}</span>
-                                <span>·</span>
-                                <span className="flex items-center gap-1">
-                                    <Clock className="h-3.5 w-3.5" />
-                                    {estimateReadTime(content)} mnt
-                                </span>
                             </div>
                             <div
                                 className="flex h-9 w-9 items-center justify-center rounded-full transition-transform group-hover:scale-110"
@@ -145,13 +129,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
                             </span>
                         </div>
                     )}
-                    {/* Read time */}
-                    <div className="absolute bottom-3 right-3">
-                        <span className="flex items-center gap-1 rounded-full bg-black/40 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
-                            <Clock className="h-3 w-3" />
-                            {estimateReadTime(content)} mnt
-                        </span>
-                    </div>
+
                 </div>
 
                 {/* Content */}

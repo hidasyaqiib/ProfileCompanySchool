@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { ArrowUpRight, Clock, User } from 'lucide-react';
+import { ArrowUpRight, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import React from 'react';
 import NewsCard from '../components/news/news-card';
@@ -164,7 +164,7 @@ const NewsList: React.FC<NewsListProps> = ({
 
                                 {/* Right — content */}
                                 <div className="flex w-1/2 min-w-0 flex-col justify-between py-0.5">
-                                    {/* Source + read time */}
+                                    {/* Source */}
                                     <div className="mb-2 flex flex-wrap items-center gap-2">
                                         <div className="flex items-center gap-1.5">
                                             <div
@@ -173,13 +173,6 @@ const NewsList: React.FC<NewsListProps> = ({
                                             />
                                             <span className="text-xs font-semibold text-gray-600">MI NU 02 Situwangi</span>
                                         </div>
-                                        <span className="text-gray-300">·</span>
-                                        <span className="flex items-center gap-1 text-xs text-gray-400">
-                                            <Clock className="h-3 w-3" />
-                                            {Math.max(1, Math.ceil(
-                                                featuredItem.content.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length / 200
-                                            ))} mnt baca
-                                        </span>
                                     </div>
 
                                     {/* Title */}
@@ -192,15 +185,8 @@ const NewsList: React.FC<NewsListProps> = ({
                                         {featuredItem.content.replace(/<[^>]*>/g, '')}
                                     </p>
 
-                                    {/* Category + author */}
+                                    {/* Author */}
                                     <div className="flex items-center gap-2 text-xs">
-                                        <span
-                                            className="rounded-full px-2.5 py-0.5 font-bold text-white"
-                                            style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
-                                        >
-                                            Berita Utama
-                                        </span>
-                                        <span className="text-gray-300">·</span>
                                         <span className="flex items-center gap-1 text-gray-500">
                                             <User className="h-3 w-3" />
                                             {featuredItem.author}
