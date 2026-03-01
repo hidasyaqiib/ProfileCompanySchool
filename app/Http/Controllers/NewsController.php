@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\News;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,7 +15,7 @@ class NewsController extends Controller
     public function news(Request $request): Response
     {
         $search = $request->get('search', '');
-        $perPage = $request->get('per_page', 9);
+        $perPage = 9; // Fixed to 9 items per page
 
         $query = News::query()
             ->where('status', 'Published')
@@ -26,8 +24,8 @@ class NewsController extends Controller
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('content', 'like', "%{$search}%")
-                  ->orWhere('author', 'like', "%{$search}%");
+                    ->orWhere('content', 'like', "%{$search}%")
+                    ->orWhere('author', 'like', "%{$search}%");
             });
         }
 
@@ -41,8 +39,8 @@ class NewsController extends Controller
             'meta' => [
                 'title' => 'Berita Terkini - MI NU 02 Situwangi',
                 'description' => 'Ikuti perkembangan dan update terbaru seputar kegiatan, prestasi, dan informasi penting MI NU 02 Situwangi. Pusat informasi terpercaya untuk orang tua, siswa, dan masyarakat.',
-                'keywords' => 'berita sekolah, MI NU 02 Situwangi, informasi sekolah, kegiatan sekolah, prestasi siswa, pengumuman sekolah, update sekolah, news, madrasah ibtidaiyah'
-            ]
+                'keywords' => 'berita sekolah, MI NU 02 Situwangi, informasi sekolah, kegiatan sekolah, prestasi siswa, pengumuman sekolah, update sekolah, news, madrasah ibtidaiyah',
+            ],
         ]);
     }
 
@@ -60,7 +58,7 @@ class NewsController extends Controller
             ->where('id', '!=', $news->id)
             ->where(function ($query) use ($news) {
                 $query->where('author', $news->author)
-                      ->orWhere('title', 'like', '%' . explode(' ', $news->title)[0] . '%');
+                    ->orWhere('title', 'like', '%'.explode(' ', $news->title)[0].'%');
             })
             ->orderBy('published_at', 'desc')
             ->limit(3)
@@ -70,11 +68,11 @@ class NewsController extends Controller
             'news' => $news,
             'relatedNews' => $relatedNews,
             'meta' => [
-                'title' => $news->title . ' - MI NU 02 Situwangi',
-                'description' => strip_tags(substr($news->content, 0, 160)) . '...',
-                'keywords' => 'berita, MI NU 02 Situwangi, ' . $news->author . ', informasi sekolah',
+                'title' => $news->title.' - MI NU 02 Situwangi',
+                'description' => strip_tags(substr($news->content, 0, 160)).'...',
+                'keywords' => 'berita, MI NU 02 Situwangi, '.$news->author.', informasi sekolah',
                 'image' => $news->image_url,
-            ]
+            ],
         ]);
     }
 }

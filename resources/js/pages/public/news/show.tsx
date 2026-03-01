@@ -91,7 +91,7 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
             <Head title={meta.title}>
                 <meta name="description" content={meta.description} />
                 <meta name="keywords" content={meta.keywords} />
-                
+
                 {/* Open Graph */}
                 <meta property="og:title" content={meta.title} />
                 <meta property="og:description" content={meta.description} />
@@ -101,18 +101,18 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
                 <meta property="og:site_name" content="MI NU 02 Situwangi" />
                 <meta property="article:published_time" content={news.published_at} />
                 <meta property="article:author" content={news.author} />
-                
+
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={meta.title} />
                 <meta name="twitter:description" content={meta.description} />
                 <meta name="twitter:image" content={meta.image || "https://mi-nu-02-situwangi.com/assets/image/hero-home.webp"} />
-                
+
                 {/* Additional SEO */}
                 <link rel="canonical" href={window.location.href} />
                 <meta name="robots" content="index, follow" />
                 <meta name="author" content={news.author} />
-                
+
                 {/* JSON-LD Structured Data */}
                 <script
                     type="application/ld+json"
@@ -122,7 +122,7 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
 
             <main className="bg-white">
                 {/* Hero Section */}
-                <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-emerald-900 py-16 lg:py-24">
+                <section className="relative bg-gray-50 py-16 lg:py-24">
                     {/* Background Pattern */}
                     <div className="absolute inset-0 opacity-10">
                         <div
@@ -139,7 +139,7 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
                             <div className="mb-8">
                                 <Link
                                     href="/berita"
-                                    className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
+                                    className="inline-flex items-center gap-2 rounded-lg bg-emerald-200 px-4 py-2 text-sm font-medium text-emerald-500 backdrop-blur-sm transition-all hover:bg-emerald-700"
                                 >
                                     <FiArrowLeft className="h-4 w-4" />
                                     Kembali ke Berita
@@ -157,12 +157,12 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
                                 </div>
 
                                 {/* Title */}
-                                <h1 className="mb-6 text-3xl font-bold leading-tight text-white lg:text-5xl">
+                                <h1 className="mb-6 text-3xl font-bold leading-tight text-emerald-800 lg:text-5xl">
                                     {news.title}
                                 </h1>
 
                                 {/* Meta Info */}
-                                <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-300">
+                                <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-black/70">
                                     <div className="flex items-center gap-2">
                                         <FiUser className="h-4 w-4" />
                                         <span className="font-medium">{news.author}</span>
@@ -173,10 +173,10 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
                                             {formatDate(news.published_at)}
                                         </time>
                                     </div>
-                                    <div className="flex items-center gap-2">
+                                    {/* <div className="flex items-center gap-2">
                                         <FiClock className="h-4 w-4" />
                                         <span>{estimateReadTime(news.content)} menit baca</span>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 {/* Share Button */}
@@ -193,7 +193,7 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
                         </div>
                     </div>
 
-                    {/* Wave Separator */}
+                    {/* Wave Separator
                     <div className="absolute right-0 bottom-0 left-0">
                         <svg
                             viewBox="0 0 1440 120"
@@ -206,7 +206,7 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
                                 fill="white"
                             />
                         </svg>
-                    </div>
+                    </div> */}
                 </section>
 
                 {/* Article Content */}
@@ -229,8 +229,8 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
                                     )}
 
                                     {/* Content */}
-                                    <div 
-                                        className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-emerald-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-img:rounded-xl"
+                                    <div
+                                        className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-500 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-emerald-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-img:rounded-xl"
                                         dangerouslySetInnerHTML={{ __html: news.content }}
                                     />
 
@@ -246,7 +246,7 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
                                                     <p className="text-sm text-gray-600">Penulis</p>
                                                 </div>
                                             </div>
-                                            
+
                                             <button
                                                 onClick={handleShare}
                                                 className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
@@ -295,7 +295,7 @@ const NewsShow: React.FC<NewsShowPageProps> = ({
                                                         </article>
                                                     ))}
                                                 </div>
-                                                
+
                                                 <div className="mt-6">
                                                     <Link
                                                         href="/berita"

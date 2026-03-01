@@ -86,20 +86,19 @@ const NewsPage: React.FC<NewsPageProps> = ({
         handleSearch(searchValue);
     }, [searchValue, handleSearch]);
 
-    const handleLoadMore = useCallback(() => {
-        if (news?.links?.next) {
-            const url = new URL(news.links.next);
-            const page = url.searchParams.get('page');
-
-            const params = new URLSearchParams(window.location.search);
-            params.set('page', page || '2');
-
-            router.get('/berita', Object.fromEntries(params), {
-                preserveState: true,
-                preserveScroll: true,
-            });
+    const handlePageChange = useCallback((page: number) => {
+        const params = new URLSearchParams(window.location.search);
+        if (page > 1) {
+            params.set('page', page.toString());
+        } else {
+            params.delete('page');
         }
-    }, [news?.links?.next]);
+
+        router.get('/berita', Object.fromEntries(params), {
+            preserveState: true,
+            preserveScroll: false,
+        });
+    }, []);
 
     const paginationInfo = useMemo(() => {
         if (!news?.meta) {
@@ -231,8 +230,6 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 {/* News List */}
                 <NewsList
                     newsItems={news?.data || []}
-                    showLoadMore={paginationInfo.hasMore}
-                    onLoadMore={handleLoadMore}
                     loading={isSearching}
                 />
 
@@ -240,91 +237,80 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 {paginationInfo.totalPages > 1 && (
                     <section className="border-t border-gray-200 bg-white py-8">
                         <div className="container mx-auto px-4">
-                            <nav className="flex items-center justify-between">
-                                <div className="flex flex-1 justify-between sm:hidden">
+                            <nav className="flex items-center justify-center">
+                                <div className="flex items-center gap-2">
+                                    {/* Previous button */}
                                     {news?.links?.prev && (
                                         <button
-                                            onClick={() => {
-                                                const url = new URL(news.links.prev!);
-                                                const page = url.searchParams.get('page') || '1';
-                                                const params = new URLSearchParams(window.location.search);
-                                                params.set('page', page);
-                                                router.get('/berita', Object.fromEntries(params), {
-                                                    preserveState: true,
-                                                });
-                                            }}
-                                            className="relative inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                                            onClick={() => handlePageChange(paginationInfo.currentPage - 1)}
+                                            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
                                         >
+                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                            </svg>
                                             Sebelumnya
                                         </button>
                                     )}
+
+                                    {/* Page numbers */}
+                                    <div className="flex items-center gap-1">
+                                        {Array.from({ length: Math.min(5, paginationInfo.totalPages) }, (_, i) => {
+                                            let pageNum;
+                                            if (paginationInfo.totalPages <= 5) {
+                                                pageNum = i + 1;
+                                            } else {
+                                                const current = paginationInfo.currentPage;
+                                                const total = paginationInfo.totalPages;
+
+                                                if (current <= 3) {
+                                                    pageNum = i + 1;
+                                                } else if (current > total - 3) {
+                                                    pageNum = total - 4 + i;
+                                                } else {
+                                                    pageNum = current - 2 + i;
+                                                }
+                                            }
+
+                                            const isActive = pageNum === paginationInfo.currentPage;
+
+                                            return (
+                                                <button
+                                                    key={pageNum}
+                                                    onClick={() => handlePageChange(pageNum)}
+                                                    className={`h-10 w-10 rounded-lg text-sm font-medium transition-colors ${
+                                                        isActive
+                                                            ? 'bg-emerald-500 text-white'
+                                                            : 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                                                    }`}
+                                                >
+                                                    {pageNum}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+
+                                    {/* Next button */}
                                     {news?.links?.next && (
                                         <button
-                                            onClick={() => {
-                                                const url = new URL(news.links.next!);
-                                                const page = url.searchParams.get('page') || '2';
-                                                const params = new URLSearchParams(window.location.search);
-                                                params.set('page', page);
-                                                router.get('/berita', Object.fromEntries(params), {
-                                                    preserveState: true,
-                                                });
-                                            }}
-                                            className="relative ml-3 inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                                            onClick={() => handlePageChange(paginationInfo.currentPage + 1)}
+                                            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
                                         >
                                             Selanjutnya
+                                            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
                                         </button>
                                     )}
                                 </div>
-
-                                <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                                    <div>
-                                        <p className="text-sm text-gray-700">
-                                            Halaman <span className="font-medium">{paginationInfo.currentPage}</span> dari{' '}
-                                            <span className="font-medium">{paginationInfo.totalPages}</span>
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        {news?.links?.prev && (
-                                            <button
-                                                onClick={() => {
-                                                    const url = new URL(news.links.prev!);
-                                                    const page = url.searchParams.get('page') || '1';
-                                                    const params = new URLSearchParams(window.location.search);
-                                                    params.set('page', page);
-                                                    router.get('/berita', Object.fromEntries(params), {
-                                                        preserveState: true,
-                                                    });
-                                                }}
-                                                className="relative inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                                            >
-                                                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                                </svg>
-                                                Sebelumnya
-                                            </button>
-                                        )}
-                                        {news?.links?.next && (
-                                            <button
-                                                onClick={() => {
-                                                    const url = new URL(news.links.next!);
-                                                    const page = url.searchParams.get('page') || '2';
-                                                    const params = new URLSearchParams(window.location.search);
-                                                    params.set('page', page);
-                                                    router.get('/berita', Object.fromEntries(params), {
-                                                        preserveState: true,
-                                                    });
-                                                }}
-                                                className="relative inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                                            >
-                                                Selanjutnya
-                                                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        )}
-                                    </div>
-                                </div>
                             </nav>
+
+                            {/* Page info */}
+                            <div className="mt-4 text-center">
+                                <p className="text-sm text-gray-600">
+                                    Halaman {paginationInfo.currentPage} dari {paginationInfo.totalPages} •{' '}
+                                    Menampilkan {paginationInfo.showing} dari {paginationInfo.total} berita
+                                </p>
+                            </div>
                         </div>
                     </section>
                 )}

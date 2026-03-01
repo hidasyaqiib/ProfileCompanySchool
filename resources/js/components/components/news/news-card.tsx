@@ -73,11 +73,11 @@ const NewsCard: React.FC<NewsCardProps> = ({
     return (
         <Link
             href={`/berita/${slug}`}
-            className="group block h-full rounded-xl bg-white p-4 shadow"
+            className="group block h-full rounded-xl bg-white overflow-hidden shadow"
         >
             <article className="flex h-full flex-col">
                 {/* Thumbnail */}
-                <div className="relative mb-4 aspect-4/3 overflow-hidden rounded-xl">
+                <div className="relative aspect-4/3 overflow-hidden">
                     <img
                         src={image_url || '/assets/image/hero-home.webp'}
                         alt={title}
@@ -86,8 +86,10 @@ const NewsCard: React.FC<NewsCardProps> = ({
                     />
                 </div>
 
-                {/* Source & Date */}
-                <div className="mb-2 flex items-center gap-2 text-xs text-gray-500">
+                {/* Content with padding */}
+                <div className="p-4 flex-1 flex flex-col">
+                    {/* Source & Date */}
+                    <div className="mb-2 flex items-center gap-2 text-xs text-gray-500">
                     <span
                         className={`inline-block h-2.5 w-2.5 shrink-0 rounded-full ${dotColor}`}
                     />
@@ -111,12 +113,13 @@ const NewsCard: React.FC<NewsCardProps> = ({
                     {stripHtml(content)}
                 </p>
 
-                {/* Footer: category + read time */}
-                <div className="mt-auto flex items-center justify-end text-xs">
-                    <span className="flex items-center gap-1 font-semibold text-emerald-700 transition-all group-hover:underline">
-                        Baca selengkapnya
-                        <FiArrowRight className="h-4 w-4 text-emerald-700 transition-transform group-hover:translate-x-1" />
-                    </span>
+                    {/* Footer: category + read time */}
+                    <div className="mt-auto flex items-center justify-end text-xs">
+                        <span className="flex items-center gap-1 font-semibold text-emerald-700 transition-all group-hover:underline">
+                            Baca selengkapnya
+                            <FiArrowRight className="h-4 w-4 text-emerald-700 transition-transform group-hover:translate-x-1" />
+                        </span>
+                    </div>
                 </div>
             </article>
         </Link>

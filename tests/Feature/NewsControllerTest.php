@@ -15,7 +15,7 @@ class NewsControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Create sample news for testing
         News::create([
             'title' => 'Test News Article',
@@ -41,11 +41,10 @@ class NewsControllerTest extends TestCase
         $response = $this->get('/berita');
 
         $response->assertStatus(200);
-        $response->assertInertia(fn (Assert $page) => 
-            $page->component('public/news/news')
-                 ->has('news.data', 1) // Only published news should be shown
-                 ->has('filters')
-                 ->has('meta')
+        $response->assertInertia(fn (Assert $page) => $page->component('public/news/news')
+            ->has('news.data', 1) // Only published news should be shown
+            ->has('filters')
+            ->has('meta')
         );
     }
 
@@ -54,10 +53,9 @@ class NewsControllerTest extends TestCase
         $response = $this->get('/berita?search=Test');
 
         $response->assertStatus(200);
-        $response->assertInertia(fn (Assert $page) => 
-            $page->component('public/news/news')
-                 ->where('filters.search', 'Test')
-                 ->has('news.data', 1)
+        $response->assertInertia(fn (Assert $page) => $page->component('public/news/news')
+            ->where('filters.search', 'Test')
+            ->has('news.data', 1)
         );
     }
 
@@ -66,10 +64,9 @@ class NewsControllerTest extends TestCase
         $response = $this->get('/berita?search=NonExistent');
 
         $response->assertStatus(200);
-        $response->assertInertia(fn (Assert $page) => 
-            $page->component('public/news/news')
-                 ->where('filters.search', 'NonExistent')
-                 ->has('news.data', 0)
+        $response->assertInertia(fn (Assert $page) => $page->component('public/news/news')
+            ->where('filters.search', 'NonExistent')
+            ->has('news.data', 0)
         );
     }
 
@@ -78,12 +75,11 @@ class NewsControllerTest extends TestCase
         $response = $this->get('/berita/test-news-article');
 
         $response->assertStatus(200);
-        $response->assertInertia(fn (Assert $page) => 
-            $page->component('public/news/show')
-                 ->has('news')
-                 ->where('news.slug', 'test-news-article')
-                 ->has('relatedNews')
-                 ->has('meta')
+        $response->assertInertia(fn (Assert $page) => $page->component('public/news/show')
+            ->has('news')
+            ->where('news.slug', 'test-news-article')
+            ->has('relatedNews')
+            ->has('meta')
         );
     }
 
@@ -116,10 +112,9 @@ class NewsControllerTest extends TestCase
         $response = $this->get('/berita');
 
         $response->assertStatus(200);
-        $response->assertInertia(fn (Assert $page) => 
-            $page->component('public/news/news')
-                 ->has('news.data', 9) // Default per_page is 9
-                 ->where('news.meta.total', 16) // 15 + 1 from setUp
+        $response->assertInertia(fn (Assert $page) => $page->component('public/news/news')
+            ->has('news.data', 9) // Default per_page is 9
+            ->where('news.meta.total', 16) // 15 + 1 from setUp
         );
     }
 
@@ -128,11 +123,10 @@ class NewsControllerTest extends TestCase
         $response = $this->get('/berita');
 
         $response->assertStatus(200);
-        $response->assertInertia(fn (Assert $page) => 
-            $page->component('public/news/news')
-                 ->where('meta.title', 'Berita Terkini - MI NU 02 Situwangi')
-                 ->has('meta.description')
-                 ->has('meta.keywords')
+        $response->assertInertia(fn (Assert $page) => $page->component('public/news/news')
+            ->where('meta.title', 'Berita Terkini - MI NU 02 Situwangi')
+            ->has('meta.description')
+            ->has('meta.keywords')
         );
     }
 }
