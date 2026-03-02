@@ -10,6 +10,7 @@ interface Teacher {
     type: 'Teacher' | 'Staff' | 'Chief';
     motto: string | null;
     last_education: string | null;
+    image_url?: string;
 }
 
 interface PrincipalProps {
@@ -99,7 +100,7 @@ const Principal: React.FC<PrincipalProps> = ({ chiefs }) => {
                                 <div className="overflow-hidden rounded-2xl border border-dashed border-gray-300 bg-gray-50">
                                     {chief.photo ? (
                                         <img
-                                            src={`/storage/${chief.photo}`}
+                                            src={chief.image_url}
                                             alt={chief.name}
                                             className="h-full w-full object-cover"
                                         />

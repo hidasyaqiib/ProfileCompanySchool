@@ -8,6 +8,7 @@ interface Teacher {
     position: string;
     photo: string | null;
     type: 'Teacher' | 'Staff' | 'Chief';
+    image_url?: string;
 }
 
 interface TeacherStaffProps {
@@ -32,7 +33,7 @@ const TeacherCard: React.FC<{ teacher: Teacher; index: number }> = ({
             <div className="relative h-72 w-full bg-gray-200">
                 {teacher.photo ? (
                     <img
-                        src={`/storage/${teacher.photo}`}
+                        src={teacher.image_url}
                         alt={teacher.name}
                         className="h-full w-full object-cover object-top"
                         loading="lazy"

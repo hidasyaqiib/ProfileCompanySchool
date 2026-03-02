@@ -62,7 +62,7 @@ const SchoolTourComponent: React.FC<SchoolTourComponentProps> = ({
                         {/* Top Bar */}
                         <div
                             className="absolute top-0 right-0 left-0 flex items-center justify-between bg-gradient-to-b from-black/80 to-transparent px-6 py-5"
-                            style={{ zIndex: 999999 }}
+                            style={{ zIndex: 10 }}
                         >
                             <div className="flex flex-col">
                                 {/* Label 360 */}
@@ -115,38 +115,39 @@ const SchoolTourComponent: React.FC<SchoolTourComponentProps> = ({
                         </div>
 
                         {/* Panorama Viewer */}
-                        <div className="h-full w-full">
+                        <div className="h-full w-full" style={{ zIndex: 1 }}>
                             <ReactPhotoSphereViewer
                                 src={selectedPanorama.panorama_image}
                                 height="100vh"
                                 width="100%"
                                 defaultZoomLvl={0}
+                                touchmoveTwoFingers={false}
+                                mousewheel={true}
+                                mousewheelCtrlKey={false}
+                                navbar={['zoom', 'move', 'fullscreen']}
+                                lang={{
+                                    zoomIn: 'Perbesar',
+                                    zoomOut: 'Perkecil',
+                                    moveUp: 'Atas',
+                                    moveDown: 'Bawah',
+                                    moveLeft: 'Kiri',
+                                    moveRight: 'Kanan',
+                                    fullscreen: 'Layar Penuh',
+                                    enterFullscreen: 'Masuk Layar Penuh',
+                                    exitFullscreen: 'Keluar Layar Penuh',
+                                    download: 'Unduh',
+                                    menu: 'Menu',
+                                    close: 'Tutup',
+                                    twoFingers:
+                                        'Gunakan dua jari untuk navigasi',
+                                    ctrlZoom: 'Ctrl + scroll untuk zoom',
+                                    loadError: 'Gagal memuat panorama',
+                                }}
+                                loadingTxt="Memuat panorama..."
                             />
                         </div>
 
-                        {/* Bottom Bar */}
-                        <div
-                            className="absolute right-0 bottom-0 left-0 flex items-center justify-center bg-gradient-to-t from-black/70 to-transparent py-5"
-                            style={{ zIndex: 999999 }}
-                        >
-                            <p className="font-poppins flex items-center gap-2 text-xs text-white/50">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-4 w-4"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={1.5}
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-                                    />
-                                </svg>
-                                Seret untuk menjelajahi ruangan
-                            </p>
-                        </div>
+                        {/* Bottom Bar — DIHAPUS, digantikan navbar bawaan viewer */}
                     </motion.div>
                 )}
             </AnimatePresence>

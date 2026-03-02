@@ -22,6 +22,10 @@ class Teacher extends Model
         'type' => 'string',
     ];
 
+    protected $appends = [
+        'image_url',
+    ];
+
     protected static function booted(): void
     {
         static::saving(function (Teacher $record) {
