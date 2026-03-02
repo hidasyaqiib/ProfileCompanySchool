@@ -13,7 +13,7 @@ const HeroSchoolTour: React.FC = () => {
             }}
         >
             {/* Gradient Overlay — putih di tepi, transparan di tengah */}
-            <div className="absolute inset-0 bg-gradient-to-t from-white/97 via-white/50 to-white/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/100 via-white/50 to-white/30" />
 
             {/* Content */}
             <div className="relative z-10 flex max-w-3xl flex-col items-center text-center">

@@ -17,6 +17,20 @@ const ImageStructure: React.FC<ImageStructureProps> = ({ structures }) => {
     if (structures.length === 0) {
         return (
             <section className="bg-white py-16">
+                {/* Wave Top */}
+                <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none">
+                    <svg
+                        className="relative block h-16 w-full md:h-24"
+                        viewBox="0 0 1440 80"
+                        preserveAspectRatio="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M0,60 C400,0 1000,100 1440,40 L1440,0 L0,0 Z"
+                            fill="#f3f4f6"
+                        />
+                    </svg>
+                </div>
                 <div className="container mx-auto px-4">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
@@ -48,8 +62,23 @@ const ImageStructure: React.FC<ImageStructureProps> = ({ structures }) => {
     }
 
     return (
-        <section className="bg-white py-24">
-            <div className="mx-auto max-w-[1800px] px-12">
+        <section className="relative bg-white">
+            {/* Wave Transition dari Hero (bg abu-abu) ke section ini (bg putih) */}
+            <div className="w-full overflow-hidden leading-none">
+                <svg
+                    className="relative block h-16 w-full md:h-24 lg:h-32"
+                    viewBox="0 0 1440 80"
+                    preserveAspectRatio="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M0,60 C400,0 1000,100 1440,40 L1440,0 L0,0 Z"
+                        fill="#f3f4f6"
+                    />
+                </svg>
+            </div>
+
+            <div className="mx-auto max-w-[1800px] px-12 pt-16 pb-24">
                 <div className="space-y-24">
                     {structures.map((structure, index) => (
                         <motion.div
