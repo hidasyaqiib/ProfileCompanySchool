@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, AlertCircle, User } from 'lucide-react';
 
@@ -27,10 +27,13 @@ const TeacherCard: React.FC<{ teacher: Teacher; index: number }> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="relative max-w-[260px] min-w-[260px] cursor-pointer overflow-hidden rounded-2xl shadow-[0_0_16px_rgba(0,0,0,0.10)]"
+            className="relative w-full flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl sm:w-[260px]"
+            style={{
+                border: '2px dashed #9CA3AF',
+            }}
         >
             {/* Image */}
-            <div className="relative h-72 w-full bg-gray-200">
+            <div className="relative h-[300px] w-full bg-gray-200">
                 {teacher.photo ? (
                     <img
                         src={teacher.image_url}
@@ -40,7 +43,7 @@ const TeacherCard: React.FC<{ teacher: Teacher; index: number }> = ({
                     />
                 ) : (
                     <div className="flex h-full w-full items-center justify-center bg-gray-100">
-                        <User className="h-16 w-16 text-gray-300" />
+                        <User className="h-20 w-20 text-gray-300" />
                     </div>
                 )}
 
@@ -49,7 +52,7 @@ const TeacherCard: React.FC<{ teacher: Teacher; index: number }> = ({
             </div>
 
             {/* Info overlay at bottom */}
-            <div className="absolute right-0 bottom-0 left-0 rounded-b-2xl bg-white/90 px-4 py-3 backdrop-blur-sm">
+            <div className="absolute right-0 bottom-0 left-0 bg-white px-4 py-3">
                 <p className="font-poppins truncate text-sm font-bold text-gray-900">
                     {teacher.name}
                 </p>
@@ -62,33 +65,53 @@ const TeacherCard: React.FC<{ teacher: Teacher; index: number }> = ({
 };
 
 /* ── Reusable Slider ── */
+const GAP = 24; // gap-6 in px
+
 const TeacherSlider: React.FC<{
     title: string;
     subtitle: string;
     data: Teacher[];
     emptyMessage: string;
 }> = ({ title, subtitle, data, emptyMessage }) => {
-    const sliderRef = useRef<HTMLDivElement>(null);
+    const trackRef = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const itemsVisible = 4;
-    const maxIndex = Math.max(0, Math.ceil(data.length / itemsVisible) - 1);
+    const [visibleCount, setVisibleCount] = useState(4);
+    const [cardPxWidth, setCardPxWidth] = useState(0);
+
+    // maxIndex: how many times you can press "next" (1 card at a time)
+    const maxIndex = Math.max(0, data.length - visibleCount);
+
+    const CARD_W = 260;
+    // 4 × 260 + 3 × 24 = 1112px — fixed container width for desktop
+
+    useEffect(() => {
+        const measure = () => {
+            const count = window.innerWidth < 640 ? 1 : 4;
+            setVisibleCount(count);
+            setCurrentIndex((prev) =>
+                Math.min(prev, Math.max(0, data.length - count)),
+            );
+            // Always measure the actual rendered card width from the DOM
+            if (trackRef.current && trackRef.current.children[0]) {
+                const firstCard = trackRef.current.children[0] as HTMLElement;
+                setCardPxWidth(firstCard.offsetWidth);
+            }
+        };
+
+        const timerId = setTimeout(measure, 50);
+        window.addEventListener('resize', measure);
+        return () => {
+            clearTimeout(timerId);
+            window.removeEventListener('resize', measure);
+        };
+    }, [data.length]);
+
+    const translateX = currentIndex * (cardPxWidth + GAP);
 
     const scroll = (dir: 'left' | 'right') => {
-        if (!sliderRef.current) return;
-        const cardWidth = 260 + 24; // width + gap
-        const scrollAmount = cardWidth * itemsVisible;
-
         if (dir === 'left') {
-            sliderRef.current.scrollBy({
-                left: -scrollAmount,
-                behavior: 'smooth',
-            });
             setCurrentIndex((p) => Math.max(0, p - 1));
         } else {
-            sliderRef.current.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth',
-            });
             setCurrentIndex((p) => Math.min(maxIndex, p + 1));
         }
     };
@@ -147,23 +170,29 @@ const TeacherSlider: React.FC<{
                     </div>
                 </motion.div>
             ) : (
-                <div className="relative">
-                    {/* Slider Track */}
-                    <div
-                        ref={sliderRef}
-                        className="scrollbar-hide flex gap-6 overflow-x-auto scroll-smooth px-6 pb-4"
-                        style={{
-                            scrollbarWidth: 'none',
-                            msOverflowStyle: 'none',
-                        }}
-                    >
-                        {data.map((item, i) => (
-                            <TeacherCard
-                                key={item.id}
-                                teacher={item}
-                                index={i}
-                            />
-                        ))}
+                // Single centered container — true fixed width, no bleed
+                <div className="mx-auto" style={{ width: 'min(100%, 1112px)' }}>
+                    {/* overflow-hidden clips the track — no manual scroll possible */}
+                    <div className="overflow-hidden pb-4">
+                        {/* Track: moves via CSS transform only */}
+                        <div
+                            ref={trackRef}
+                            className="flex gap-6"
+                            style={{
+                                transform: `translateX(-${translateX}px)`,
+                                transition: 'transform 0.4s ease-in-out',
+                                touchAction: 'none',
+                                userSelect: 'none',
+                            }}
+                        >
+                            {data.map((item, i) => (
+                                <TeacherCard
+                                    key={item.id}
+                                    teacher={item}
+                                    index={i}
+                                />
+                            ))}
+                        </div>
                     </div>
 
                     {/* Navigation Buttons */}
@@ -179,7 +208,7 @@ const TeacherSlider: React.FC<{
                             <ChevronLeft className="h-6 w-6" />
                         </motion.button>
 
-                        {/* Dot Indicators */}
+                        {/* Dot Indicators — one dot per card position */}
                         <div className="flex gap-2">
                             {Array.from({ length: maxIndex + 1 }).map(
                                 (_, i) => (
