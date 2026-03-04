@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AlertCircle } from 'lucide-react';
+import { Info, Network } from 'lucide-react';
 
 interface Structure {
     id: number;
@@ -16,11 +16,11 @@ interface ImageStructureProps {
 const ImageStructure: React.FC<ImageStructureProps> = ({ structures }) => {
     if (structures.length === 0) {
         return (
-            <section className="bg-white py-16">
-                {/* Wave Top */}
-                <div className="absolute -top-1 left-0 w-full overflow-hidden leading-none">
+            <section className="relative bg-white">
+                {/* Wave Transition */}
+                <div className="w-full overflow-hidden leading-none">
                     <svg
-                        className="relative block h-16 w-full md:h-24"
+                        className="relative block h-16 w-full md:h-24 lg:h-32"
                         viewBox="0 0 1440 80"
                         preserveAspectRatio="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -31,29 +31,32 @@ const ImageStructure: React.FC<ImageStructureProps> = ({ structures }) => {
                         />
                     </svg>
                 </div>
-                <div className="container mx-auto px-4">
+
+                <div className="mx-auto max-w-2xl px-4 pt-8 pb-20">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8 }}
-                        className="mx-auto max-w-2xl"
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="flex flex-col items-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 px-10 py-14"
                     >
-                        <div className="rounded-lg border-l-4 border-blue-500 bg-blue-50 p-6 shadow-sm">
-                            <div className="flex items-start">
-                                <AlertCircle className="mt-0.5 mr-3 h-6 w-6 flex-shrink-0 text-blue-500" />
-                                <div>
-                                    <h3 className="mb-2 text-lg font-semibold text-blue-900">
-                                        Struktur Organisasi Belum Tersedia
-                                    </h3>
-                                    <p className="text-sm leading-relaxed text-blue-800">
-                                        Maaf, saat ini belum ada data struktur
-                                        organisasi yang dapat ditampilkan.
-                                        Silakan periksa kembali nanti atau
-                                        hubungi administrator untuk informasi
-                                        lebih lanjut.
-                                    </p>
-                                </div>
-                            </div>
+                        {/* Icon */}
+                        <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-gray-100">
+                            <Network className="h-10 w-10 text-gray-300" />
+                        </div>
+
+                        {/* Title */}
+                        <p className="font-poppins mb-4 text-base font-semibold text-gray-500">
+                            Struktur Organisasi Belum Tersedia
+                        </p>
+
+                        {/* Bar Notifikasi */}
+                        <div className="flex w-full items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5">
+                            <Info className="h-4 w-4 flex-shrink-0 text-amber-500" />
+                            <p className="font-poppins text-sm text-amber-700">
+                                Silakan periksa kembali nanti atau hubungi
+                                administrator.
+                            </p>
                         </div>
                     </motion.div>
                 </div>

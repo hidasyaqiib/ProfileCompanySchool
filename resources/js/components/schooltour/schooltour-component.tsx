@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ReactPhotoSphereViewer } from 'react-photo-sphere-viewer';
+import { Info, School } from 'lucide-react';
 
 interface SchoolTourItem {
     id: number;
@@ -228,11 +229,32 @@ const SchoolTourComponent: React.FC<SchoolTourComponentProps> = ({
 
                     {/* Empty State */}
                     {schooltours.length === 0 && (
-                        <div className="py-24 text-center text-gray-400">
-                            <p className="text-lg">
-                                Belum ada data tour ruangan.
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5 }}
+                            className="flex flex-col items-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 px-10 py-14"
+                        >
+                            {/* Icon */}
+                            <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-gray-100">
+                                <School className="h-10 w-10 text-gray-300" />
+                            </div>
+
+                            {/* Title */}
+                            <p className="font-poppins mb-4 text-base font-semibold text-gray-500">
+                                Data Tour Ruangan Belum Tersedia
                             </p>
-                        </div>
+
+                            {/* Bar Notifikasi */}
+                            <div className="flex w-full items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5">
+                                <Info className="h-4 w-4 flex-shrink-0 text-amber-500" />
+                                <p className="font-poppins text-sm text-amber-700">
+                                    Silakan periksa kembali nanti atau hubungi
+                                    administrator.
+                                </p>
+                            </div>
+                        </motion.div>
                     )}
                 </div>
             </section>

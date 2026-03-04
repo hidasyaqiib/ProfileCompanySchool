@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, AlertCircle, User } from 'lucide-react';
+import {
+    ChevronLeft,
+    ChevronRight,
+    Users,
+    GraduationCap,
+    Info,
+    User,
+} from 'lucide-react';
 
 interface Teacher {
     id: number;
@@ -72,7 +79,8 @@ const TeacherSlider: React.FC<{
     subtitle: string;
     data: Teacher[];
     emptyMessage: string;
-}> = ({ title, subtitle, data, emptyMessage }) => {
+    emptyIcon?: React.ReactNode;
+}> = ({ title, subtitle, data, emptyMessage, emptyIcon }) => {
     const trackRef = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleCount, setVisibleCount] = useState(4);
@@ -152,20 +160,26 @@ const TeacherSlider: React.FC<{
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="mx-auto max-w-lg"
+                    className="mx-auto max-w-2xl"
                 >
-                    <div className="rounded-lg border-l-4 border-blue-500 bg-blue-50 p-5">
-                        <div className="flex items-start gap-3">
-                            <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-500" />
-                            <div>
-                                <h3 className="font-semibold text-blue-900">
-                                    {emptyMessage}
-                                </h3>
-                                <p className="mt-0.5 text-sm text-blue-800">
-                                    Silakan periksa kembali nanti atau hubungi
-                                    administrator.
-                                </p>
-                            </div>
+                    <div className="flex flex-col items-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 px-10 py-14">
+                        {/* Icon */}
+                        <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-gray-100">
+                            <span className="text-gray-300">{emptyIcon}</span>
+                        </div>
+
+                        {/* Title */}
+                        <p className="font-poppins mb-4 text-base font-semibold text-gray-500">
+                            {emptyMessage}
+                        </p>
+
+                        {/* Bar Notifikasi */}
+                        <div className="flex w-full items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5">
+                            <Info className="h-4 w-4 flex-shrink-0 text-amber-500" />
+                            <p className="font-poppins text-sm text-amber-700">
+                                Silakan periksa kembali nanti atau hubungi
+                                administrator.
+                            </p>
                         </div>
                     </div>
                 </motion.div>
@@ -256,6 +270,7 @@ const TeacherStaff: React.FC<TeacherStaffProps> = ({ staffs, teachers }) => {
                     subtitle="MI NU 02 Situwangi"
                     data={staffs}
                     emptyMessage="Data Staff Belum Tersedia"
+                    emptyIcon={<Users className="h-10 w-10" />}
                 />
 
                 {/* Teacher Slider */}
@@ -264,6 +279,7 @@ const TeacherStaff: React.FC<TeacherStaffProps> = ({ staffs, teachers }) => {
                     subtitle="MI NU 02 Situwangi"
                     data={teachers}
                     emptyMessage="Data Guru Belum Tersedia"
+                    emptyIcon={<GraduationCap className="h-10 w-10" />}
                 />
             </div>
         </section>
