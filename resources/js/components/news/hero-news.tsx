@@ -12,6 +12,7 @@
  * @param onSearchSubmit   Called when user presses Enter or clicks "Cari"
  * @param totalNews        Total number of published articles (optional)
  */
+import { motion } from 'framer-motion';
 import { Search, Sparkles } from 'lucide-react';
 import React from 'react';
 
@@ -74,7 +75,12 @@ const HeroNews: React.FC<HeroNewsProps> = ({
                 </div>
 
                 {/* ── Magazine masthead ─────────────────────────────── */}
-                <div className="mx-auto max-w-4xl">
+                <motion.div
+                    className="mx-auto max-w-4xl"
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.65, ease: 'easeOut', delay: 0.1 }}
+                >
                     {/* Giant editorial wordmark */}
                     <h1 className="mb-2 text-center text-5xl font-black leading-none tracking-tighter text-gray-900 sm:text-6xl md:text-8xl lg:text-[9rem]">
                         Berita
@@ -108,7 +114,7 @@ const HeroNews: React.FC<HeroNewsProps> = ({
                             </button>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
 
             {/* ── Bottom divider ────────────────────────────────── */}

@@ -4,6 +4,7 @@
  * Renders the lead description paragraph, the full HTML article content
  * (with prose typography), and the author card footer.
  */
+import { motion } from 'framer-motion';
 import { Share2 } from 'lucide-react';
 import React from 'react';
 
@@ -22,7 +23,12 @@ const ArticleBody: React.FC<ArticleBodyProps> = ({
     author,
     onShare,
 }) => (
-    <article className="lg:col-span-8">
+    <motion.article
+        className="lg:col-span-8"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+    >
         {/* Lead paragraph */}
         {/* <p className="mb-8 text-lg font-medium leading-relaxed text-gray-700 lg:text-xl">
             {description}
@@ -78,7 +84,7 @@ const ArticleBody: React.FC<ArticleBodyProps> = ({
                 </div>
             </div>
         </footer>
-    </article>
+    </motion.article>
 );
 
 export default ArticleBody;

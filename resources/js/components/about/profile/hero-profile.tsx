@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { MdArrowForward } from 'react-icons/md';
@@ -19,7 +20,12 @@ const HeroProfile: React.FC<HeroProfileProps> = ({
             <div className="mx-auto max-w-7xl px-4 pt-20 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
                 <div className="grid min-h-[500px] grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Image Column */}
-                    <div className="order-1 flex justify-center lg:order-1 lg:justify-start">
+                    <motion.div
+                        className="order-1 flex justify-center lg:order-1 lg:justify-start"
+                        initial={{ opacity: 0, x: -60 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, ease: 'easeOut' }}
+                    >
                         <div className="relative w-full max-w-md">
                             {heroImage ? (
                                 <img
@@ -41,10 +47,15 @@ const HeroProfile: React.FC<HeroProfileProps> = ({
                                 </div>
                             )}
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Content Column */}
-                    <div className="order-2 flex flex-col justify-center space-y-2 lg:order-2">
+                    <motion.div
+                        className="order-2 flex flex-col justify-center space-y-2 lg:order-2"
+                        initial={{ opacity: 0, x: 60 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.15 }}
+                    >
                         {/* Breadcrumb Navigation */}
                         <nav
                             aria-label="Breadcrumb"
@@ -107,7 +118,7 @@ const HeroProfile: React.FC<HeroProfileProps> = ({
                                 />
                             </button>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 

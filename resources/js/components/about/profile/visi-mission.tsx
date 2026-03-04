@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FiEye } from 'react-icons/fi';
 import { HiOutlineClipboardList } from 'react-icons/hi';
@@ -8,7 +9,13 @@ const VisiMission: React.FC = () => {
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
                 <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Content Column */}
-                    <div className="flex flex-col justify-center space-y-8">
+                    <motion.div
+                        className="flex flex-col justify-center space-y-8"
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                        viewport={{ once: true, margin: '-80px' }}
+                    >
                         {/* Section Header */}
                         <header>
                             <h2 className="font-poppins text-2xl font-semibold sm:text-3xl lg:text-4xl">
@@ -100,10 +107,16 @@ const VisiMission: React.FC = () => {
                             Visi dan misi ini menjadi arah langkah MI NU 02
                             Situwangi dalam mencetak generasi unggul.
                         </footer>
-                    </div>
+                    </motion.div>
 
                     {/* Image Column */}
-                    <div className="order-first flex items-center justify-center lg:order-last">
+                    <motion.div
+                        className="order-first flex items-center justify-center lg:order-last"
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+                        viewport={{ once: true, margin: '-80px' }}
+                    >
                         <div className="w-full max-w-sm sm:max-w-md">
                             <img
                                 src="/assets/image/model-profile-dummy.webp"
@@ -114,7 +127,7 @@ const VisiMission: React.FC = () => {
                                 height="500"
                             />
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

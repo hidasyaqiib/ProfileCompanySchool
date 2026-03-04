@@ -6,6 +6,7 @@
  * — all in one cohesive section.
  */
 import { Link } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, ChevronRight, Copy, Share2 } from 'lucide-react';
 import React from 'react';
 import type { NewsItem } from '@/components/news/news-list';
@@ -56,7 +57,12 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
         </div>
 
         {/* Bottom content — title + meta + actions */}
-        <div className="absolute inset-x-0 bottom-0 pb-6 sm:pb-10">
+        <motion.div
+            className="absolute inset-x-0 bottom-0 pb-6 sm:pb-10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: 'easeOut', delay: 0.2 }}
+        >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-5xl">
 
@@ -114,7 +120,7 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     </div>
 );
 

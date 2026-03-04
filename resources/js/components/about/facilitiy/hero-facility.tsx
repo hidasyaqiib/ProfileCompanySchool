@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
 interface HeroFacilityProps {
@@ -48,7 +49,12 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
             <div className="relative mx-auto max-w-7xl px-6 py-16 sm:px-6 lg:px-8 lg:py-24">
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
                     {/* Content Column */}
-                    <div className="mt-24 space-y-4 lg:pr-8">
+                    <motion.div
+                        className="mt-24 space-y-4 lg:pr-8"
+                        initial={{ opacity: 0, x: -60 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, ease: 'easeOut' }}
+                    >
                         {/* Breadcrumbs */}
                         <nav
                             aria-label="Breadcrumb"
@@ -131,10 +137,15 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                                 </svg>
                             </a>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Image Column */}
-                    <div className="relative lg:order-last">
+                    <motion.div
+                        className="relative lg:order-last"
+                        initial={{ opacity: 0, x: 60 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+                    >
                         {/* 3D Perspective Container */}
                         <div className="perspective-1000 relative rotate-y-12 transform">
                             {/* Red Base Platform */}
@@ -164,7 +175,7 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
 
                         {/* Background Glow Effect */}
                         {/* <div className="absolute inset-0 bg-gradient-radial from-red-500/10 via-transparent to-transparent blur-3xl transform scale-150" /> */}
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 

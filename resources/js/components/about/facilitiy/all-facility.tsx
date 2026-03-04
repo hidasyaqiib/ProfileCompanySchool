@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import type { FacilityItem } from '../../components/facility/facility-carousel';
 import FacilityCarousel from '../../components/facility/facility-carousel';
@@ -26,7 +27,13 @@ const AllFacility: React.FC<AllFacilityProps> = ({
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="mx-auto mb-16 max-w-3xl text-center">
+                <motion.div
+                    className="mx-auto mb-16 max-w-3xl text-center"
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, ease: 'easeOut' }}
+                    viewport={{ once: true, margin: '-80px' }}
+                >
                     <h2
                         id="all-facilities-title"
                         className="mb-6 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl"
@@ -44,7 +51,7 @@ const AllFacility: React.FC<AllFacilityProps> = ({
                     <div className="mt-8 flex justify-center">
                         <div className="h-1 w-24 rounded-full bg-gradient-to-r from-[#2ECC71] to-[#27ae60]" />
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Statistics Bar */}
                 {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
@@ -64,10 +71,16 @@ const AllFacility: React.FC<AllFacilityProps> = ({
                         <div className="text-3xl font-bold text-red-600 mb-2">100%</div>
                         <div className="text-sm text-gray-600 font-medium">Berstandar Industri</div>
                     </div>
-                </div> */}
+                </motion.div>
 
                 {/* Facility Carousel / Empty State */}
-                <div className="relative">
+                <motion.div
+                    className="relative"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                >
                     {facilitiesData.length > 0 ? (
                         <FacilityCarousel
                             facilities={facilitiesData}
@@ -91,10 +104,16 @@ const AllFacility: React.FC<AllFacilityProps> = ({
                             </p>
                         </div>
                     )}
-                </div>
+                </motion.div>
 
                 {/* Call to Action */}
-                <div className="mt-16 text-center">
+                <motion.div
+                    className="mt-16 text-center"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    viewport={{ once: true, margin: '-60px' }}
+                >
                     <div className="rounded-2xl bg-none p-8 lg:p-12">
                         <h3 className="mb-4 text-2xl font-bold text-gray-900">
                             Ingin Melihat Fasilitas Secara Langsung?
@@ -119,7 +138,7 @@ const AllFacility: React.FC<AllFacilityProps> = ({
                             </a>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import FacilityCard from '../components/facility/facility-card';
 
@@ -53,7 +54,13 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
-                <header className="mx-auto mb-12 max-w-3xl text-center">
+                <motion.header
+                    className="mx-auto mb-12 max-w-3xl text-center"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, ease: 'easeOut' }}
+                    viewport={{ once: true, margin: '-80px' }}
+                >
                     <h2
                         id="gallery-grid-title"
                         className="mb-6 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl"
@@ -71,7 +78,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
                     <div className="mt-8 flex justify-center">
                         <div className="h-1 w-24 rounded-full bg-gradient-to-r from-[#2ECC71] to-[#27AE60]" />
                     </div>
-                </header>
+                </motion.header>
 
                 {/* Results Info */}
                 {galleryData.length > 0 && (
@@ -91,11 +98,15 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
                     {paginatedItems.length > 0 ? (
                         <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             {paginatedItems.map((item, index) => (
-                                <article
+                                <motion.article
                                     key={item.id}
                                     className="group transform transition-all duration-300"
                                     itemScope
                                     itemType="https://schema.org/ImageObject"
+                                    initial={{ opacity: 0, y: 32 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.45, ease: 'easeOut', delay: (index % 4) * 0.08 }}
+                                    viewport={{ once: true, margin: '-40px' }}
                                 >
                                     <FacilityCard
                                         title={item.title}
@@ -104,7 +115,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
                                         date={item.date}
                                         className="mb-0 h-80"
                                     />
-                                </article>
+                                </motion.article>
                             ))}
                         </div>
                     ) : (

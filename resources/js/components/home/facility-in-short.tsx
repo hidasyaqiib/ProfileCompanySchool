@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import type { FacilityItem } from '../components/facility/facility-carousel';
 import FacilityCarousel from '../components/facility/facility-carousel';
@@ -15,7 +16,13 @@ const FacilityInShortSection: React.FC<FacilityInShortProps> = ({
         <section className="overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-20 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">
                 {/* Section Header */}
-                <header className="mb-16 text-center">
+                <motion.header
+                    className="mb-16 text-center"
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, ease: 'easeOut' }}
+                    viewport={{ once: true, margin: '-80px' }}
+                >
                     <h2 className="mb-6 text-4xl leading-tight font-bold text-gray-900 md:text-5xl">
                         Fasilitas
                         <span className="bg-gradient-to-r from-[#2ECC71] to-[#27ae60] bg-clip-text text-transparent">
@@ -29,9 +36,15 @@ const FacilityInShortSection: React.FC<FacilityInShortProps> = ({
                         proses belajar mengajar yang efektif dan menyenangkan
                         bagi seluruh siswa.
                     </p>
-                </header>
+                </motion.header>
 
                 {/* Facilities Carousel / Empty State */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                >
                 {displayFacilities.length > 0 ? (
                     <FacilityCarousel
                         facilities={displayFacilities}
@@ -55,6 +68,7 @@ const FacilityInShortSection: React.FC<FacilityInShortProps> = ({
                         </p>
                     </div>
                 )}
+                </motion.div>
             </div>
         </section>
     );

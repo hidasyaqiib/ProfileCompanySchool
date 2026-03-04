@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import NewsCard from '@/components/components/news/news-card';
 
@@ -107,7 +108,13 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
 
             <div className="relative z-10 container mx-auto px-5">
                 {/* Header */}
-                <div className="mb-10 flex items-end justify-between">
+                <motion.div
+                    className="mb-10 flex items-end justify-between"
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    viewport={{ once: true, margin: '-80px' }}
+                >
                     <div>
                         <h2 className="text-3xl font-bold text-gray-900 lg:text-4xl">
                             Berita{' '}
@@ -140,7 +147,7 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
                             </svg>
                         </Link>
                     )}
-                </div>
+                </motion.div>
 
                 {/* Error state */}
                 {error && (
@@ -195,8 +202,24 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
 
                 {/* News grid */}
                 {!loading && !error && news.length > 0 && (
-                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                    <motion.div
+                        className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: '-60px' }}
+                        variants={{
+                            hidden: {},
+                            visible: { transition: { staggerChildren: 0.08 } },
+                        }}
+                    >
                         {news.map((item) => (
+                            <motion.div
+                                key={item.id}
+                                variants={{
+                                    hidden: { opacity: 0, y: 30 },
+                                    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
+                                }}
+                            >
                             <NewsCard
                                 key={item.id}
                                 id={item.id}
@@ -209,8 +232,9 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
                                 slug={item.slug}
                                 status={item.status}
                             />
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 )}
 
                 {/* Mobile "view all" */}

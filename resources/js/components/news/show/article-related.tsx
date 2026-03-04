@@ -5,6 +5,7 @@
  * sidebar on desktop. Stacks below the article body on mobile/tablet.
  */
 import { Link } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, CalendarDays, ChevronRight } from 'lucide-react';
 import React from 'react';
 import type { NewsItem } from '@/components/news/news-list';
@@ -29,7 +30,12 @@ const ArticleRelated: React.FC<ArticleRelatedProps> = ({ relatedNews }) => {
     if (relatedNews.length === 0) return null;
 
     return (
-        <aside className="lg:col-span-4 w-full min-w-0">
+        <motion.aside
+            className="lg:col-span-4 w-full min-w-0"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
+        >
             <div className="space-y-4">
 
                 {/* Widget card */}
@@ -108,7 +114,7 @@ const ArticleRelated: React.FC<ArticleRelatedProps> = ({ relatedNews }) => {
                 </div>
 
             </div>
-        </aside>
+        </motion.aside>
     );
 };
 

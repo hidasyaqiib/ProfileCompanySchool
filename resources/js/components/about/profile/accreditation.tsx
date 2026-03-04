@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { FaEye } from 'react-icons/fa';
 
@@ -7,7 +8,13 @@ const Accreditation: React.FC = () => {
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
                 <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Image Column */}
-                    <div className="order-2 flex items-center justify-center lg:order-1">
+                    <motion.div
+                        className="order-2 flex items-center justify-center lg:order-1"
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                        viewport={{ once: true, margin: '-80px' }}
+                    >
                         <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg">
                             <img
                                 src="/assets/image/accreditation.webp"
@@ -18,10 +25,16 @@ const Accreditation: React.FC = () => {
                                 height="600"
                             />
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Content Column */}
-                    <div className="order-1 flex flex-col justify-center space-y-6 lg:order-2">
+                    <motion.div
+                        className="order-1 flex flex-col justify-center space-y-6 lg:order-2"
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+                        viewport={{ once: true, margin: '-80px' }}
+                    >
                         {/* Main Heading */}
                         <header>
                             <h2 className="font-poppins text-3xl leading-tight font-bold text-black sm:text-4xl lg:text-5xl">
@@ -73,7 +86,7 @@ const Accreditation: React.FC = () => {
                                 di madrasah.
                             </p>
                         </aside>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

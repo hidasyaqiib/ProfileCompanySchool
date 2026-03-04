@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
 interface HeroGalleryProps {
@@ -52,7 +53,12 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
             <div className="relative mx-auto max-w-7xl px-6 pt-16 sm:px-6 lg:px-8 lg:py-24">
                 <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Content Column */}
-                    <div className="mt-8 lg:mt-24 space-y-6 lg:pr-8">
+                    <motion.div
+                        className="mt-8 lg:mt-24 space-y-6 lg:pr-8"
+                        initial={{ opacity: 0, x: -60 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, ease: 'easeOut' }}
+                    >
                         {/* Breadcrumbs */}
                         <nav
                             aria-label="Breadcrumb"
@@ -163,10 +169,15 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
                                 </svg>
                             </a>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Image Column */}
-                    <div className="relative mt-12 lg:mt-0 order-first lg:order-last">
+                    <motion.div
+                        className="relative mt-12 lg:mt-0 order-first lg:order-last"
+                        initial={{ opacity: 0, x: 60 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+                    >
                         {/* 3D Perspective Container */}
                         <div className="perspective-1000 relative rotate-y-12 transform">
                             {/* Main Gallery Image */}
@@ -186,7 +197,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
                                 </div> */}
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 

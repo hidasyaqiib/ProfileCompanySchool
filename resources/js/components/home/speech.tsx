@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
 interface Headmaster {
@@ -106,6 +107,8 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
         </div>
     );
 
+    const imageFrom = imagePosition === 'right' ? 60 : -60;
+
     return (
         <section
             className={`relative min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 pt-24 lg:py-24 ${className} overflow-visible`}
@@ -118,20 +121,28 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
                             : ''
                     }`}
                 >
-                    <div
+                    <motion.div
+                        initial={{ opacity: 0, x: imageFrom }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                        viewport={{ once: true, margin: '-80px' }}
                         className={
                             imagePosition === 'right' ? 'lg:col-start-2' : ''
                         }
                     >
                         <ImageSection />
-                    </div>
-                    <div
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -imageFrom }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+                        viewport={{ once: true, margin: '-80px' }}
                         className={
                             imagePosition === 'right' ? 'lg:col-start-1' : ''
                         }
                     >
                         <ContentSection />
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
