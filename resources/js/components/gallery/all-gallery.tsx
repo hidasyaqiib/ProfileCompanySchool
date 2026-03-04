@@ -18,7 +18,7 @@ interface GalleryGridProps {
     itemsPerPage?: number;
 }
 
-const GalleryGrid: React.FC<GalleryGridProps> = ({
+const AllGallery: React.FC<GalleryGridProps> = ({
     galleryItems = [],
     title = 'Koleksi Lengkap',
     subtitle = 'Semua dokumentasi kegiatan, prestasi, dan fasilitas MI NU 02 Situwangi dalam satu tempat',
@@ -211,4 +211,4 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
     );
 };
 
-export default GalleryGrid;
+export default AllGallery;

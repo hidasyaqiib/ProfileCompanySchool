@@ -1,6 +1,6 @@
 import { Head, usePage } from '@inertiajs/react';
 import React from 'react';
-import GalleryGrid from '@/components/gallery/gallery-grid';
+import AllGallery from '@/components/gallery/all-gallery';
 import HeroGallery from '@/components/gallery/hero-gallery';
 import MainLayout from '@/layouts/main-layout';
 
@@ -46,7 +46,7 @@ const Gallery: React.FC = () => {
             <meta name="twitter:image" content="/images/gallery-og.jpg" />
 
             <HeroGallery />
-            <GalleryGrid galleryItems={galleryItems} />
+            <AllGallery galleryItems={galleryItems} />
         </MainLayout>
     );
 };
