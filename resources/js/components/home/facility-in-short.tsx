@@ -6,56 +6,10 @@ interface FacilityInShortProps {
     facilities?: FacilityItem[];
 }
 
-const DEFAULT_FACILITIES: FacilityItem[] = [
-    {
-        id: 1,
-        title: 'Blake Star',
-        image: '/assets/image/hero-home.webp',
-        description:
-            'State-of-the-art library with digital resources and quiet study areas for enhanced learning.',
-    },
-    {
-        id: 2,
-        title: 'David Gilmore',
-        image: '/assets/image/hero-home.webp',
-        description:
-            'Fully equipped laboratory for chemistry, physics, and biology experiments.',
-    },
-    {
-        id: 3,
-        title: 'Gerard White',
-        image: '/assets/image/hero-home.webp',
-        description:
-            'Comprehensive sports facilities including gymnasium, swimming pool, and outdoor courts.',
-    },
-    {
-        id: 4,
-        title: 'Computer Center',
-        image: '/assets/image/hero-home.webp',
-        description:
-            'Advanced computing lab with latest technology for programming and digital literacy.',
-    },
-    {
-        id: 5,
-        title: 'Art Studio',
-        image: '/assets/image/hero-home.webp',
-        description:
-            'Creative space for visual arts with professional-grade equipment and materials.',
-    },
-    {
-        id: 6,
-        title: 'Music Room',
-        image: '/assets/image/hero-home.webp',
-        description:
-            'Soundproof music practice rooms with various instruments and recording equipment.',
-    },
-];
-
 const FacilityInShortSection: React.FC<FacilityInShortProps> = ({
     facilities = [],
 }) => {
-    const displayFacilities =
-        facilities.length > 0 ? facilities : DEFAULT_FACILITIES;
+    const displayFacilities = facilities;
 
     return (
         <section className="overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-20 sm:px-6 lg:px-8">
@@ -77,15 +31,30 @@ const FacilityInShortSection: React.FC<FacilityInShortProps> = ({
                     </p>
                 </header>
 
-                {/* Facilities Carousel */}
-                <FacilityCarousel
-                    facilities={displayFacilities}
-                    itemsPerPage={4}
-                    showNavigation={displayFacilities.length > 4}
-                    showPagination={displayFacilities.length > 4}
-                    ariaLabel="School facilities showcase"
-                    className="facility-carousel"
-                />
+                {/* Facilities Carousel / Empty State */}
+                {displayFacilities.length > 0 ? (
+                    <FacilityCarousel
+                        facilities={displayFacilities}
+                        itemsPerPage={4}
+                        showNavigation={displayFacilities.length > 4}
+                        showPagination={displayFacilities.length > 4}
+                        ariaLabel="School facilities showcase"
+                        className="facility-carousel"
+                    />
+                ) : (
+                    <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-white/60 py-16 text-center">
+                        <svg className="mx-auto mb-4 h-12 w-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        <h3 className="mb-2 text-base font-semibold text-gray-600">Belum Ada Fasilitas Unggulan</h3>
+                        <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
+                            <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                            </svg>
+                            Aktifkan toggle fasilitas unggulan melalui panel admin.
+                        </p>
+                    </div>
+                )}
             </div>
         </section>
     );

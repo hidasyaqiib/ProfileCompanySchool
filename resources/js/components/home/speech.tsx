@@ -8,9 +8,7 @@ interface Headmaster {
 }
 
 interface Speech {
-    greeting: string;
-    content: string[];
-    closing: string;
+    content: string;
 }
 
 interface SpeechData {
@@ -30,28 +28,28 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
     className = '',
     imagePosition = 'left',
 }) => {
-    // Default data fallback
-    const defaultData: SpeechData = {
-        title: 'Sambutan Kepala Madrasah',
-        headmaster: {
-            name: 'Rahmawati, S.Pd.I., M.Pd.',
-            position: 'Kepala Madrasah',
-            school: 'MI NU 02 Situwangi',
-            image: '/assets/image/headmaster.webp',
-        },
-        speech: {
-            greeting: "Assalamu'alaikum warahmatullahi wabarakatuh",
-            content: [
-                "Alhamdulillahi robbil'alamiin, segala puji syukur kita panjatkan ke hadirat Alloh SWT karena atas rahmat dan karunia-Nya, website resmi MI NU 02 Situwangi ini dapat hadir sebagai sarana informasi, komunikasi, dan publikasi bagi seluruh warga madrasah/sekolah serta masyarakat luas.",
-                'Website madrasah ini kami kembangkan sebagai wujud komitmen dalam meningkatkan layanan pendidikan yang transparan, informatif, dan adaptif terhadap perkembangan teknologi informasi. Melalui media ini, kami berharap berbagai informasi terkait kegiatan madrasah, prestasi peserta didik, tenaga pendidik, serta program-program unggulan madrasah dapat diakses dengan mudah dan cepat.',
-                'MI NU 02 Situwangi senantiasa berupaya menciptakan lingkungan belajar yang rapi, bersih dan berkarakter, guna membentuk peserta didik yang berilmu, berakhlaklakul karimah, mampu membaca Al Quran, menguasai teknologi serta berwawasan lingkungan. Peran serta orang tua, alumni, dan masyarakat sangat kami harapkan demi kemajuan dan keberhasilan pendidikan di madrasah ini.',
-                'Akhir kata, kami mengucapkan terima kasih kepada seluruh pihak yang telah berkontribusi dalam pengembangan website madrasah ini. Semoga dapat memberikan manfaat dan menjadi jembatan komunikasi yang efektif bagi kita semua.',
-            ],
-            closing: "Wassalamu'alaikum warahmatullahi wabarakatuh.",
-        },
-    };
+    if (!data) {
+        return (
+            <section className={`relative bg-gradient-to-br from-gray-50 to-white py-16 ${className}`}>
+                <div className="container mx-auto px-4">
+                    <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 py-20 text-center">
+                        <svg className="mx-auto mb-4 h-14 w-14 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <h3 className="mb-2 text-lg font-semibold text-gray-700">Sambutan Kepala Madrasah</h3>
+                        <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
+                            <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                            </svg>
+                            Data sambutan belum diisi. Silakan tambahkan melalui panel admin.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
-    const speechData = data || defaultData;
+    const speechData = data;
 
     const ImageSection = () => (
         <div className="flex items-center justify-center p-4 lg:p-8">
@@ -78,22 +76,16 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
 
                 <div className="space-y-6">
                     <p className="font-poppins text-lg font-medium text-gray-700 italic">
-                        {speechData.speech.greeting}
+                        Assalamu&apos;alaikum warahmatullahi wabarakatuh
                     </p>
 
-                    <div className="space-y-4">
-                        {speechData.speech.content.map((paragraph, index) => (
-                            <p
-                                key={index}
-                                className="font-poppins text-justify text-[12px] leading-relaxed text-gray-700 lg:text-[16px]"
-                            >
-                                {paragraph}
-                            </p>
-                        ))}
-                    </div>
+                    <div
+                        className="prose prose-sm max-w-none space-y-4 text-justify font-poppins text-[12px] leading-relaxed text-gray-700 lg:text-[16px] [&_p]:mb-3 [&_br]:hidden"
+                        dangerouslySetInnerHTML={{ __html: speechData.speech.content }}
+                    />
 
                     <p className="font-poppins text-lg font-medium text-gray-700 italic">
-                        {speechData.speech.closing}
+                        Wassalamu&apos;alaikum warahmatullahi wabarakatuh.
                     </p>
 
                     <div className="mt-8 border-t border-gray-200 pt-6">

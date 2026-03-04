@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import type { FacilityItem } from '../../components/facility/facility-carousel';
 import FacilityCarousel from '../../components/facility/facility-carousel';
 
@@ -16,70 +16,7 @@ const AllFacility: React.FC<AllFacilityProps> = ({
     className = '',
 }) => {
     // Default facilities data if none provided
-    const defaultFacilities: FacilityItem[] = useMemo(
-        () => [
-            {
-                id: 1,
-                title: 'Laboratorium Komputer',
-                image: '/images/facilities/lab-komputer.jpg',
-                description:
-                    'Lab komputer dengan perangkat modern untuk pembelajaran programming dan desain',
-            },
-            {
-                id: 2,
-                title: 'Laboratorium Jaringan',
-                image: '/images/facilities/lab-jaringan.jpg',
-                description:
-                    'Fasilitas lengkap untuk praktik jaringan komputer dan administrasi sistem',
-            },
-            {
-                id: 3,
-                title: 'Laboratorium Telekomunikasi',
-                image: '/images/facilities/lab-telekomunikasi.jpg',
-                description:
-                    'Perangkat telekomunikasi terkini untuk pembelajaran teknologi komunikasi',
-            },
-            {
-                id: 4,
-                title: 'Ruang Multimedia',
-                image: '/images/facilities/multimedia.jpg',
-                description:
-                    'Studio multimedia lengkap untuk produksi konten digital dan broadcasting',
-            },
-            {
-                id: 5,
-                title: 'Perpustakaan Digital',
-                image: '/images/facilities/perpustakaan.jpg',
-                description:
-                    'Koleksi buku dan referensi digital dengan akses internet berkecepatan tinggi',
-            },
-            {
-                id: 6,
-                title: 'Aula Serbaguna',
-                image: '/images/facilities/aula.jpg',
-                description:
-                    'Ruang serbaguna untuk berbagai kegiatan sekolah dan acara besar',
-            },
-            {
-                id: 7,
-                title: 'Laboratorium Robotika',
-                image: '/images/facilities/lab-robotika.jpg',
-                description:
-                    'Fasilitas untuk pengembangan dan pembelajaran teknologi robotika',
-            },
-            {
-                id: 8,
-                title: 'Ruang Server',
-                image: '/images/facilities/server-room.jpg',
-                description:
-                    'Infrastruktur server untuk mendukung sistem informasi sekolah',
-            },
-        ],
-        [],
-    );
-
-    const facilitiesData =
-        facilities.length > 0 ? facilities : defaultFacilities;
+    const facilitiesData = facilities;
 
     return (
         <section
@@ -129,16 +66,31 @@ const AllFacility: React.FC<AllFacilityProps> = ({
                     </div>
                 </div> */}
 
-                {/* Facility Carousel */}
+                {/* Facility Carousel / Empty State */}
                 <div className="relative">
-                    <FacilityCarousel
-                        facilities={facilitiesData}
-                        itemsPerPage={4}
-                        showNavigation={true}
-                        showPagination={true}
-                        className="mb-8"
-                        ariaLabel="Galeri fasilitas SMK Telkom Sidoarjo"
-                    />
+                    {facilitiesData.length > 0 ? (
+                        <FacilityCarousel
+                            facilities={facilitiesData}
+                            itemsPerPage={4}
+                            showNavigation={true}
+                            showPagination={true}
+                            className="mb-8"
+                            ariaLabel="Galeri fasilitas SMK Telkom Sidoarjo"
+                        />
+                    ) : (
+                        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 py-20 text-center">
+                            <svg className="mx-auto mb-4 h-14 w-14 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                            <h3 className="mb-2 text-lg font-semibold text-gray-700">Belum Ada Fasilitas</h3>
+                            <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
+                                <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                                </svg>
+                                Data fasilitas belum diisi. Silakan tambahkan melalui panel admin.
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Call to Action */}

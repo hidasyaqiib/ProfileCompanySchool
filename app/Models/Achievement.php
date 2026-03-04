@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class Achievement extends Model
 {
@@ -25,6 +25,8 @@ class Achievement extends Model
         'date_achievement' => 'date',
     ];
 
+    protected $appends = ['image_url'];
+
     protected static function booted(): void
     {
         static::saving(function (Achievement $record) {
@@ -40,15 +42,15 @@ class Achievement extends Model
 
                 if ($disk->exists($originalPath)) {
                     try {
-                        $manager = new ImageManager(new Driver());
+                        $manager = new ImageManager(new Driver);
 
                         $image = $manager->read($disk->path($originalPath));
 
                         $image->scaleDown(width: 1080);
 
                         $pathInfo = pathinfo($originalPath);
-                        $newFilename = $pathInfo['filename'] . '.webp';
-                        $newPath = $pathInfo['dirname'] . '/' . $newFilename;
+                        $newFilename = $pathInfo['filename'].'.webp';
+                        $newPath = $pathInfo['dirname'].'/'.$newFilename;
 
                         $encoded = $image->toWebp(quality: 80);
 
@@ -60,7 +62,7 @@ class Achievement extends Model
                             $disk->delete($originalPath);
                         }
                     } catch (\Exception $e) {
-                        \Log::error('Image conversion failed: ' . $e->getMessage());
+                        \Log::error('Image conversion failed: '.$e->getMessage());
                     }
                 }
             }
@@ -72,10 +74,11 @@ class Achievement extends Model
             }
         });
     }
+
     public function getImageUrlAttribute(): ?string
     {
         return $this->image
-        ? asset('storage/' . $this->image)
+        ? asset('storage/'.$this->image)
         : null;
     }
 }

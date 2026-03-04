@@ -2,30 +2,49 @@ import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { MdArrowForward } from 'react-icons/md';
 
-const HeroProfile: React.FC = () => {
+interface HeroProfileProps {
+    description?: string;
+    heroImage?: string;
+}
+
+const HeroProfile: React.FC<HeroProfileProps> = ({
+    description,
+    heroImage,
+}) => {
     return (
         <section
-            className="bg-gray-100"
+            className="relative overflow-hidden bg-gray-100"
             aria-label="School Profile Hero Section"
         >
             <div className="mx-auto max-w-7xl px-4 pt-20 sm:px-6 sm:pt-24 lg:px-8 lg:pt-32">
                 <div className="grid min-h-[500px] grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Image Column */}
-                    <div className="order-2 flex justify-center lg:order-1 lg:justify-start">
+                    <div className="order-1 flex justify-center lg:order-1 lg:justify-start">
                         <div className="relative w-full max-w-md">
-                            <img
-                                src="/assets/image/model-profile-dummy.webp"
-                                alt="Siswa MI NU 02 Situwangi dalam seragam tradisional"
-                                className="h-auto w-full object-cover"
-                                loading="lazy"
-                                width="400"
-                                height="600"
-                            />
+                            {heroImage ? (
+                                <img
+                                    src={heroImage}
+                                    alt="Siswa MI NU 02 Situwangi dalam seragam tradisional"
+                                    className="h-auto w-full object-cover"
+                                    loading="lazy"
+                                    width="400"
+                                    height="600"
+                                />
+                            ) : (
+                                <div className="flex h-64 w-full items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50">
+                                    <div className="text-center">
+                                        <svg className="mx-auto mb-2 h-10 w-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        <p className="text-sm text-gray-400">Gambar belum diatur</p>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 
                     {/* Content Column */}
-                    <div className="order-1 flex flex-col justify-center space-y-2 lg:order-2">
+                    <div className="order-2 flex flex-col justify-center space-y-2 lg:order-2">
                         {/* Breadcrumb Navigation */}
                         <nav
                             aria-label="Breadcrumb"
@@ -55,26 +74,31 @@ const HeroProfile: React.FC = () => {
 
                         {/* Description */}
                         <div className="prose prose-gray max-w-none">
-                            <p className="font-poppins text-justify text-sm leading-relaxed font-medium text-gray-700 sm:text-base lg:text-lg">
-                                MI NU 02 Situwangi menerapkan pembelajaran umum
-                                dan pendidikan Islam secara terpadu dengan fokus
-                                pada pengembangan akademik, akhlak, dan
-                                keterampilan keagamaan seperti membaca Al-Qur'an
-                                serta pengamalan Ahlussunnah wal Jama'ah.
-                                Melalui visi membentuk peserta didik yang
-                                berilmu, berakhlakul karimah, dan terampil,
-                                madrasah ini berkomitmen menyiapkan siswa untuk
-                                melanjutkan pendidikan ke jenjang lebih tinggi
-                                dan berperan positif di masyarakat.
-                            </p>
+                            {description ? (
+                                <p className="font-poppins text-justify text-sm leading-relaxed font-medium text-gray-700 sm:text-base lg:text-lg">
+                                    {description}
+                                </p>
+                            ) : (
+                                <p className="font-poppins inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
+                                    <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                                    </svg>
+                                    Konten profil belum diisi. Silakan tambahkan melalui panel admin.
+                                </p>
+                            )}
                         </div>
 
                         {/* Call to Action */}
                         <div className="pt-0">
                             <button
                                 type="button"
-                                className="font-poppins inline-flex items-center gap-2 rounded-md bg-[#27ae60] px-6 py-3 text-sm font-semibold text-white shadow-md transition-colors duration-300 hover:bg-[#2ecc71] focus:ring-2 focus:ring-[#27ae60] focus:ring-offset-2 focus:outline-none sm:text-base"
+                                className="font-poppins inline-flex items-center gap-2 rounded-md bg-[#27ae60] px-6 py-3 text-sm font-semibold text-white shadow-md transition-colors duration-300 hover:bg-[#2ecc71] sm:text-base"
                                 aria-label="Jelajahi lebih lanjut tentang profil sekolah"
+                                onClick={() =>
+                                    document
+                                        .getElementById('visi-misi')
+                                        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                }
                             >
                                 Jelajahi
                                 <MdArrowForward
@@ -86,6 +110,21 @@ const HeroProfile: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Bottom Wave Separator
+            <div className="absolute right-0 bottom-0 left-0 w-full overflow-hidden leading-none">
+                <svg
+                    className="relative block h-16 w-full md:h-24 lg:h-32"
+                    viewBox="0 0 1440 80"
+                    preserveAspectRatio="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M0,60 C400,-20 1000,90 1440,20 L1440,80 L0,80 Z"
+                        fill="white"
+                    />
+                </svg>
+            </div> */}
         </section>
     );
 };

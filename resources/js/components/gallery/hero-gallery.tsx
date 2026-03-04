@@ -49,10 +49,10 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
                 />
             </div>
 
-            <div className="relative mx-auto max-w-7xl px-6 py-16 sm:px-6 lg:px-8 lg:py-24">
-                <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <div className="relative mx-auto max-w-7xl px-6 pt-16 sm:px-6 lg:px-8 lg:py-24">
+                <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Content Column */}
-                    <div className="mt-24 space-y-6 lg:pr-8">
+                    <div className="mt-8 lg:mt-24 space-y-6 lg:pr-8">
                         {/* Breadcrumbs */}
                         <nav
                             aria-label="Breadcrumb"
@@ -137,12 +137,18 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
                             <a
                                 href={ctaLink}
                                 onClick={handleCtaClick}
-                                className="inline-flex transform items-center rounded-xl bg-[#2ECC71] px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#27AE60] hover:shadow-xl"
+                                className="inline-flex transform items-center rounded-lg
+                   bg-[#2ECC71]
+                   px-5 py-3 text-sm
+                   sm:px-6 sm:py-4 sm:text-base
+                   md:px-8 md:py-4 md:text-sm
+                   font-semibold text-white shadow-lg
+                   transition-all duration-300 hover:bg-[#27AE60]"
                                 aria-label={`${ctaText} - Lihat semua galeri`}
                             >
                                 <span>{ctaText}</span>
                                 <svg
-                                    className="ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                                    className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -160,7 +166,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
                     </div>
 
                     {/* Image Column */}
-                    <div className="relative lg:order-last">
+                    <div className="relative mt-12 lg:mt-0 order-first lg:order-last">
                         {/* 3D Perspective Container */}
                         <div className="perspective-1000 relative rotate-y-12 transform">
                             {/* Main Gallery Image */}
@@ -185,15 +191,15 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
             </div>
 
             {/* Bottom Wave Separator */}
-            <div className="absolute right-0 bottom-0 left-0">
+            <div className="absolute right-0 bottom-0 left-0 w-full overflow-hidden leading-none">
                 <svg
-                    viewBox="0 0 1440 120"
-                    fill="none"
+                    className="relative block h-16 w-full md:h-24 lg:h-32"
+                    viewBox="0 0 1440 80"
+                    preserveAspectRatio="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-auto w-full"
                 >
                     <path
-                        d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V120Z"
+                        d="M0,60 C400,-20 1000,90 1440,20 L1440,80 L0,80 Z"
                         fill="white"
                     />
                 </svg>

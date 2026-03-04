@@ -109,31 +109,32 @@ const NewsCard: React.FC<NewsCardProps> = ({
 
     return (
         <Link href={`/berita/${slug}`} className="group block h-full">
-            <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gray-200/80 hover:ring-emerald-100">
+        <article className="flex h-full flex-col overflow-hidden rounded-2xl border-2 border-dashed border-gray-200 bg-white transition-all duration-300 hover:border-[#2ECC71]/60">
                 {/* Image */}
-                <div className="relative aspect-4/3 overflow-hidden bg-gray-100">
-                    <img
-                        src={image_url || '/assets/image/hero-home.webp'}
-                        alt={title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                    />
-                    {/* New badge */}
-                    {isNew() && (
-                        <div className="absolute top-3 left-3">
-                            <span
-                                className="rounded-full px-2.5 py-1 text-xs font-bold text-white shadow"
-                                style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
-                            >
-                                Baru
-                            </span>
-                        </div>
-                    )}
-
+                <div className="p-3 pb-0">
+                    <div className="relative aspect-video w-full h-50 overflow-hidden rounded-xl bg-gray-100">
+                        <img
+                            src={image_url || '/assets/image/hero-home.webp'}
+                            alt={title}
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                        />
+                        {/* New badge */}
+                        {isNew() && (
+                            <div className="absolute top-2 left-2">
+                                <span
+                                    className="rounded-full px-2.5 py-1 text-xs font-bold text-white shadow"
+                                    style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                                >
+                                    Baru
+                                </span>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-1 flex-col p-5">
+                <div className="flex flex-1 flex-col px-5 py-2">
                     {/* Meta */}
                     <div className="mb-3 flex items-center gap-2 text-xs text-gray-400">
                         <span className="flex items-center gap-1 font-medium text-gray-600 truncate">
@@ -145,25 +146,24 @@ const NewsCard: React.FC<NewsCardProps> = ({
                     </div>
 
                     {/* Title */}
-                    <h3 className="mb-2.5 line-clamp-2 text-base font-bold leading-snug text-gray-900 transition-colors group-hover:text-[#27ae60]">
+                    <h3 className="mb-2.5 line-clamp-1 text-base font-bold leading-snug text-gray-900">
                         {title}
                     </h3>
 
                     {/* Excerpt */}
-                    <p className="mb-5 line-clamp-3 grow text-sm leading-relaxed text-gray-500">
+                    <p className="mb-5 line-clamp-2 grow text-sm leading-relaxed text-gray-500">
                         {stripHtml(content)}
                     </p>
 
                     {/* CTA */}
-                    <div className="mt-auto flex items-center justify-between border-t border-gray-50 pt-4">
-                        <span className="text-xs font-semibold text-[#27ae60] transition-all group-hover:underline">
+                    <div className="mt-auto flex items-center justify-between border-t border-gray-100 py-2">
+                        <span className="text-xs font-semibold text-[#27ae60]">
                             Baca selengkapnya
                         </span>
                         <div
-                            className="flex h-7 w-7 items-center justify-center rounded-full opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0.5"
-                            style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                            className="flex h-7 w-7 items-center justify-center rounded-full"
                         >
-                            <ArrowUpRight className="h-3.5 w-3.5 text-white" />
+                            <ArrowUpRight className="h-3.5 w-3.5 text-[#27ae60]" />
                         </div>
                     </div>
                 </div>

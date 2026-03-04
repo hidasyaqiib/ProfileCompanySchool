@@ -24,9 +24,9 @@ const ArticleBody: React.FC<ArticleBodyProps> = ({
 }) => (
     <article className="lg:col-span-8">
         {/* Lead paragraph */}
-        <p className="mb-8 text-lg font-medium leading-relaxed text-gray-700 lg:text-xl">
+        {/* <p className="mb-8 text-lg font-medium leading-relaxed text-gray-700 lg:text-xl">
             {description}
-        </p>
+        </p> */}
 
         {/* Article prose content */}
         <div
@@ -67,14 +67,14 @@ const ArticleBody: React.FC<ArticleBodyProps> = ({
                         <p className="text-sm font-black text-gray-900">{author}</p>
                         <p className="text-xs text-gray-500">Penulis &mdash; MI NU 02 Situwangi</p>
                     </div>
-                    <button
+                    {/* <button
                         onClick={onShare}
                         className="hidden shrink-0 items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white transition-all hover:opacity-90 active:scale-95 sm:flex"
                         style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
                     >
                         <Share2 className="h-4 w-4" />
                         Bagikan
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </footer>

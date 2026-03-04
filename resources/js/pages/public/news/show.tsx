@@ -3,7 +3,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import ArticleBody from '@/components/news/show/article-body';
 import ArticleHero from '@/components/news/show/article-hero';
 import ArticleRelated from '@/components/news/show/article-related';
-import ArticleSidebar from '@/components/news/show/article-sidebar';
 import type { NewsItem } from '@/components/news/news-list';
 import MainLayout from '@/layouts/main-layout';
 
@@ -134,21 +133,13 @@ const NewsShow: React.FC<NewsShowPageProps> = ({ news, relatedNews, meta }) => {
                                     author={news.author}
                                     onShare={handleShare}
                                 />
-                                <ArticleSidebar
-                                    newsContent={news.content}
-                                    relatedNews={relatedNews}
-                                    formatDate={formatDate}
-                                    onShare={handleShare}
-                                    onCopy={copyToClipboard}
-                                    copied={copied}
-                                />
+                                <ArticleRelated relatedNews={relatedNews} />
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Related articles grid */}
-                <ArticleRelated relatedNews={relatedNews} />
+
             </main>
         </MainLayout>
     );

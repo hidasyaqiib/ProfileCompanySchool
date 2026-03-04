@@ -53,15 +53,11 @@ class NewsController extends Controller
             ->where('status', 'Published')
             ->firstOrFail();
 
-        // Get related news (same author or similar content)
+        // Get other latest news (excluding current article)
         $relatedNews = News::where('status', 'Published')
             ->where('id', '!=', $news->id)
-            ->where(function ($query) use ($news) {
-                $query->where('author', $news->author)
-                    ->orWhere('title', 'like', '%'.explode(' ', $news->title)[0].'%');
-            })
             ->orderBy('published_at', 'desc')
-            ->limit(3)
+            ->limit(5)
             ->get();
 
         return Inertia::render('public/news/show', [

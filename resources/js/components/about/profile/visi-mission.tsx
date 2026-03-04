@@ -4,7 +4,7 @@ import { HiOutlineClipboardList } from 'react-icons/hi';
 
 const VisiMission: React.FC = () => {
     return (
-        <section className="bg-white" aria-label="Visi dan Misi Sekolah">
+        <section id="visi-misi" className="bg-white" aria-label="Visi dan Misi Sekolah">
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
                 <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Content Column */}

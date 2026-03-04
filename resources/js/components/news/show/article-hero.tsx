@@ -25,7 +25,7 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
     onCopy,
     copied,
 }) => (
-    <div className="relative h-[75vh] min-h-120 w-full overflow-hidden bg-gray-950">
+    <div className="relative h-[60vh] min-h-72 w-full overflow-hidden bg-gray-950 sm:h-[70vh] sm:min-h-96 md:h-[75vh] md:min-h-120">
         {/* Cover image */}
         <img
             src={news.image_url || '/assets/image/hero-home.webp'}
@@ -38,8 +38,8 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
         {/* Gradient overlay — strong at bottom for content legibility */}
         <div className="absolute inset-0 bg-linear-to-t from-gray-950 via-gray-950/50 to-gray-950/10" />
 
-        {/* Breadcrumb — top left */}
-        <div className="absolute top-50 left-50 inset-x-0">
+        {/* Breadcrumb — top */}
+        <div className="absolute inset-x-0 top-4 sm:top-6">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs">
                     <Link href="/" className="font-medium text-white/70 transition-colors hover:text-white">
@@ -50,23 +50,23 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
                         Berita
                     </Link>
                     <ChevronRight className="h-3 w-3 shrink-0 text-white/40" />
-                    <span className="line-clamp-1 max-w-60 text-white/50">{news.title}</span>
+                    <span className="line-clamp-1 max-w-40 text-white/50 sm:max-w-60">{news.title}</span>
                 </nav>
             </div>
         </div>
 
         {/* Bottom content — title + meta + actions */}
-        <div className="absolute inset-x-0 bottom-0 pb-10">
-            <div className="container mx-auto">
+        <div className="absolute inset-x-0 bottom-0 pb-6 sm:pb-10">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-5xl">
 
                     {/* Title */}
-                    <h1 className="mb-5 text-2xl font-black leading-tight text-white drop-shadow-sm md:text-4xl lg:text-[2.75rem]">
+                    <h1 className="mb-3 text-xl font-black leading-tight text-white drop-shadow-sm sm:mb-5 sm:text-2xl md:text-4xl lg:text-[2.75rem]">
                         {news.title}
                     </h1>
 
                     {/* Author + date */}
-                    <div className="mb-6 flex flex-wrap items-center gap-4 text-sm text-white/70">
+                    <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-white/70 sm:mb-6 sm:gap-4">
                         <div className="flex items-center gap-2">
                             <div
                                 className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-black text-white"
@@ -84,7 +84,7 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
                     </div>
 
                     {/* Action bar */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5">
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-4 sm:gap-3 sm:pt-5">
                         <Link
                             href="/berita"
                             className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/80 transition-colors hover:text-white"

@@ -104,7 +104,7 @@ const NewsList: React.FC<NewsListProps> = ({
                     <div className="mx-auto max-w-sm">
                         <div
                             className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-3xl"
-                            style={{ background: 'linear-gradient(135deg, #2ECC71/10 0%, #27ae60/10 100%)', backgroundColor: '#f0fdf4' }}
+                            style={{ backgroundColor: '#f0fdf4' }}
                         >
                             <svg className="h-10 w-10 text-[#27ae60]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
@@ -112,9 +112,12 @@ const NewsList: React.FC<NewsListProps> = ({
                                 />
                             </svg>
                         </div>
-                        <h3 className="mb-2 text-xl font-bold text-gray-900">Belum Ada Berita</h3>
-                        <p className="text-sm text-gray-500">
-                            Belum ada berita yang dipublikasikan. Silakan periksa kembali nanti.
+                        <h3 className="mb-3 text-xl font-bold text-gray-900">Belum Ada Berita</h3>
+                        <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
+                            <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                            </svg>
+                            Berita belum dipublikasikan. Silakan tambahkan melalui panel admin.
                         </p>
                     </div>
                 </div>
@@ -150,47 +153,45 @@ const NewsList: React.FC<NewsListProps> = ({
                         <motion.div variants={itemVariants} className="mb-8">
                             <Link
                                 href={`/berita/${featuredItem.slug}`}
-                                className="group flex gap-4 overflow-hidden rounded-2xl bg-white p-4 ring-1 ring-gray-200 transition-all duration-300 hover:shadow-lg hover:ring-[#2ECC71]/40 sm:gap-5 sm:p-5"
+                                className="group flex flex-row gap-4 sm:gap-6"
                             >
-                                {/* Left — thumbnail */}
-                                <div className="relative aspect-4/3 w-1/2 shrink-0 overflow-hidden rounded-xl">
+                                {/* Thumbnail — 50% */}
+                                <div className="w-1/2 shrink-0 overflow-hidden rounded-2xl">
                                     <img
                                         src={featuredItem.image_url || '/assets/image/hero-home.webp'}
                                         alt={featuredItem.title}
-                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        className="aspect-4/3 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         loading="eager"
                                     />
                                 </div>
 
-                                {/* Right — content */}
-                                <div className="flex w-1/2 min-w-0 flex-col justify-between py-0.5">
+                                {/* Content — 50% */}
+                                <div className="flex w-1/2 min-w-0 flex-col gap-2 py-0.5 sm:gap-3">
                                     {/* Source */}
-                                    <div className="mb-2 flex flex-wrap items-center gap-2">
-                                        <div className="flex items-center gap-1.5">
-                                            <div
-                                                className="h-5 w-5 rounded-full"
-                                                style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
-                                            />
-                                            <span className="text-xs font-semibold text-gray-600">MI NU 02 Situwangi</span>
-                                        </div>
+                                    <div className="flex flex-wrap items-center gap-1.5">
+                                        <div
+                                            className="h-3.5 w-3.5 shrink-0 rounded-full"
+                                            style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                                        />
+                                        <span className="text-xs font-semibold text-gray-500">Terbaru</span>
+                                        <span className="text-gray-300">·</span>
+                                        <span className="text-xs text-gray-400">{featuredItem.published_at}</span>
                                     </div>
 
                                     {/* Title */}
-                                    <h2 className="mb-2 line-clamp-3 text-base font-black leading-snug text-gray-900 transition-colors group-hover:text-[#27ae60] sm:text-lg md:text-xl lg:text-2xl">
+                                    <h2 className="line-clamp-4 text-lg font-black leading-tight text-gray-900 transition-colors group-hover:text-[#27ae60] sm:text-xl md:text-2xl lg:text-5xl">
                                         {featuredItem.title}
                                     </h2>
 
-                                    {/* Excerpt — hidden on small screens */}
-                                    <p className="mb-3 hidden line-clamp-2 text-sm leading-relaxed text-gray-500 sm:block">
+                                    {/* Excerpt */}
+                                    <p className="hidden line-clamp-4 text-md leading-relaxed text-gray-500 sm:block lg:line-clamp-5">
                                         {featuredItem.content.replace(/<[^>]*>/g, '')}
                                     </p>
 
-                                    {/* Author */}
-                                    <div className="flex items-center gap-2 text-xs">
-                                        <span className="flex items-center gap-1 text-gray-500">
-                                            <User className="h-3 w-3" />
-                                            {featuredItem.author}
-                                        </span>
+                                    {/* Author + arrow */}
+                                    <div className="mt-auto flex items-center gap-2 border-t border-gray-100 pt-2 text-xs text-gray-400">
+                                        <User className="h-3 w-3 shrink-0" />
+                                        <span className="truncate font-medium uppercase">{featuredItem.author}</span>
                                         <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-[#27ae60] opacity-0 transition-opacity group-hover:opacity-100" />
                                     </div>
                                 </div>
@@ -199,8 +200,9 @@ const NewsList: React.FC<NewsListProps> = ({
                     )}
 
                     {/* If not enough for hero layout, show all in grid */}
+                    {/* news terbaru */}
                     {!hasHeroLayout && (
-                        <div className="mb-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                        <div className="mb-5 grid gap-5 lg:grid-cols-4">
                             {newsItems.map((news) => (
                                 <motion.div key={news.id} variants={itemVariants}>
                                     <NewsCard {...news} />
@@ -220,9 +222,9 @@ const NewsList: React.FC<NewsListProps> = ({
                         </div>
                     )}
 
-                    {/* Remaining items grid — 4 cards per row on large screens */}
+                    {/* Remaining items news grid */}
                     {remainingItems.length > 0 && (
-                        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
                             {remainingItems.map((news) => (
                                 <motion.div key={news.id} variants={itemVariants}>
                                     <NewsCard {...news} />
@@ -233,25 +235,27 @@ const NewsList: React.FC<NewsListProps> = ({
                 </motion.div>
 
                 {/* ── Pagination ────────────────────────────────── */}
-                {pagination && pagination.totalPages >= 1 && (
+                {pagination && pagination.totalPages > 1 && (
                     <nav
                         aria-label="Navigasi halaman berita"
-                        className="mt-10 flex flex-col items-center gap-3 border-t border-gray-100 pt-8"
+                        className="mt-10 flex items-center justify-center space-x-2 border-t border-gray-100 pt-8"
                     >
-                        <div className="flex items-center gap-1.5">
-                            {/* Previous */}
-                            <button
-                                onClick={() => pagination.onPageChange(pagination.currentPage - 1)}
-                                disabled={!pagination.hasPrev}
-                                aria-label="Halaman sebelumnya"
-                                className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-500 transition-all hover:border-[#2ECC71] hover:text-[#27ae60] disabled:cursor-not-allowed disabled:opacity-35"
-                            >
-                                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
+                        {/* Previous */}
+                        <button
+                            onClick={() => pagination.onPageChange(pagination.currentPage - 1)}
+                            disabled={!pagination.hasPrev}
+                            aria-label="Halaman sebelumnya"
+                            className={`rounded-lg px-4 py-2 font-medium transition-colors duration-300 ${
+                                !pagination.hasPrev
+                                    ? 'cursor-not-allowed bg-gray-200 text-gray-400'
+                                    : 'bg-white text-gray-700 shadow-sm hover:bg-green-50 hover:text-[#2ECC71]'
+                            }`}
+                        >
+                            ‹ Sebelumnya
+                        </button>
 
-                            {/* Page numbers */}
+                        {/* Page numbers */}
+                        <div className="flex space-x-1">
                             {Array.from({ length: Math.min(5, pagination.totalPages) }, (_, i) => {
                                 let pageNum: number;
                                 if (pagination.totalPages <= 5) {
@@ -270,33 +274,31 @@ const NewsList: React.FC<NewsListProps> = ({
                                         onClick={() => pagination.onPageChange(pageNum)}
                                         aria-label={`Halaman ${pageNum}`}
                                         aria-current={isActive ? 'page' : undefined}
-                                        className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-semibold transition-all ${
+                                        className={`h-10 w-10 rounded-lg font-medium transition-all duration-300 ${
                                             isActive
-                                                ? 'text-white shadow-md shadow-emerald-200'
-                                                : 'border border-gray-200 bg-white text-gray-600 hover:border-[#2ECC71] hover:text-[#27ae60]'
+                                                ? 'bg-[#2ECC71] text-white shadow-md'
+                                                : 'bg-white text-gray-700 shadow-sm hover:bg-green-50 hover:text-[#2ECC71]'
                                         }`}
-                                        style={isActive ? { background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' } : undefined}
                                     >
                                         {pageNum}
                                     </button>
                                 );
                             })}
-
-                            {/* Next */}
-                            <button
-                                onClick={() => pagination.onPageChange(pagination.currentPage + 1)}
-                                disabled={!pagination.hasNext}
-                                aria-label="Halaman berikutnya"
-                                className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-500 transition-all hover:border-[#2ECC71] hover:text-[#27ae60] disabled:cursor-not-allowed disabled:opacity-35"
-                            >
-                                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
                         </div>
-                        <p className="text-xs text-gray-400">
-                            Halaman {pagination.currentPage} dari {pagination.totalPages}
-                        </p>
+
+                        {/* Next */}
+                        <button
+                            onClick={() => pagination.onPageChange(pagination.currentPage + 1)}
+                            disabled={!pagination.hasNext}
+                            aria-label="Halaman berikutnya"
+                            className={`rounded-lg px-4 py-2 font-medium transition-colors duration-300 ${
+                                !pagination.hasNext
+                                    ? 'cursor-not-allowed bg-gray-200 text-gray-400'
+                                    : 'bg-white text-gray-700 shadow-sm hover:bg-green-50 hover:text-[#2ECC71]'
+                            }`}
+                        >
+                            Selanjutnya ›
+                        </button>
                     </nav>
                 )}
 

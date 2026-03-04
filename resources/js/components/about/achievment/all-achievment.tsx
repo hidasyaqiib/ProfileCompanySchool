@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react';
-import type { FacilityItem } from '../../components/facility/facility-carousel';
-import FacilityCarousel from '../../components/facility/facility-carousel';
+import React, { useState } from 'react';
+import FacilityCard from '../../components/facility/facility-card';
 
 export interface AchievementItem {
     id: number;
@@ -18,6 +17,7 @@ interface AllAchievementProps {
     title?: string;
     subtitle?: string;
     className?: string;
+    itemsPerPage?: number;
 }
 
 const AllAchievement: React.FC<AllAchievementProps> = ({
@@ -25,94 +25,24 @@ const AllAchievement: React.FC<AllAchievementProps> = ({
     title = 'Semua Prestasi',
     subtitle = 'Bangga dengan pencapaian siswa-siswi SMK Telkom Sidoarjo dalam berbagai kompetisi dan kegiatan',
     className = '',
+    itemsPerPage = 8,
 }) => {
-    // Default achievements data if none provided
-    const defaultAchievements: AchievementItem[] = useMemo(
-        () => [
-            {
-                id: 1,
-                title: 'Juara 1 Lomba Web Design',
-                category: 'Teknologi Informasi',
-                year: '2024',
-                level: 'Nasional',
-                description:
-                    'Meraih juara pertama dalam kompetisi web design tingkat nasional dengan tema "Digital Innovation for Education"',
-                image: '/images/achievements/web-design.jpg',
-                award: 'Emas',
-            },
-            {
-                id: 2,
-                title: 'Juara 2 Kompetisi Jaringan',
-                category: 'Teknik Komputer Jaringan',
-                year: '2024',
-                level: 'Provinsi',
-                description:
-                    'Berhasil meraih peringkat kedua dalam lomba konfigurasi jaringan tingkat Jawa Timur',
-                image: '/images/achievements/network.jpg',
-                award: 'Perak',
-            },
-            {
-                id: 3,
-                title: 'Juara 1 Mobile App Development',
-                category: 'Rekayasa Perangkat Lunak',
-                year: '2024',
-                level: 'Regional',
-                description:
-                    'Aplikasi mobile untuk edukasi lingkungan meraih juara pertama se-Jawa Timur',
-                image: '/images/achievements/mobile-app.jpg',
-                award: 'Emas',
-            },
-            {
-                id: 4,
-                title: 'Juara 3 Robotika',
-                category: 'Teknik Otomasi Industri',
-                year: '2023',
-                level: 'Nasional',
-                description:
-                    'Tim robotika berhasil masuk 3 besar dalam kompetisi robot line follower nasional',
-                image: '/images/achievements/robotics.jpg',
-                award: 'Perunggu',
-            },
-            {
-                id: 5,
-                title: 'Best Innovation Award',
-                category: 'Multimedia',
-                year: '2023',
-                level: 'Internasional',
-                description:
-                    'Proyek video dokumenter meraih penghargaan inovasi terbaik di festival film pelajar ASEAN',
-                image: '/images/achievements/multimedia.jpg',
-                award: 'Khusus',
-            },
-            {
-                id: 6,
-                title: 'Juara 1 Cyber Security',
-                category: 'Keamanan Siber',
-                year: '2023',
-                level: 'Nasional',
-                description:
-                    'Tim cyber security menjadi champion dalam kompetisi ethical hacking tingkat nasional',
-                image: '/images/achievements/cybersec.jpg',
-                award: 'Emas',
-            },
-        ],
-        [],
-    );
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const achievementsData =
-        achievements.length > 0 ? achievements : defaultAchievements;
+    const achievementsData = achievements;
 
-    // Convert achievement data to facility format for carousel
-    const facilityFormattedData: FacilityItem[] = useMemo(
-        () =>
-            achievementsData.map((achievement) => ({
-                id: achievement.id,
-                title: achievement.title,
-                image: achievement.image || '/images/achievements/default.jpg',
-                description: `${achievement.category} • ${achievement.year} • ${achievement.level} • ${achievement.award || 'Prestasi'} - ${achievement.description}`,
-            })),
-        [achievementsData],
-    );
+    // Pagination
+    const totalPages = Math.ceil(achievementsData.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedItems = achievementsData.slice(startIndex, startIndex + itemsPerPage);
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        document.querySelector('#all-achievements')?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+        });
+    };
 
     return (
         <section
@@ -142,37 +72,95 @@ const AllAchievement: React.FC<AllAchievementProps> = ({
                     </div>
                 </div>
 
-                {/* Statistics Bar */}
-                {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-                    <div className="text-center">
-                        <div className="text-3xl font-bold text-[#2ECC71] mb-2">50+</div>
-                        <div className="text-sm text-gray-600 font-medium">Total Prestasi</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-3xl font-bold text-[#2ECC71] mb-2">15+</div>
-                        <div className="text-sm text-gray-600 font-medium">Kompetisi Nasional</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-3xl font-bold text-[#2ECC71] mb-2">5+</div>
-                        <div className="text-sm text-gray-600 font-medium">Tingkat Internasional</div>
-                    </div>
-                    <div className="text-center">
-                        <div className="text-3xl font-bold text-[#2ECC71] mb-2">25+</div>
-                        <div className="text-sm text-gray-600 font-medium">Juara Pertama</div>
-                    </div>
-                </div> */}
-
-                {/* Achievement Carousel */}
-                <div className="relative">
-                    <FacilityCarousel
-                        facilities={facilityFormattedData}
-                        itemsPerPage={4}
-                        showNavigation={true}
-                        showPagination={true}
-                        className="mb-8"
-                        ariaLabel="Galeri prestasi SMK Telkom Sidoarjo"
-                    />
+                {/* Achievement Grid */}
+                <div className="transition-opacity duration-300">
+                    {paginatedItems.length > 0 ? (
+                        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            {paginatedItems.map((achievement) => (
+                                <article
+                                    key={achievement.id}
+                                    className="group transform transition-all duration-300"
+                                >
+                                    <FacilityCard
+                                        title={achievement.title}
+                                        image={achievement.image || '/images/achievements/default.jpg'}
+                                        description={`${achievement.category} • ${achievement.year} • ${achievement.level}${achievement.award ? ` • ${achievement.award}` : ''} — ${achievement.description}`}
+                                        date={`${achievement.year}-01-01`}
+                                        className="mb-0 h-80"
+                                    />
+                                </article>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 py-20 text-center">
+                            <svg className="mx-auto mb-4 h-14 w-14 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                            </svg>
+                            <h3 className="mb-2 text-lg font-semibold text-gray-700">Belum Ada Prestasi</h3>
+                            <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
+                                <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                                </svg>
+                                Data prestasi belum diisi. Silakan tambahkan melalui panel admin.
+                            </p>
+                        </div>
+                    )}
                 </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                    <nav
+                        className="mt-4 mb-12 flex items-center justify-center space-x-2"
+                        aria-label="Achievement pagination"
+                    >
+                        <button
+                            onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                            disabled={currentPage === 1}
+                            className={`rounded-lg px-4 py-2 font-medium transition-colors duration-300 ${
+                                currentPage === 1
+                                    ? 'cursor-not-allowed bg-gray-200 text-gray-400'
+                                    : 'bg-white text-gray-700 shadow-sm hover:bg-green-50 hover:text-[#2ECC71]'
+                            }`}
+                            aria-label="Previous page"
+                        >
+                            ‹ Sebelumnya
+                        </button>
+
+                        <div className="flex space-x-1">
+                            {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                                const pageNum = i + 1;
+                                return (
+                                    <button
+                                        key={pageNum}
+                                        onClick={() => handlePageChange(pageNum)}
+                                        className={`h-10 w-10 rounded-lg font-medium transition-all duration-300 ${
+                                            currentPage === pageNum
+                                                ? 'bg-[#2ECC71] text-white shadow-md'
+                                                : 'bg-white text-gray-700 shadow-sm hover:bg-green-50 hover:text-[#2ECC71]'
+                                        }`}
+                                        aria-label={`Go to page ${pageNum}`}
+                                        aria-current={currentPage === pageNum ? 'page' : undefined}
+                                    >
+                                        {pageNum}
+                                    </button>
+                                );
+                            })}
+                        </div>
+
+                        <button
+                            onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                            disabled={currentPage === totalPages}
+                            className={`rounded-lg px-4 py-2 font-medium transition-colors duration-300 ${
+                                currentPage === totalPages
+                                    ? 'cursor-not-allowed bg-gray-200 text-gray-400'
+                                    : 'bg-white text-gray-700 shadow-sm hover:bg-green-50 hover:text-[#2ECC71]'
+                            }`}
+                            aria-label="Next page"
+                        >
+                            Selanjutnya ›
+                        </button>
+                    </nav>
+                )}
 
                 {/* Call to Action */}
                 <div className="mt-16 text-center">

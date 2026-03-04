@@ -8,6 +8,7 @@ export interface NewsItem {
     title: string;
     content: string;
     thumbnail: string | null;
+    image_url?: string | null;
     published_at: string;
     author: string;
     slug: string;
@@ -168,9 +169,9 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
 
                 {/* Empty state */}
                 {!loading && !error && news.length === 0 && (
-                    <div className="flex flex-col items-center justify-center rounded-2xl bg-white py-16 shadow-sm">
+                    <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-white py-16 text-center">
                         <svg
-                            className="mb-4 h-16 w-16 text-gray-300"
+                            className="mx-auto mb-4 h-14 w-14 text-gray-300"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -182,11 +183,12 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
                                 d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
                             />
                         </svg>
-                        <p className="text-lg font-medium text-gray-500">
-                            Belum ada berita tersedia
-                        </p>
-                        <p className="mt-1 text-sm text-gray-400">
-                            Berita terbaru akan muncul di sini
+                        <h3 className="mb-2 text-base font-semibold text-gray-600">Belum Ada Berita Terbaru</h3>
+                        <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
+                            <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                            </svg>
+                            Berita belum dipublikasikan. Silakan tambahkan melalui panel admin.
                         </p>
                     </div>
                 )}
@@ -201,6 +203,7 @@ const NewsInShort: React.FC<NewsInShortProps> = ({
                                 title={item.title}
                                 content={item.content}
                                 thumbnail={item.thumbnail}
+                                image_url={item.image_url ?? item.thumbnail ?? undefined}
                                 published_at={item.published_at}
                                 author={item.author}
                                 slug={item.slug}

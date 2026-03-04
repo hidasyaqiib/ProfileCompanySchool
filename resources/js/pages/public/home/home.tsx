@@ -1,27 +1,11 @@
 import type { PageProps } from '@inertiajs/core';
 import { Head, usePage } from '@inertiajs/react';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import FacilityInShort from '@/components/home/facility-in-short';
 import HeroSection from '@/components/home/hero-home';
 import NewsInShort from '@/components/home/news-in-short';
 import SpeechSection from '@/components/home/speech';
 import MainLayout from '@/layouts/main-layout';
-import facilities from '@/routes/filament/admin/resources/facilities';
-
-interface SpeechData {
-    title: string;
-    headmaster: {
-        name: string;
-        position: string;
-        school: string;
-        image: string;
-    };
-    speech: {
-        greeting: string;
-        content: string[];
-        closing: string;
-    };
-}
 
 interface HomeProps extends PageProps {
     latestNews: Array<{
@@ -40,42 +24,40 @@ interface HomeProps extends PageProps {
         image: string;
         description: string;
     }>;
+    principal: {
+        name: string;
+        image_url: string | null;
+        greeting_message: string;
+    } | null;
 }
 
 const Home: React.FC = () => {
-    const { latestNews, featuredFacilities } = usePage<HomeProps>().props;
-    const [speechData, setSpeechData] = useState<SpeechData | null>(null);
-    const [loading, setLoading] = useState(true);
+    const { latestNews, featuredFacilities, principal } = usePage<HomeProps>().props;
 
-    useEffect(() => {
-        const fetchSpeechData = async () => {
-            try {
-                const response = await fetch('/data/speechsection.json');
-                if (response.ok) {
-                    const data: SpeechData = await response.json();
-                    setSpeechData(data);
-                }
-            } catch (error) {
-                console.error('Failed to load speech data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchSpeechData();
-    }, []);
+    const speechData = principal
+        ? {
+              title: 'Sambutan Kepala Madrasah',
+              headmaster: {
+                  name: principal.name,
+                  position: 'Kepala Madrasah',
+                  school: 'MI NU 02 Situwangi',
+                  image: principal.image_url ?? '/assets/image/headmaster.webp',
+              },
+              speech: {
+                  content: principal.greeting_message,
+              },
+          }
+        : undefined;
 
     return (
         <MainLayout>
             <Head title="Home" />
             <HeroSection />
-            {!loading && (
-                <SpeechSection
-                    data={speechData || undefined}
-                    imagePosition="left"
-                    className="scroll-mt-16"
-                />
-            )}
+            <SpeechSection
+                data={speechData}
+                imagePosition="left"
+                className="scroll-mt-16"
+            />
             <FacilityInShort
                 facilities={featuredFacilities.map((facility) => ({
                     id: facility.id,

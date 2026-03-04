@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
 use App\Models\Facilities;
+use App\Models\News;
+use App\Models\Principal;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -21,6 +22,7 @@ class HomeController extends Controller
                 'title' => $news->title,
                 'content' => \Illuminate\Support\Str::limit(strip_tags($news->content), 150),
                 'thumbnail' => $news->image_url,
+                'image_url' => $news->image_url,
                 'published_at' => $news->published_at,
                 'author' => $news->author,
                 'slug' => $news->slug,
@@ -36,13 +38,20 @@ class HomeController extends Controller
                 'id' => $facility->id,
                 'name' => $facility->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($facility->description), 150),
-                'image' => $facility->image,
+                'image' => $facility->first_image_url,
                 'created_at' => $facility->created_at,
             ]);
+
+        $principal = Principal::latest()->first();
 
         return Inertia::render('public/home/home', [
             'latestNews' => $latestNews,
             'featuredFacilities' => $featuredFacilities,
+            'principal' => $principal ? [
+                'name' => $principal->name,
+                'image_url' => $principal->image_url,
+                'greeting_message' => $principal->greeting_message,
+            ] : null,
         ]);
     }
 }
