@@ -19,6 +19,8 @@ class News extends Model
         'status',
     ];
 
+    protected $appends = ['image_url'];
+
     protected static function booted(): void
     {
         static::saving(function (News $record) {
@@ -34,15 +36,15 @@ class News extends Model
 
                 if ($disk->exists($originalPath)) {
                     try {
-                        $manager = new ImageManager(new Driver());
+                        $manager = new ImageManager(new Driver);
 
                         $image = $manager->read($disk->path($originalPath));
 
                         $image->scaleDown(width: 1080);
 
                         $pathInfo = pathinfo($originalPath);
-                        $newFilename = $pathInfo['filename'] . '.webp';
-                        $newPath = $pathInfo['dirname'] . '/' . $newFilename;
+                        $newFilename = $pathInfo['filename'].'.webp';
+                        $newPath = $pathInfo['dirname'].'/'.$newFilename;
 
                         $encoded = $image->toWebp(quality: 80);
 
@@ -54,7 +56,7 @@ class News extends Model
                             $disk->delete($originalPath);
                         }
                     } catch (\Exception $e) {
-                        \Log::error('Image conversion failed: ' . $e->getMessage());
+                        \Log::error('Image conversion failed: '.$e->getMessage());
                     }
                 }
             }
@@ -66,10 +68,11 @@ class News extends Model
             }
         });
     }
+
     public function getImageUrlAttribute(): ?string
     {
         return $this->thumbnail
-        ? asset('storage/' . $this->thumbnail)
+        ? asset('storage/'.$this->thumbnail)
         : null;
     }
 }
