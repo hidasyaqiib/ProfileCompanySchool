@@ -29,7 +29,12 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('portal-admin')
-            ->brandName("MI NU 02 SITUWANGI")
+            ->brandName("MI NU 02 Situwangi")
+            ->brandLogo(asset('assets/image/logo-mi-light.webp'))
+            ->darkModeBrandLogo(asset('assets/image/logo-mi-dark.webp'))
+            ->brandLogoHeight('3rem')
+            ->favicon(asset('assets/image/logo-kemenag.webp'))
+            ->sidebarCollapsibleOnDesktop()
             ->login()
             ->passwordReset()
             ->navigationGroups([
@@ -39,7 +44,11 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Penerimaan Siswa Baru'),
             ])
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::hex('#2DC86F'),
+                'info'    => Color::hex('#3B82F6'),
+                'success' => Color::hex('#2DC86F'),
+                'warning' => Color::hex('#F59E0B'),
+                'danger'  => Color::hex('#EF4444'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

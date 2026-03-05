@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Structures\Tables;
+namespace App\Filament\Resources\Schooltours\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -11,22 +11,33 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class StructuresTable
+class SchooltoursTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->weight('bold')
-                    ->label('Nama Struktur'),
+                TextColumn::make('title')
+                    ->label('Judul Ruangan')
+                    ->searchable(),
 
-                ImageColumn::make('photo')
-                    ->label('Gambar Struktur')
+                TextColumn::make('description')
+                    ->label('Deskripsi Singkat Ruangan')
+                    ->limit(50)
+                    ->wrap()
+                    ->html(),
+
+                ImageColumn::make('cover_image')
+                    ->label('Foto Cover Ruangan')
                     ->disk('public')
-                    ->square()
-                    ->height(200)
-                    ->width(200),
+                    ->height(120)
+                    ->width(120),
+
+                ImageColumn::make('panorama_image')
+                    ->label('Foto Panorama Ruangan')
+                    ->disk('public')
+                    ->height(120)
+                    ->width(120),
             ])
             ->filters([
                 //

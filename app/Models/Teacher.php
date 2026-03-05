@@ -14,10 +14,16 @@ class Teacher extends Model
         'position',
         'photo',
         'type',
+        'motto',
+        'last_education',
     ];
 
     protected $casts = [
         'type' => 'string',
+    ];
+
+    protected $appends = [
+        'image_url',
     ];
 
     protected static function booted(): void

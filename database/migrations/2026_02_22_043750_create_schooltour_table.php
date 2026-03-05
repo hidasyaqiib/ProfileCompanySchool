@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admission', function (Blueprint $table) {
+        Schema::create('schooltour', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
-            $table->string('whatsapp_number')->nullable();
+            $table->string('title');
+            $table->text('description');
+            $table->string('cover_image');
+            $table->string('panorama_image');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admission');
+        Schema::dropIfExists('schooltour');
     }
 };

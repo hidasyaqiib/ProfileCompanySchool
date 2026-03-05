@@ -20,13 +20,13 @@ class PrincipalResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static ?string $recordTitleAttribute = 'Kepala Sekolah';
+    protected static ?string $recordTitleAttribute = 'Sambuntan Kepala Sekolah';
 
-    protected static ?string $navigationLabel = 'Kepala Sekolah';
+    protected static ?string $navigationLabel = 'Sambuntan Kepala Sekolah';
 
-    protected static ?string $modelLabel = 'Kepala Sekolah';
+    protected static ?string $modelLabel = 'Sambuntan Kepala Sekolah';
 
-    protected static ?string $pluralModelLabel = 'Kepala Sekolah';
+    protected static ?string $pluralModelLabel = 'Sambuntan Kepala Sekolah';
 
     protected static ?int $navigationSort = 6;
 

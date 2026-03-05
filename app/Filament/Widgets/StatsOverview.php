@@ -16,7 +16,7 @@ class StatsOverview extends StatsOverviewWidget
         return [
             Stat::make('Total Berita', News::where('status', 'published')->count())
                 ->description('Artikel yang telah dipublikasi')
-                ->color('warning'),
+                ->color('primary'),
 
             Stat::make('Jumlah Guru & Staff', Teacher::count())
                 ->color('primary'),

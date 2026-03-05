@@ -12,6 +12,10 @@ class AdmissionForm
     {
         return $schema
             ->components([
+                TextInput::make('whatsapp_number')
+                    ->label('Nomor WhatsApp')
+                    ->columnSpanFull(),
+
                 FileUpload::make('image')
                     ->label('Gambar Persyaratan')
                     ->image()
@@ -20,10 +24,11 @@ class AdmissionForm
                     ->visibility('public')
                     ->imageResizeTargetWidth('1920')
                     ->imageResizeTargetHeight('1080')
-                    ->maxSize(5120)
+                    ->maxSize(10240)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/svg+xml'])
-                    ->helperText('Maksimal ukuran file 5MB. Tipe file yang diperbolehkan: jpeg, png, jpg, webp, svg.')
-                    ->required(),
+                    ->helperText('Maksimal ukuran file 10MB. Tipe file yang diperbolehkan: jpeg, png, jpg, webp, svg.')
+                    ->required()
+                    ->columnSpanFull(),
             ]);
     }
 }

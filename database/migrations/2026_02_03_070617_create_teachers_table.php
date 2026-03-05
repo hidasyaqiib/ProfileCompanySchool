@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('position');
             $table->string('photo')->nullable();
             $table->enum('type', ['Teacher', 'Staff', 'Chief']);
+            $table->string('motto')->nullable();
+            $table->string('last_education')->nullable();
             $table->timestamps();
         });
     }

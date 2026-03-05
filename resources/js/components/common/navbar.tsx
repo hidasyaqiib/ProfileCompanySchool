@@ -27,8 +27,8 @@ const menus = [
         label: 'Galeri',
         path: '/galeri',
     },
-    { label: 'Lab Tour', path: '/lab-tour' },
-    { label: 'PPDB', path: '/ppdb' },
+    { label: "Tour Sekolah", path: "/school-tour" },
+    { label: "PPDB", path: "/ppdb" },
 ];
 
 const Navbar: React.FC = () => {
