@@ -17,6 +17,8 @@ class Principal extends Model
         'greeting_message',
     ];
 
+    protected $appends = ['image_url'];
+
     protected static function booted(): void
     {
         static::saving(function (Principal $record) {

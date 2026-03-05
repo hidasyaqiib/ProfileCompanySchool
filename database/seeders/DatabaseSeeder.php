@@ -20,5 +20,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@minu02situwangi.sch.id',
             'password' => Hash::make('minu02situwangi'),
         ]);
+
+        // Seed news articles
+        $this->call([
+            NewsSeeder::class,
+        ]);
     }
 }

@@ -1,62 +1,137 @@
-import React from "react";
+import { motion } from 'framer-motion';
+import React from 'react';
+import { FiEye } from 'react-icons/fi';
+import { HiOutlineClipboardList } from 'react-icons/hi';
 
 const VisiMission: React.FC = () => {
     return (
-        <section className="flex grid grid-cols-2 item-center justify-center h-150 px-16 pt-32 bg-white">
-            {/* left column */}
-            <div className="px-16 py-2">
-                <h1 className="text-[#2ECC71] font-poppins text-4xl font-semibold">
-                    Visi <span className="text-black">&</span> Misi <span className="text-black">Sekolah</span>
-                </h1>
+        <section id="visi-misi" className="bg-white" aria-label="Visi dan Misi Sekolah">
+            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+                <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
+                    {/* Content Column */}
+                    <motion.div
+                        className="flex flex-col justify-center space-y-8"
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                        viewport={{ once: true, margin: '-80px' }}
+                    >
+                        {/* Section Header */}
+                        <header>
+                            <h2 className="font-poppins text-2xl font-semibold sm:text-3xl lg:text-4xl">
+                                <span className="text-[#2ECC71]">Visi</span>
+                                <span className="text-black"> & Misi </span>
+                                <span className="text-black">Sekolah</span>
+                            </h2>
+                        </header>
 
-                {/* visi */}
-                <div className="mt-8 flex items-start gap-4">
-                    {/* Icon bulat hijau visi (eye/vision) */}
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#2ECC71] flex items-center justify-center">
-                        {/* Eye icon (vision) */}
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path d="M1.5 12s4-7 10.5-7 10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12Z" stroke="currentColor" strokeWidth="2" fill="none" />
-                            <circle cx="12" cy="12" r="3" fill="white" stroke="currentColor" strokeWidth="2" />
-                            <circle cx="12" cy="12" r="1.5" fill="#2ECC71" />
-                        </svg>
-                    </div>
-                    <div className="flex-1">
-                        <h2 className="font-poppins text-2xl text-black font-semibold mb-1">Visi Sekolah</h2>
-                        <p className="font-poppins text-gray-700 text-justify">
-                            Menjadi institusi pendidikan unggulan yang menghasilkan lulusan berkarakter, berwawasan global, dan siap menghadapi tantangan masa depan melalui pembelajaran inovatif dan lingkungan yang mendukung.
-                        </p>
-                    </div>
+                        {/* Vision Section */}
+                        <article
+                            className="flex items-start gap-4"
+                            aria-labelledby="vision-heading"
+                        >
+                            <div
+                                className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#2ECC71] sm:h-12 sm:w-12"
+                                aria-hidden="true"
+                            >
+                                <FiEye className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                            </div>
+                            <div className="flex-1 space-y-2">
+                                <h3
+                                    id="vision-heading"
+                                    className="font-poppins text-xl font-semibold text-black sm:text-2xl"
+                                >
+                                    Visi Sekolah
+                                </h3>
+                                <p className="font-poppins text-sm leading-relaxed text-gray-700 sm:text-base">
+                                    Menjadi institusi pendidikan unggulan yang
+                                    menghasilkan lulusan berkarakter, berwawasan
+                                    global, dan siap menghadapi tantangan masa
+                                    depan melalui pembelajaran inovatif dan
+                                    lingkungan yang mendukung.
+                                </p>
+                            </div>
+                        </article>
+
+                        {/* Mission Section */}
+                        <article
+                            className="flex items-start gap-4"
+                            aria-labelledby="mission-heading"
+                        >
+                            <div
+                                className="mt-1 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#2ECC71] sm:h-12 sm:w-12"
+                                aria-hidden="true"
+                            >
+                                <HiOutlineClipboardList className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+                            </div>
+                            <div className="flex-1 space-y-4">
+                                <h3
+                                    id="mission-heading"
+                                    className="font-poppins text-xl font-semibold text-black sm:text-2xl"
+                                >
+                                    Misi Sekolah
+                                </h3>
+                                <ol
+                                    className="font-poppins space-y-3 text-sm text-gray-700 sm:text-base"
+                                    role="list"
+                                >
+                                    {[
+                                        'Menyelenggarakan proses pembelajaran yang inovatif dan berpusat pada siswa.',
+                                        'Mengembangkan karakter dan nilai-nilai moral pada setiap siswa.',
+                                        'Menyediakan fasilitas pendidikan yang mendukung pembelajaran efektif.',
+                                        'Mendorong partisipasi aktif dari komunitas sekolah, termasuk orang tua dan masyarakat.',
+                                        'Mempersiapkan siswa untuk menghadapi tantangan global melalui penguasaan teknologi dan bahasa asing.',
+                                    ].map((mission, index) => (
+                                        <li
+                                            key={index}
+                                            className="flex items-start gap-3"
+                                            role="listitem"
+                                        >
+                                            <span
+                                                className="min-w-[24px] flex-shrink-0 text-base font-bold text-[#2ECC71] sm:text-lg"
+                                                aria-label={`Misi nomor ${index + 1}`}
+                                            >
+                                                {index + 1}.
+                                            </span>
+                                            <span className="leading-relaxed">
+                                                {mission}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </div>
+                        </article>
+
+                        {/* Footer Note */}
+                        <footer className="font-poppins text-xs leading-relaxed text-gray-600 sm:text-sm">
+                            Visi dan misi ini menjadi arah langkah MI NU 02
+                            Situwangi dalam mencetak generasi unggul.
+                        </footer>
+                    </motion.div>
+
+                    {/* Image Column */}
+                    <motion.div
+                        className="order-first flex items-center justify-center lg:order-last"
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+                        viewport={{ once: true, margin: '-80px' }}
+                    >
+                        <div className="w-full max-w-sm sm:max-w-md">
+                            <img
+                                src="/assets/image/model-profile-dummy.webp"
+                                alt="Siswa MI NU 02 Situwangi menunjukkan semangat belajar dan karakter unggul"
+                                className="h-auto w-full object-cover"
+                                loading="lazy"
+                                width="400"
+                                height="500"
+                            />
+                        </div>
+                    </motion.div>
                 </div>
-
-                {/* misi */}
-                <div className="mt-8 flex items-start gap-4">
-                    {/* Icon bulat hijau misi (checklist) */}
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#2ECC71] flex items-center justify-center mt-1">
-                        {/* Checklist icon */}
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" strokeWidth="2" fill="none" />
-                            <path d="M8 12l2 2 4-4" stroke="white" strokeWidth="2" fill="none" />
-                        </svg>
-                    </div>
-                    <div className="flex-1">
-                        <h2 className="font-poppins text-2xl text-black font-semibold mb-1">Misi Sekolah</h2>
-                        <ul className="custom-green-list font-poppins text-gray-700">
-                            <li>Menyelenggarakan proses pembelajaran yang inovatif dan berpusat pada siswa.</li>
-                            <li>Mengembangkan karakter dan nilai-nilai moral pada setiap siswa.</li>
-                            <li>Menyediakan fasilitas pendidikan yang mendukung pembelajaran efektif.</li>
-                            <li>Mendorong partisipasi aktif dari komunitas sekolah, termasuk orang tua dan masyarakat.</li>
-                            <li>Mempersiapkan siswa untuk menghadapi tantangan global melalui penguasaan teknologi dan bahasa asing.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            {/* right column */}
-            <div className="px-16 py-2">
-                <img src="/assets/image/visi-mission.webp" alt="Visi Mission" className="w-full h-auto rounded-lg shadow-lg" />
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default VisiMission;

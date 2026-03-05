@@ -1,18 +1,23 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
-use App\Http\Controllers\GlobalController;
 
 // Public routes
-Route::get('/', [GlobalController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('/profil', [GlobalController::class, 'profile'])->name('profile');
+Route::get('/profil', [AboutUsController::class, 'profile'])->name('profile');
+Route::get('/fasilitas', [AboutUsController::class, 'facility'])->name('facility');
+Route::get('/prestasi', [AboutUsController::class, 'achievement'])->name('achievement');
 
-Route::get('/berita', function () {
-    return Inertia::render('public/news/news');
-})->name('news');
+Route::get('/galeri', [GalleryController::class, 'index'])->name('gallery');
+
+Route::get('/berita', [NewsController::class, 'news'])->name('news');
+Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('news.show');
 
 // Authenticated routes
 Route::get('dashboard', function () {

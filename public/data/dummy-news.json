@@ -1,0 +1,58 @@
+{
+  "news": [
+    {
+      "id": 1,
+      "title": "Prestasi Siswa MI NU 2 Situwangi Juara Olimpiade Sains Nasional",
+      "content": "Tim siswa MI NU 2 Situwangi berhasil meraih juara 1 dalam Olimpiade Sains Nasonal tingkat SD/MI. Prestasi gemilang ini dicapai setelah persiapan intensif selama 6 bulan dengan bimbingan guru-guru terbaik.",
+      "thumbnail": "/assets/image/hero-home.webp",
+      "published_at": "2026-02-15",
+      "author": "Tim Redaksi",
+      "slug": "prestasi-siswa-juara-olimpiade-sains-nasional"
+    },
+    {
+      "id": 2,
+      "title": "Program Literasi Digital untuk Mendukung Pembelajaran Modern",
+      "content": "MI NU 2 Situwangi memperkenalkan program literasi digital terbaru untuk meningkatkan kemampuan teknologi siswa. Program ini meliputi pembelajaran coding dasar, penggunaan aplikasi edukatif, dan etika digital.",
+      "thumbnail": "/assets/image/hero-home.webp",
+      "published_at": "2026-02-12",
+      "author": "Kepala Sekolah",
+      "slug": "program-literasi-digital-pembelajaran-modern"
+    },
+    {
+      "id": 3,
+      "title": "Kegiatan Baksos Ramah Lingkungan Bersama Masyarakat Sekitar",
+      "content": "Siswa dan guru MI NU 2 Situwangi mengadakan kegiatan bakti sosial pembersihan lingkungan dan penanaman pohon di sekitar sekolah. Kegiatan ini bertujuan untuk menumbuhkan kepedulian lingkungan sejak dini.",
+      "thumbnail": "/assets/image/hero-home.webp",
+      "published_at": "2026-02-10",
+      "author": "Guru Pembina",
+      "slug": "kegiatan-baksos-ramah-lingkungan"
+    },
+    {
+      "id": 4,
+      "title": "Pelatihan Guru Metode Pembelajaran Inovatif",
+      "content": "Para guru MI NU 2 Situwangi mengikuti pelatihan metode pembelajaran inovatif untuk meningkatkan kualitas pengajaran. Workshop ini menghadirkan narasumber dari universitas terkemuka dan praktisi pendidikan.",
+      "thumbnail": "/assets/image/hero-home.webp",
+      "published_at": "2026-02-08",
+      "author": "Tim Pengembangan",
+      "slug": "pelatihan-guru-metode-pembelajaran-inovatif"
+    },
+    {
+      "id": 5,
+      "title": "Festival Seni dan Budaya Nusantara Tingkat Madrasah",
+      "content": "MI NU 2 Situwangi menjadi tuan rumah Festival Seni dan Budaya Nusantara yang diikuti oleh berbagai madrasah se-kabupaten. Acara ini menampilkan tarian tradisional, musik, dan pameran kerajinan tangan.",
+      "thumbnail": "/assets/image/hero-home.webp",
+      "published_at": "2026-02-05",
+      "author": "Panitia Festival",
+      "slug": "festival-seni-budaya-nusantara"
+    },
+    {
+      "id": 6,
+      "title": "Program Beasiswa Prestasi untuk Siswa Berprestasi",
+      "content": "Yayasan MI NU 2 Situwangi meluncurkan program beasiswa prestasi untuk siswa yang memiliki prestasi akademik dan non-akademik outstanding. Program ini bertujuan mendukung pendidikan berkualitas untuk semua.",
+      "thumbnail": "/assets/image/hero-home.webp",
+      "published_at": "2026-02-03",
+      "author": "Yayasan",
+      "slug": "program-beasiswa-prestasi-siswa-berprestasi"
+    }
+  ]
+}
