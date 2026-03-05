@@ -65,7 +65,7 @@ const ModalCard: React.FC<ModalCardProps> = ({
     const modal = (
         /* Backdrop */
         <div
-            className="fixed inset-0 z-200000 flex items-center justify-center bg-black/85 p-6 backdrop-blur-sm"
+            className="fixed inset-0 z-200000 flex items-center justify-center bg-black/40 p-6 backdrop-blur-sm"
             role="dialog"
             aria-modal="true"
             aria-label={title}
@@ -79,7 +79,7 @@ const ModalCard: React.FC<ModalCardProps> = ({
                 {/* ── Close button ── */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50"
+                    className="absolute top-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 shadow transition hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
                     aria-label="Tutup modal"
                     type="button"
                 >
@@ -91,10 +91,10 @@ const ModalCard: React.FC<ModalCardProps> = ({
                 {/* ══════════════════════
                     LEFT — Photo viewer
                 ══════════════════════ */}
-                <div className="flex w-[55%] flex-col bg-black">
+                <div className="flex w-[55%] flex-col bg-gray-50">
                     {/* Image wrapper — padded so photo doesn't bleed to edges */}
-                    <div className="flex flex-1 items-center justify-center p-8 pb-4">
-                        <div className="relative w-full overflow-hidden rounded-xl bg-zinc-900 shadow-lg">
+                    <div className="flex flex-1 items-center justify-center p-8 pb-8">
+                        <div className="relative w-full overflow-hidden rounded-xl bg-gray-200 shadow-lg">
                             <img
                                 key={activeIndex}
                                 src={photos[activeIndex]}
@@ -108,7 +108,7 @@ const ModalCard: React.FC<ModalCardProps> = ({
                                     <button
                                         onClick={goPrev}
                                         disabled={activeIndex === 0}
-                                        className={`absolute top-1/2 left-3 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition hover:bg-black/80 focus:outline-none ${activeIndex === 0 ? 'cursor-not-allowed opacity-25' : 'cursor-pointer'}`}
+                                        className={`absolute top-1/2 left-3 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow backdrop-blur-sm transition hover:bg-white focus:outline-none ${activeIndex === 0 ? 'cursor-not-allowed opacity-25' : 'cursor-pointer'}`}
                                         aria-label="Foto sebelumnya"
                                         type="button"
                                     >
@@ -119,7 +119,7 @@ const ModalCard: React.FC<ModalCardProps> = ({
                                     <button
                                         onClick={goNext}
                                         disabled={activeIndex === photos.length - 1}
-                                        className={`absolute top-1/2 right-3 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition hover:bg-black/80 focus:outline-none ${activeIndex === photos.length - 1 ? 'cursor-not-allowed opacity-25' : 'cursor-pointer'}`}
+                                        className={`absolute top-1/2 right-3 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow backdrop-blur-sm transition hover:bg-white focus:outline-none ${activeIndex === photos.length - 1 ? 'cursor-not-allowed opacity-25' : 'cursor-pointer'}`}
                                         aria-label="Foto berikutnya"
                                         type="button"
                                     >
@@ -129,7 +129,7 @@ const ModalCard: React.FC<ModalCardProps> = ({
                                     </button>
 
                                     {/* Counter */}
-                                    <span className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
+                                    <span className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-white/90 px-3 py-0.5 text-xs font-medium text-gray-700 shadow backdrop-blur-sm">
                                         {activeIndex + 1} / {photos.length}
                                     </span>
                                 </>
@@ -140,18 +140,17 @@ const ModalCard: React.FC<ModalCardProps> = ({
                     {/* Thumbnail strip */}
                     {hasMultiplePhotos && (
                         <div
-                            className="flex gap-2 overflow-x-auto px-8 pb-6"
+                            className="flex gap-2 overflow-x-auto justify-center px-8 pb-6"
                             style={{ scrollbarWidth: 'none' }}
                         >
                             {photos.map((src, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setActiveIndex(i)}
-                                    className={`h-12 w-12 flex-none overflow-hidden rounded-lg border-2 transition-all focus:outline-none ${
-                                        i === activeIndex
+                                    className={`h-12 w-12 flex-none overflow-hidden rounded-lg border-2 transition-all focus:outline-none ${i === activeIndex
                                             ? 'border-[#2ECC71] opacity-100'
                                             : 'border-transparent opacity-40 hover:opacity-70'
-                                    }`}
+                                        }`}
                                     aria-label={`Lihat foto ${i + 1}`}
                                     aria-pressed={i === activeIndex}
                                     type="button"
@@ -166,41 +165,44 @@ const ModalCard: React.FC<ModalCardProps> = ({
                 {/* ══════════════════════
                     RIGHT — Text content
                 ══════════════════════ */}
-                <div className="flex w-[45%] flex-col overflow-y-auto bg-zinc-950 px-8 py-8">
-                    {/* Top: title + divider + description */}
-                    <div className="flex flex-1 flex-col gap-5">
-                        <h2 className="text-xl font-bold leading-snug tracking-tight text-white">
-                            {title}
-                        </h2>
+                <div className="flex w-[45%] flex-col overflow-y-auto bg-white px-8 py-8 border-l border-gray-100">
+                    {/* Title — pr-10 keeps it clear of the absolute close button */}
+                    <h2 className="pr-10 text-xl font-bold leading-snug tracking-tight text-gray-900 break-all">
+                        {title}
+                    </h2>
 
-                        <div className="h-px w-full bg-white/10" />
+                    <div className="mt-5 h-px w-full bg-gray-200" />
 
+                    {/* Description — flex-1 pushes bottom bar down */}
+                    <div className="mt-5 flex flex-1 flex-col">
                         {description && (
-                            <p className="text-sm leading-relaxed text-zinc-400">
+                            <p className="text-sm leading-relaxed text-gray-600 break-all">
                                 {description}
                             </p>
                         )}
+                    </div>
 
-                        {/* Meta chips */}
-                        <div className="flex flex-col gap-2">
-                            {date && (
-                                <div className="flex items-center gap-2 text-xs text-zinc-500">
-                                    <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                                    </svg>
-                                    {new Date(date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
-                                </div>
-                            )}
-
-                            {hasMultiplePhotos && (
-                                <div className="flex items-center gap-2 text-xs text-[#2ECC71]">
-                                    <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                    </svg>
-                                    {photos.length} foto tersedia
-                                </div>
-                            )}
+                    {/* Bottom bar — foto tersedia (left) | date (right) */}
+                    <div className="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                        {/* Left: photo count */}
+                        <div className="flex items-center gap-2 text-xs text-[#2ECC71]">
+                            <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                            {photos.length} foto tersedia
                         </div>
+
+                        {/* Right: date */}
+                        {date ? (
+                            <div className="flex items-center gap-2 text-xs text-gray-500">
+                                <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                                </svg>
+                                {new Date(date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                            </div>
+                        ) : (
+                            <div className="invisible text-xs">–</div>
+                        )}
                     </div>
                 </div>
 

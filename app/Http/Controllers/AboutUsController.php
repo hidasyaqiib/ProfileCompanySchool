@@ -31,6 +31,7 @@ class AboutUsController extends Controller
                 'image' => $facility->first_image_url,
                 'images' => $facility->image_urls,
                 'description' => $facility->description,
+                'date' => $facility->created_at?->format('Y-m-d'),
             ]);
 
         $meta = [
@@ -53,7 +54,7 @@ class AboutUsController extends Controller
             ->map(fn (Achievement $achievement) => [
                 'id' => $achievement->id,
                 'title' => $achievement->title_achievement,
-                'category' => implode(', ', $achievement->name_student ?? []),
+                'category' => implode(', ', (array) ($achievement->name_student ?? [])),
                 'year' => $achievement->date_achievement?->format('Y') ?? '',
                 'level' => $achievement->level_achievement,
                 'description' => $achievement->description ?? '',

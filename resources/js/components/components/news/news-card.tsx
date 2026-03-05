@@ -91,7 +91,6 @@ const NewsCard: React.FC<NewsCardProps> = ({
                                     <User className="h-3.5 w-3.5" />
                                     {author}
                                 </span>
-                                <span>·</span>
                                 <span>{formatDate(published_at)}</span>
                             </div>
                             <div
@@ -136,12 +135,11 @@ const NewsCard: React.FC<NewsCardProps> = ({
                 {/* Content */}
                 <div className="flex flex-1 flex-col px-5 py-2">
                     {/* Meta */}
-                    <div className="mb-3 flex items-center gap-2 text-xs text-gray-400">
+                    <div className="mb-3 flex items-center gap-2 justify-between text-xs text-gray-400">
                         <span className="flex items-center gap-1 font-medium text-gray-600 truncate">
                             <User className="h-3 w-3 shrink-0" />
                             {author}
                         </span>
-                        <span className="text-gray-200">·</span>
                         <time dateTime={published_at} className="shrink-0">{formatDate(published_at)}</time>
                     </div>
 

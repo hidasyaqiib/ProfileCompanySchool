@@ -36,7 +36,7 @@ const FacilityCard: React.FC<FacilityCardProps> = ({
                     }
                 }}
                 aria-label={`Lihat detail ${title}`}
-                className={`group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border-2 border-dashed border-gray-200 bg-white transition-all duration-300 hover:border-[#2ECC71]/60 focus:outline-none focus:ring-2 focus:ring-[#2ECC71] ${className}`}
+                className={`group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border-2 border-dashed border-gray-200 bg-white transition-all duration-300 hover:border-[#2ECC71]/60 focus:outline-none ${className}`}
             >
                 {/* IMAGE */}
                 <div className="p-3 pb-0">
