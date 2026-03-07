@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicCalendar;
 use App\Models\Achievement;
 use App\Models\Facilities;
 use App\Models\Profileschool;
@@ -25,7 +26,7 @@ class AboutUsController extends Controller
         $facilities = Facilities::query()
             ->orderByDesc('created_at')
             ->get()
-            ->map(fn (Facilities $facility) => [
+            ->map(fn(Facilities $facility) => [
                 'id' => $facility->id,
                 'title' => $facility->name,
                 'image' => $facility->first_image_url,
@@ -51,7 +52,7 @@ class AboutUsController extends Controller
         $achievements = Achievement::query()
             ->orderByDesc('date_achievement')
             ->get()
-            ->map(fn (Achievement $achievement) => [
+            ->map(fn(Achievement $achievement) => [
                 'id' => $achievement->id,
                 'title' => $achievement->title_achievement,
                 'category' => implode(', ', (array) ($achievement->name_student ?? [])),
@@ -71,6 +72,24 @@ class AboutUsController extends Controller
         return inertia('public/about/achievment', [
             'achievements' => $achievements,
             'meta' => $meta,
+        ]);
+    }
+
+    public function academicCalendar()
+    {
+        $events = AcademicCalendar::all()
+            ->map(fn(AcademicCalendar $event) => [
+                'id' => $event->id,
+                'title' => $event->title,
+                'description' => $event->description,
+                'start' => $event->start_date->format('Y-m-d'),
+                // Pass inclusive end_date; the frontend will handle +1 day for FullCalendar
+                'end' => $event->end_date?->format('Y-m-d'),
+                'category' => $event->category,
+            ]);
+
+        return inertia('public/about/academicCalendar', [
+            'events' => $events,
         ]);
     }
 }
