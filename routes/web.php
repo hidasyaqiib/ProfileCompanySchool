@@ -19,6 +19,7 @@ Route::get('/profil', [AboutUsController::class, 'profile'])->name('profile');
 Route::get('/fasilitas', [AboutUsController::class, 'facility'])->name('facility');
 Route::get('/prestasi', [AboutUsController::class, 'achievement'])->name('achievement');
 Route::get('/kalender-akademik', [AboutUsController::class, 'academicCalendar'])->name('academic-calendar');
+Route::get('/kurikulum', [AboutUsController::class, 'curriculum'])->name('curriculum');
 
 // Staff Routes
 Route::get('/struktur-organisasi', [StaffController::class, 'structure'])->name('structure');
