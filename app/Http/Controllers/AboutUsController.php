@@ -60,6 +60,7 @@ class AboutUsController extends Controller
                 'title' => $achievement->title_achievement,
                 'category' => implode(', ', (array) ($achievement->name_student ?? [])),
                 'year' => $achievement->date_achievement?->format('Y') ?? '',
+                'date' => $achievement->date_achievement?->format('d M Y') ?? '',
                 'level' => $achievement->level_achievement,
                 'description' => $achievement->description ?? '',
                 'image' => $achievement->image_url,

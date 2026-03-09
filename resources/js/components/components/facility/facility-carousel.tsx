@@ -39,7 +39,8 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
     const isAnimatingRef = useRef<boolean>(false);
 
     // Responsive items per page: 1 on mobile, 2 on tablet, prop value on desktop
-    const [effectiveItemsPerPage, setEffectiveItemsPerPage] = useState<number>(itemsPerPage);
+    const [effectiveItemsPerPage, setEffectiveItemsPerPage] =
+        useState<number>(itemsPerPage);
 
     useEffect(() => {
         const updateItemsPerPage = (): void => {
@@ -108,7 +109,8 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
             const progress = Math.min(elapsed / ANIMATION_DURATION, 1);
             const easeOutCubic = 1 - Math.pow(1 - progress, 3);
 
-            container.scrollLeft = startScrollLeft + scrollDistance * easeOutCubic;
+            container.scrollLeft =
+                startScrollLeft + scrollDistance * easeOutCubic;
 
             if (progress < 1) {
                 requestAnimationFrame(animateScroll);
@@ -133,7 +135,10 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
             const cardWidth = container.scrollWidth / totalLength;
             if (cardWidth === 0) return;
             const nearestIndex = Math.round(container.scrollLeft / cardWidth);
-            const clampedIndex = Math.max(0, Math.min(nearestIndex, maxIndexRef.current));
+            const clampedIndex = Math.max(
+                0,
+                Math.min(nearestIndex, maxIndexRef.current),
+            );
             setCurrentIndex(clampedIndex);
         };
 
@@ -151,17 +156,26 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
 
     const goToNext = useCallback((): void => {
         setCurrentIndex((prev) => {
-            const newIndex = Math.min(maxIndexRef.current, prev + itemsPerPageRef.current);
+            const newIndex = Math.min(
+                maxIndexRef.current,
+                prev + itemsPerPageRef.current,
+            );
             animateToIndex(newIndex);
             return newIndex;
         });
     }, [animateToIndex]);
 
-    const goToPage = useCallback((pageIndex: number): void => {
-        const newIndex = Math.min(pageIndex * itemsPerPageRef.current, maxIndexRef.current);
-        setCurrentIndex(newIndex);
-        animateToIndex(newIndex);
-    }, [animateToIndex]);
+    const goToPage = useCallback(
+        (pageIndex: number): void => {
+            const newIndex = Math.min(
+                pageIndex * itemsPerPageRef.current,
+                maxIndexRef.current,
+            );
+            setCurrentIndex(newIndex);
+            animateToIndex(newIndex);
+        },
+        [animateToIndex],
+    );
 
     const handleKeyDown = useCallback(
         (event: React.KeyboardEvent, action: () => void): void => {
@@ -195,13 +209,17 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
     if (facilities.length === 0) {
         return (
             <div className="py-8 text-center" role="alert">
-                <p className="text-gray-500">No facilities available to display.</p>
+                <p className="text-gray-500">
+                    No facilities available to display.
+                </p>
             </div>
         );
     }
 
     return (
-        <div className={`relative ${hasMultipleSlides ? 'pb-16' : ''} ${className}`}>
+        <div
+            className={`relative ${hasMultipleSlides ? 'pb-16' : ''} ${className}`}
+        >
             {/* Navigation Buttons */}
             {showNavigation && hasMultipleSlides && (
                 <>
@@ -217,8 +235,18 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
                         aria-label={`Previous slide. Currently showing slide ${getCurrentPage() + 1}`}
                         type="button"
                     >
-                        <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                        <svg
+                            className="h-6 w-6 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2.5}
+                                d="M15 19l-7-7 7-7"
+                            />
                         </svg>
                     </button>
 
@@ -234,8 +262,18 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
                         aria-label={`Next slide. Currently showing slide ${getCurrentPage() + 1}`}
                         type="button"
                     >
-                        <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                        <svg
+                            className="h-6 w-6 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2.5}
+                                d="M9 5l7 7-7 7"
+                            />
                         </svg>
                     </button>
                 </>
@@ -252,7 +290,9 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
                         <button
                             key={`page-${index}`}
                             onClick={() => goToPage(index)}
-                            onKeyDown={(e) => handleKeyDown(e, () => goToPage(index))}
+                            onKeyDown={(e) =>
+                                handleKeyDown(e, () => goToPage(index))
+                            }
                             disabled={isAnimating}
                             className={`h-3 w-3 rounded-full transition-all duration-300 ${
                                 getCurrentPage() === index
@@ -260,7 +300,9 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
                                     : 'bg-gray-400 hover:bg-gray-500'
                             } ${isAnimating ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                             aria-label={`Go to page ${index + 1}`}
-                            aria-current={getCurrentPage() === index ? 'page' : undefined}
+                            aria-current={
+                                getCurrentPage() === index ? 'page' : undefined
+                            }
                             role="tab"
                             type="button"
                         />
@@ -295,7 +337,6 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
                                 image={facility.image}
                                 images={facility.images}
                                 description={facility.description}
-                                date={facility.date}
                                 className={cardClassName}
                             />
                         </div>
@@ -305,9 +346,13 @@ const FacilityCarousel: React.FC<FacilityCarouselProps> = ({
 
             <div className="sr-only" aria-live="polite">
                 Showing slide {currentIndex + 1} to{' '}
-                {Math.min(currentIndex + effectiveItemsPerPage, facilities.length)} of{' '}
-                {facilities.length} facilities.
-                {hasMultipleSlides && `Page ${getCurrentPage() + 1} of ${totalPages}.`}
+                {Math.min(
+                    currentIndex + effectiveItemsPerPage,
+                    facilities.length,
+                )}{' '}
+                of {facilities.length} facilities.
+                {hasMultipleSlides &&
+                    `Page ${getCurrentPage() + 1} of ${totalPages}.`}
             </div>
         </div>
     );
