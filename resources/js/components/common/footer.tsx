@@ -1,4 +1,5 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
+import React from 'react';
 import {
     Mail,
     Phone,
@@ -9,6 +10,22 @@ import {
 } from 'lucide-react';
 
 const Footer: React.FC = () => {
+    const { whatsappNumber } = usePage<{ whatsappNumber?: string | null }>()
+        .props;
+
+    const getWhatsappUrl = (): string | undefined => {
+        if (!whatsappNumber) return undefined;
+        let phone = whatsappNumber.replace(/\D/g, '');
+        if (phone.startsWith('0')) phone = '62' + phone.slice(1);
+        else if (phone.startsWith('+')) phone = phone.slice(1);
+        const message = encodeURIComponent(
+            'Halo, saya ingin mendaftar di MI NU 02 Situwangi. Mohon informasi lebih lanjut.',
+        );
+        return `https://wa.me/${phone}?text=${message}`;
+    };
+
+    const whatsappUrl = getWhatsappUrl();
+
     return (
         <footer className="border-t border-gray-100 bg-white">
             <div className="mx-auto max-w-7xl px-4 py-12">
@@ -36,7 +53,7 @@ const Footer: React.FC = () => {
                             <div className="flex items-start gap-3">
                                 <Phone className="mt-0.5 h-4 w-4 flex-shrink-0 text-teal-700" />
                                 <span className="text-sm text-gray-600">
-                                    +031-99711858
+                                    +62 818 0566 9053
                                 </span>
                             </div>
                             <div className="flex items-start gap-3">
@@ -51,24 +68,24 @@ const Footer: React.FC = () => {
                         </div>
                         <div className="flex gap-3">
                             <a
-                                href="#"
-                                target='_blank'
+                                href="https://www.instagram.com/minu2_stw/"
+                                target="_blank"
                                 className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors hover:bg-teal-700"
                             >
                                 <Instagram className="h-4 w-4 text-white" />
                             </a>
                             <a
-                                href="#"
-                                target='_blank'
+                                href="https://www.facebook.com/profile.php?id=100086447721128"
+                                target="_blank"
                                 className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors hover:bg-teal-700"
                             >
                                 <Facebook className="h-4 w-4 text-white" />
                             </a>
                             <a
-                                href=""
+                                href={whatsappUrl ?? '#'}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors hover:bg-teal-700"
+                                className={`flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors hover:bg-teal-700 ${!whatsappUrl ? 'pointer-events-none opacity-50' : ''}`}
                             >
                                 <svg
                                     className="h-4 w-4 fill-current text-white"
@@ -79,8 +96,8 @@ const Footer: React.FC = () => {
                                 </svg>
                             </a>
                             <a
-                                href="#"
-                                target='_blank'
+                                href="https://www.youtube.com/@minu02situwangirakit12"
+                                target="_blank"
                                 className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors hover:bg-teal-700"
                             >
                                 <Youtube className="h-4 w-4 text-white" />
@@ -126,6 +143,22 @@ const Footer: React.FC = () => {
                                     className="text-sm text-gray-600 transition-colors hover:text-teal-700"
                                 >
                                     Prestasi
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/kalender-akademik"
+                                    className="text-sm text-gray-600 transition-colors hover:text-teal-700"
+                                >
+                                    Kalender Akademik
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/kurikulum"
+                                    className="text-sm text-gray-600 transition-colors hover:text-teal-700"
+                                >
+                                    Kurikulum
                                 </Link>
                             </li>
                             {/* Kepegawaian */}
