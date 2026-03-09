@@ -5,6 +5,8 @@ import FacilityInShort from '@/components/home/facility-in-short';
 import HeroSection from '@/components/home/hero-home';
 import NewsInShort from '@/components/home/news-in-short';
 import SpeechSection from '@/components/home/speech';
+import CalendarShort from '@/components/home/calendar-short';
+import type { CalendarEvent } from '@/components/about/calendarAcademic/calendar';
 import MainLayout from '@/layouts/main-layout';
 
 interface HomeProps extends PageProps {
@@ -29,10 +31,12 @@ interface HomeProps extends PageProps {
         image_url: string | null;
         greeting_message: string;
     } | null;
+    upcomingEvents: CalendarEvent[];
 }
 
 const Home: React.FC = () => {
-    const { latestNews, featuredFacilities, principal } = usePage<HomeProps>().props;
+    const { latestNews, featuredFacilities, principal, upcomingEvents } =
+        usePage<HomeProps>().props;
 
     const speechData = principal
         ? {
@@ -62,11 +66,12 @@ const Home: React.FC = () => {
                 facilities={featuredFacilities.map((facility) => ({
                     id: facility.id,
                     title: facility.name,
-                    image: facility.image, // perbaiki di sini
+                    image: facility.image,
                     description: facility.description,
                 }))}
             />
             <NewsInShort initialNews={latestNews || []} fetchFromApi={false} />
+            <CalendarShort events={upcomingEvents ?? []} />
         </MainLayout>
     );
 };
