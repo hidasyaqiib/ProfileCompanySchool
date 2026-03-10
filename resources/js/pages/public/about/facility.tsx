@@ -19,14 +19,13 @@ const Facility: React.FC = () => {
     const { facilities = [], meta = {} } = usePage<FacilityPageProps>().props;
 
     const {
-        title = 'Fasilitas - SMK Telkom Sidoarjo',
         description = 'Jelajahi fasilitas modern SMK Telkom Sidoarjo yang lengkap untuk mendukung pembelajaran Teknologi dan Informatika. Lab Komputer, Jaringan, Telekomunikasi dengan standar industri.',
         keywords = 'fasilitas sekolah, SMK Telkom Sidoarjo, laboratorium komputer, lab jaringan, telekomunikasi, teknologi informasi, pendidikan vokasi',
     } = meta as { title?: string; description?: string; keywords?: string };
 
     return (
         <MainLayout>
-            <Head title={title} />
+            <head title="Fasilitas" />
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
 

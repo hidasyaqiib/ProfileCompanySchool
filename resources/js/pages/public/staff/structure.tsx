@@ -18,7 +18,7 @@ interface StructureProps {
 const Structure: React.FC<StructureProps> = ({ structures }) => {
     return (
         <MainLayout>
-            <Head title="Struktur Organisasi - MI NU 02 Situwangi" />
+            <Head title="Struktur Organisasi" />
             <HeroStructure />
             <ImageStructure structures={structures} />
         </MainLayout>

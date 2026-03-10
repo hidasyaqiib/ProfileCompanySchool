@@ -26,7 +26,7 @@ const Gallery: React.FC = () => {
     const { galleryItems = [], meta = {} } = usePage<GalleryPageProps>().props;
 
     const {
-        title = 'Galeri - SMK Telkom Sidoarjo',
+        title = 'Galeri',
         description = 'Jelajahi dokumentasi visual kegiatan sekolah, prestasi siswa, dan fasilitas modern SMK Telkom Sidoarjo. Koleksi foto dan video terlengkap dari berbagai momen bersejarah institusi pendidikan teknologi terdepan.',
         keywords = 'galeri sekolah, SMK Telkom Sidoarjo, dokumentasi kegiatan, foto sekolah, video kegiatan, prestasi siswa, fasilitas sekolah, teknologi informasi, pendidikan vokasi, gallery',
     } = meta as { title?: string; description?: string; keywords?: string };

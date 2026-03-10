@@ -63,7 +63,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
 
     // Extract meta values with defaults
     const {
-        title = 'Berita Terkini - MI NU 02 Situwangi',
+        title = 'Berita Terkini',
         description = 'Ikuti perkembangan dan update terbaru seputar kegiatan, prestasi, dan informasi penting MI NU 02 Situwangi. Pusat informasi terpercaya untuk orang tua, siswa, dan masyarakat.',
         keywords = 'berita sekolah, MI NU 02 Situwangi, informasi sekolah, kegiatan sekolah, prestasi siswa, pengumuman sekolah, update sekolah, news, madrasah ibtidaiyah'
     } = meta;

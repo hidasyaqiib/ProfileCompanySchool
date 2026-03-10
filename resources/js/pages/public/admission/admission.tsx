@@ -21,7 +21,7 @@ const AdmissionPage: React.FC<Props> = ({ admission }) => {
 
     return (
         <MainLayout>
-            <Head title="Penerimaan Murid Baru - MI NU 02 Situwangi" />
+            <Head title="Penerimaan Murid Baru" />
             <HeroAdmission
                 brosurUrl={brosurUrl}
                 whatsappNumber={admission?.whatsapp_number}

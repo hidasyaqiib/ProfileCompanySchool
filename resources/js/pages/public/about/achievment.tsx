@@ -18,14 +18,13 @@ interface AchievementPageProps {
 const Achievement: React.FC = () => {
     const { achievements, meta = {} } = usePage<AchievementPageProps>().props;
     const {
-        title = 'Prestasi - SMK Telkom Sidoarjo',
         description = 'Jelajahi berbagai prestasi yang telah diraih siswa-siswi SMK Telkom Sidoarjo dalam kompetisi teknologi informasi, akademik, dan ekstrakurikuler tingkat lokal, nasional, hingga internasional.',
         keywords = 'prestasi sekolah, SMK Telkom Sidoarjo, kompetisi IT, juara lomba, prestasi siswa, teknologi informasi, pendidikan vokasi, achievement',
     } = meta as { title?: string; description?: string; keywords?: string };
 
     return (
         <MainLayout>
-            <Head title={title} />
+            <head title="Prestasi" />
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
 

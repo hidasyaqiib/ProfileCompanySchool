@@ -19,7 +19,7 @@ interface Props {
 const SchoolTour: React.FC<Props> = ({ schooltours }) => {
     return (
         <MainLayout>
-            <Head title="MI NU 02 Situwangi" />
+            <Head title="Tour Sekolah" />
             <HeroSchoolTour />
             <SchoolTourComponent schooltours={schooltours} />
         </MainLayout>

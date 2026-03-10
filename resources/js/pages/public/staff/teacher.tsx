@@ -28,7 +28,7 @@ const TeacherPage: React.FC<TeacherPageProps> = ({
 }) => {
     return (
         <MainLayout>
-            <Head title="Profil Guru - MI NU 02 Situwangi" />
+            <Head title="Profil Guru" />
             <HeroTeacher />
             <Principal chiefs={chiefs} />
             <TeacherStaff staffs={staffs} teachers={teachers} />
