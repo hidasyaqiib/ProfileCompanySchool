@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import MainLayout from '@/layouts/main-layout';
 import HeroAdmission from '@/components/admission/hero-admission';
 import AdmissionFlow from '@/components/admission/admission-flow';
+import AdmissionFile from '@/components/admission/admission-file';
 import SchoolProgram from '@/components/admission/school-program';
 
 interface AdmissionData {
@@ -26,6 +27,7 @@ const AdmissionPage: React.FC<Props> = ({ admission }) => {
                 whatsappNumber={admission?.whatsapp_number}
             />
             <AdmissionFlow />
+            <AdmissionFile />
             <SchoolProgram />
         </MainLayout>
     );
