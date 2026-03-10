@@ -10,6 +10,8 @@ const menus = [
             { label: 'Profil', path: '/profil' },
             { label: 'Fasilitas', path: '/fasilitas' },
             { label: 'Prestasi', path: '/prestasi' },
+            { label: 'Kalender Akademik', path: '/kalender-akademik' },
+            { label: 'Kurikulum', path: '/kurikulum' },
         ],
     },
     {

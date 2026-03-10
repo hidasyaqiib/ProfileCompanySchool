@@ -14,7 +14,7 @@ interface HeroAchievementProps {
 const HeroAchievement: React.FC<HeroAchievementProps> = ({
     breadcrumbs = [{ label: 'Tentang Kami' }, { label: 'Prestasi' }],
     title = 'Prestasi',
-    description = 'SMK Telkom Sidoarjo bangga dengan berbagai prestasi yang telah diraih siswa-siswi kami di bidang teknologi informasi, kompetisi akademik, dan kegiatan ekstrakurikuler. Prestasi ini membuktikan kualitas pendidikan dan dedikasi dalam mengembangkan potensi siswa untuk bersaing di tingkat lokal, nasional, maupun internasional.',
+    description = 'Berbagai prestasi yang telah diraih oleh siswa-siswi kami, baik di bidang akademik maupun non-akademik, menjadi bukti nyata komitmen madrasah dalam membina generasi yang unggul, kompetitif, dan berakhlak mulia melalui proses pembelajaran yang terarah dan berkesinambungan.',
     ctaText = 'Lihat Prestasi',
     ctaLink = '#all-achievements',
     heroImage = '/images/achievement-hero.jpg',
@@ -149,7 +149,7 @@ const HeroAchievement: React.FC<HeroAchievementProps> = ({
                             {/* Main Achievement Image */}
                             <div className="relative z-10">
                                 <img
-                                    src="/assets/image/logo.webp"
+                                    src="/assets/image/hero-achievement.png"
                                     alt="Prestasi SMK Telkom Sidoarjo - Pencapaian siswa dalam berbagai kompetisi"
                                     className="mx-auto h-auto w-full max-w-lg object-cover"
                                     loading="eager"

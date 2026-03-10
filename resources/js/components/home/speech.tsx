@@ -31,18 +31,43 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
 }) => {
     if (!data) {
         return (
-            <section className={`relative bg-gradient-to-br from-gray-50 to-white py-16 ${className}`}>
+            <section
+                className={`relative bg-gradient-to-br from-gray-50 to-white py-16 ${className}`}
+            >
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 py-20 text-center">
-                        <svg className="mx-auto mb-4 h-14 w-14 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        <svg
+                            className="mx-auto mb-4 h-14 w-14 text-gray-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={1.5}
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                            />
                         </svg>
-                        <h3 className="mb-2 text-lg font-semibold text-gray-700">Sambutan Kepala Madrasah</h3>
+                        <h3 className="mb-2 text-lg font-semibold text-gray-700">
+                            Sambutan Kepala Madrasah
+                        </h3>
                         <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
-                            <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                            <svg
+                                className="h-4 w-4 shrink-0"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z"
+                                />
                             </svg>
-                            Data sambutan belum diisi. Silakan tambahkan melalui panel admin.
+                            Data sambutan belum diisi. Silakan tambahkan melalui
+                            panel admin.
                         </p>
                     </div>
                 </div>
@@ -76,18 +101,12 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
                 </div>
 
                 <div className="space-y-6">
-                    <p className="font-poppins text-lg font-medium text-gray-700 italic">
-                        Assalamu&apos;alaikum warahmatullahi wabarakatuh
-                    </p>
-
                     <div
-                        className="prose prose-sm max-w-none space-y-4 text-justify font-poppins text-[12px] leading-relaxed text-gray-700 lg:text-[16px] [&_p]:mb-3 [&_br]:hidden"
-                        dangerouslySetInnerHTML={{ __html: speechData.speech.content }}
+                        className="prose prose-sm font-poppins max-w-none text-justify text-[12px] leading-relaxed text-gray-700 lg:text-[16px] [&_p]:mb-3"
+                        dangerouslySetInnerHTML={{
+                            __html: speechData.speech.content,
+                        }}
                     />
-
-                    <p className="font-poppins text-lg font-medium text-gray-700 italic">
-                        Wassalamu&apos;alaikum warahmatullahi wabarakatuh.
-                    </p>
 
                     <div className="mt-8 border-t border-gray-200 pt-6">
                         <div className="text-left">
@@ -135,7 +154,11 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
                     <motion.div
                         initial={{ opacity: 0, x: -imageFrom }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+                        transition={{
+                            duration: 0.6,
+                            ease: 'easeOut',
+                            delay: 0.15,
+                        }}
                         viewport={{ once: true, margin: '-80px' }}
                         className={
                             imagePosition === 'right' ? 'lg:col-start-1' : ''

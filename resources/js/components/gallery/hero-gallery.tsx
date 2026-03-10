@@ -183,7 +183,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
                             {/* Main Gallery Image */}
                             <div className="relative z-10">
                                 <img
-                                    src="/assets/image/logo.webp"
+                                    src="/assets/image/hero-achievement.png"
                                     alt="Galeri MI NU 02 Situwangi - Dokumentasi kegiatan dan fasilitas sekolah"
                                     className="mx-auto h-auto w-full max-w-lg object-cover"
                                     loading="eager"

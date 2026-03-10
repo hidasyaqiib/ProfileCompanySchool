@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicCalendar;
 use App\Models\Achievement;
 use App\Models\Facilities;
 use App\Models\Profileschool;
+use App\Models\Subject;
+use App\Models\Extracurricular;
+use App\Models\Curriculum;
 
 class AboutUsController extends Controller
 {
@@ -25,7 +29,7 @@ class AboutUsController extends Controller
         $facilities = Facilities::query()
             ->orderByDesc('created_at')
             ->get()
-            ->map(fn (Facilities $facility) => [
+            ->map(fn(Facilities $facility) => [
                 'id' => $facility->id,
                 'title' => $facility->name,
                 'image' => $facility->first_image_url,
@@ -51,11 +55,12 @@ class AboutUsController extends Controller
         $achievements = Achievement::query()
             ->orderByDesc('date_achievement')
             ->get()
-            ->map(fn (Achievement $achievement) => [
+            ->map(fn(Achievement $achievement) => [
                 'id' => $achievement->id,
                 'title' => $achievement->title_achievement,
                 'category' => implode(', ', (array) ($achievement->name_student ?? [])),
                 'year' => $achievement->date_achievement?->format('Y') ?? '',
+                'date' => $achievement->date_achievement?->format('d M Y') ?? '',
                 'level' => $achievement->level_achievement,
                 'description' => $achievement->description ?? '',
                 'image' => $achievement->image_url,
@@ -71,6 +76,57 @@ class AboutUsController extends Controller
         return inertia('public/about/achievment', [
             'achievements' => $achievements,
             'meta' => $meta,
+        ]);
+    }
+
+    public function academicCalendar()
+    {
+        $events = AcademicCalendar::all()
+            ->map(fn(AcademicCalendar $event) => [
+                'id' => $event->id,
+                'title' => $event->title,
+                'description' => $event->description,
+                'start' => $event->start_date->format('Y-m-d'),
+                // Pass inclusive end_date; the frontend will handle +1 day for FullCalendar
+                'end' => $event->end_date?->format('Y-m-d'),
+                'category' => $event->category,
+            ]);
+
+        return inertia('public/about/academicCalendar', [
+            'events' => $events,
+        ]);
+    }
+
+    public function curriculum()
+    {
+        $subjects = Subject::orderBy('category')
+            ->get()
+            ->map(fn(Subject $subject) => [
+                'id' => $subject->id,
+                'name' => $subject->name,
+                'description' => $subject->description,
+                'category' => $subject->category,
+            ]);
+
+        $extracurriculars = Extracurricular::orderBy('name')
+            ->get()
+            ->map(fn(Extracurricular $item) => [
+                'id' => $item->id,
+                'name' => $item->name,
+                'description' => $item->description,
+            ]);
+
+        $curricula = Curriculum::all()
+            ->map(fn(Curriculum $curriculum) => [
+                'id' => $curriculum->id,
+                'name' => $curriculum->name,
+                'description' => $curriculum->description,
+            ]);
+
+        return inertia('public/about/curriculum', [
+            'subjects' => $subjects,
+            'extracurriculars' => $extracurriculars,
+            'curricula' => $curricula,
         ]);
     }
 }

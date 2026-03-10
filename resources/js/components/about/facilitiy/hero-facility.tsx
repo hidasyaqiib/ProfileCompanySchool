@@ -14,7 +14,7 @@ interface HeroFacilityProps {
 const HeroFacility: React.FC<HeroFacilityProps> = ({
     breadcrumbs = [{ label: 'Tentang Kami' }, { label: 'Fasilitas' }],
     title = 'Fasilitas',
-    description = 'SMK Telkom Sidoarjo menyediakan fasilitas modern yang lengkap untuk mendukung pembelajaran Teknologi dan Informatika (TI). Kami memiliki Laboratorium (Lab) praktik up-to-date (Lab Komputer, Jaringan, Telekomunikasi) dengan perangkat standar industri. Fasilitas ini memastikan siswa mendapat pengalaman praktikal maksimal, membuat lulusan siap kerja dan unggul dalam keterampilan teknis.',
+    description = 'Kami menyediakan berbagai fasilitas penunjang pendidikan yang lengkap, modern, dan terawat dengan baik untuk menciptakan lingkungan belajar yang nyaman, aman, serta mendukung perkembangan akademik dan karakter siswa secara optimal.',
     ctaText = 'Jelajahi',
     ctaLink = '#all-facilities',
     heroImage = '/images/facility-hero.jpg',
@@ -161,7 +161,7 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                             {/* Main Building Image */}
                             <div className="relative z-10">
                                 <img
-                                    src="/assets/image/logo.webp"
+                                    src="/assets/image/model-profile-dummy.webp"
                                     alt="Fasilitas SMK Telkom Sidoarjo - Gedung sekolah modern dengan laboratorium lengkap"
                                     className="mx-auto h-auto w-full max-w-lg object-cover"
                                     loading="eager"
