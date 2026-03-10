@@ -179,8 +179,8 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                 </div>
             </div>
 
-            {/* Bottom Wave Separator */}
             <div className="absolute right-0 bottom-0 left-0 w-full overflow-hidden leading-none">
+                {/* Bottom Wave Separator */}
                 <svg
                     className="relative block h-16 w-full md:h-24 lg:h-32"
                     viewBox="0 0 1440 80"
