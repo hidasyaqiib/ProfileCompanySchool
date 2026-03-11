@@ -29,14 +29,6 @@ const SCHOOL_STATS: StatItem[] = [
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
 
-const heroImageVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { duration: ENTRANCE_DURATION_S, ease: 'easeOut' },
-    },
-};
-
 const cardVariants: Variants = {
     hidden: { opacity: 0, y: 48 },
     visible: {
@@ -75,7 +67,11 @@ function useCountUp(target: number, duration: number, active: boolean): number {
 }
 
 /** Scrambles through random uppercase letters then settles on `target` once `active` is true. */
-function useScramble(target: string, duration: number, active: boolean): string {
+function useScramble(
+    target: string,
+    duration: number,
+    active: boolean,
+): string {
     const [display, setDisplay] = useState('—');
 
     useEffect(() => {
@@ -91,7 +87,9 @@ function useScramble(target: string, duration: number, active: boolean): string 
                 return;
             }
             setDisplay(
-                SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)],
+                SCRAMBLE_CHARS[
+                    Math.floor(Math.random() * SCRAMBLE_CHARS.length)
+                ],
             );
             frameId = requestAnimationFrame(tick);
         };
@@ -110,7 +108,12 @@ function NumberValue({ value, active }: { value: string; active: boolean }) {
     const target = match ? parseInt(match[1], 10) : 0;
     const suffix = match ? match[2] : '';
     const count = useCountUp(target, STAT_ANIMATION_DURATION_MS, active);
-    return <>{count}{suffix}</>;
+    return (
+        <>
+            {count}
+            {suffix}
+        </>
+    );
 }
 
 function LetterValue({ value, active }: { value: string; active: boolean }) {
@@ -152,6 +155,7 @@ function StatCard({
 const HeroSection: React.FC = () => {
     const cardRef = useRef<HTMLDivElement>(null);
     const isCardInView = useInView(cardRef, { once: true });
+    const [heroImageLoaded, setHeroImageLoaded] = useState(false); // tambah ini
 
     return (
         <section
@@ -159,11 +163,13 @@ const HeroSection: React.FC = () => {
             className="relative flex min-h-[60vh] items-start justify-center overflow-visible px-4 pt-20 sm:min-h-[70vh] sm:px-8 sm:pt-24 lg:h-screen lg:px-16 lg:pt-26"
         >
             {/* Background */}
-            <div
-                role="img"
-                aria-label="Gedung MI NU 2 Situwangi"
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: "url('/assets/image/hero-home.webp')" }}
+            <img
+                src="/assets/image/hero-home.webp"
+                alt=""
+                aria-hidden="true"
+                fetchPriority="high"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover object-center"
             />
 
             {/* Heading */}
@@ -174,24 +180,26 @@ const HeroSection: React.FC = () => {
                         MI NU 2 Situwangi!
                     </span>
                 </p>
-                <h1 className="font-poppins text-3xl font-medium leading-tight text-white md:text-4xl lg:text-5xl">
+                <h1 className="font-poppins text-3xl leading-tight font-medium text-white md:text-4xl lg:text-5xl">
                     Generasi Berilmu, Berakhlak,{' '}
                     <br className="hidden sm:block" />
-                    <span className="font-semibold leading-tight text-[#AEFF00]">
+                    <span className="leading-tight font-semibold text-[#AEFF00]">
                         &amp; Berprestasi
                     </span>
                 </h1>
             </div>
 
             {/* Hero character image — smooth fade in (LCP element) */}
-            <motion.img
-                variants={heroImageVariants}
-                initial="hidden"
-                animate="visible"
+            <img
                 src="/assets/image/model-hero-dua.webp"
                 alt="Ilustrasi siswa MI NU 2 Situwangi berprestasi"
                 fetchPriority="high"
-                className="absolute bottom-0 left-1/2 h-auto w-80 -translate-x-1/2 object-contain md:w-96 lg:w-xl"
+                decoding="async"
+                onLoad={() => setHeroImageLoaded(true)}
+                style={{ willChange: 'opacity' }}
+                className={`absolute bottom-0 left-1/2 h-auto w-80 -translate-x-1/2 object-contain transition-opacity duration-[1500ms] ease-out md:w-96 lg:w-xl ${
+                    heroImageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
             />
 
             {/* Stats card — slide up fade in, counters start when card enters viewport */}
