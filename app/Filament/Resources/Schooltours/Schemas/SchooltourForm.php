@@ -43,6 +43,7 @@ class SchooltourForm
                 FileUpload::make('panorama_image')
                     ->label('Foto Panorama Ruangan')
                     ->image()
+                    ->columnSpanFull()
                     ->directory('schooltours')
                     ->disk('public')
                     ->visibility('public')
