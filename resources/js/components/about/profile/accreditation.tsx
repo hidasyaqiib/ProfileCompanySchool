@@ -70,6 +70,7 @@ const Accreditation: React.FC = () => {
                         <div className="pt-2">
                             <button
                                 type="button"
+                                onClick={() => window.open('/assets/certificate/sertifikat.pdf', '_blank')}
                                 className="font-poppins inline-flex items-center gap-2 rounded-md bg-[#27ae60] px-6 py-3 text-sm font-semibold text-white shadow-md transition-colors duration-300 hover:bg-[#2ecc71] focus:ring-2 focus:ring-[#27ae60] focus:ring-offset-2 focus:outline-none sm:text-base"
                                 aria-label="Lihat sertifikat akreditasi lengkap"
                             >

@@ -277,7 +277,7 @@ const Navbar: React.FC = () => {
                             {menu.submenu ? (
                                 <>
                                     <button
-                                        className="flex items-center font-medium text-gray-700 transition-colors duration-200 hover:text-teal-700 focus:outline-none"
+                                        className="flex items-center font-medium text-gray-700 transition-colors duration-200 hover:text-[#27ae60] focus:outline-none"
                                         type="button"
                                     >
                                         {menu.label}
