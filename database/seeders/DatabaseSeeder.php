@@ -17,13 +17,8 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'MI NU 02 SITUWANGI',
-            'email' => 'admin@minu02situwangi.sch.id',
+            'email' => 'admin.minu02situwangi@gmail.com',
             'password' => Hash::make('minu02situwangi'),
-        ]);
-
-        // Seed news articles
-        $this->call([
-            NewsSeeder::class,
         ]);
     }
 }

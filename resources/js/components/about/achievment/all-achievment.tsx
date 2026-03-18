@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import FacilityCard from '../../components/facility/facility-card';
+import { usePage } from '@inertiajs/react';
 
 export interface AchievementItem {
     id: number;
@@ -25,10 +26,25 @@ interface AllAchievementProps {
 const AllAchievement: React.FC<AllAchievementProps> = ({
     achievements = [],
     title = 'Semua Prestasi',
-    subtitle = 'Bangga dengan pencapaian siswa-siswi SMK Telkom Sidoarjo dalam berbagai kompetisi dan kegiatan',
+    subtitle = 'Bangga dengan pencapaian siswa-siswi MI NU 02 Situwangi dalam berbagai kompetisi dan kegiatan',
     className = '',
     itemsPerPage = 8,
 }) => {
+    const { whatsappNumber } = usePage<{ whatsappNumber?: string | null }>()
+        .props;
+
+    const getWhatsappUrl = (): string | undefined => {
+        if (!whatsappNumber) return undefined;
+        let phone = whatsappNumber.replace(/\D/g, '');
+        if (phone.startsWith('0')) phone = '62' + phone.slice(1);
+        else if (phone.startsWith('+')) phone = phone.slice(1);
+        const message = encodeURIComponent(
+            'Halo, saya ingin mendaftar di MI NU 02 Situwangi. Mohon informasi lebih lanjut.',
+        );
+        return `https://wa.me/${phone}?text=${message}`;
+    };
+
+    const whatsappUrl = getWhatsappUrl();
     const [currentPage, setCurrentPage] = useState(1);
 
     const achievementsData = achievements;
@@ -236,13 +252,15 @@ const AllAchievement: React.FC<AllAchievementProps> = ({
                             Ingin Meraih Prestasi Seperti Mereka?
                         </h3>
                         <p className="mx-auto mb-6 max-w-2xl text-gray-600">
-                            Bergabunglah dengan SMK Telkom Sidoarjo dan
-                            kembangkan potensi terbaikmu dalam bidang teknologi
-                            informasi dan komunikasi.
+                            Bergabunglah dengan MI NU 02 Situwangi dan
+                            kembangkan potensi terbaik putra-putri Anda menjadi
+                            generasi yang cerdas, berprestasi, dan berakhlakul
+                            karimah.
                         </p>
                         <div className="flex flex-col justify-center gap-4 sm:flex-row">
                             <a
-                                href="/contact"
+                                href={whatsappUrl ?? '#'}
+                                target="_blank"
                                 className="inline-flex transform items-center justify-center rounded-xl bg-[#2ECC71] px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#27ae60] hover:shadow-xl focus:ring-4 focus:ring-green-500/25 focus:outline-none"
                             >
                                 Daftar Sekarang

@@ -70,14 +70,14 @@ const Footer: React.FC = () => {
                             <a
                                 href="https://www.instagram.com/minu2_stw/"
                                 target="_blank"
-                                className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors hover:bg-teal-700"
+                                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#2ECC71] transition-colors hover:bg-[#20874c]"
                             >
                                 <Instagram className="h-4 w-4 text-white" />
                             </a>
                             <a
                                 href="https://www.facebook.com/profile.php?id=100086447721128"
                                 target="_blank"
-                                className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors hover:bg-teal-700"
+                                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#2ECC71] transition-colors hover:bg-[#20874c]"
                             >
                                 <Facebook className="h-4 w-4 text-white" />
                             </a>
@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
                                 href={whatsappUrl ?? '#'}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors hover:bg-teal-700 ${!whatsappUrl ? 'pointer-events-none opacity-50' : ''}`}
+                                className={`flex h-8 w-8 items-center justify-center rounded-full bg-[#2ECC71] transition-colors hover:bg-[#20874c] ${!whatsappUrl ? 'pointer-events-none opacity-50' : ''}`}
                             >
                                 <svg
                                     className="h-4 w-4 fill-current text-white"
@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
                             <a
                                 href="https://www.youtube.com/@minu02situwangirakit12"
                                 target="_blank"
-                                className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors hover:bg-teal-700"
+                                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#2ECC71] transition-colors hover:bg-[#20874c]"
                             >
                                 <Youtube className="h-4 w-4 text-white" />
                             </a>

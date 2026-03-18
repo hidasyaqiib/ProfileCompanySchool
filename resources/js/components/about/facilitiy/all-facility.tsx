@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import type { FacilityItem } from '../../components/facility/facility-carousel';
 import FacilityCarousel from '../../components/facility/facility-carousel';
+import { usePage } from '@inertiajs/react';
 
 interface AllFacilityProps {
     facilities?: FacilityItem[];
@@ -16,6 +17,22 @@ const AllFacility: React.FC<AllFacilityProps> = ({
     subtitle = 'Jelajahi berbagai fasilitas modern yang tersedia untuk mendukung pembelajaran dan pengembangan siswa',
     className = '',
 }) => {
+
+    const { whatsappNumber } = usePage<{ whatsappNumber?: string | null }>()
+            .props;
+
+        const getWhatsappUrl = (): string | undefined => {
+            if (!whatsappNumber) return undefined;
+            let phone = whatsappNumber.replace(/\D/g, '');
+            if (phone.startsWith('0')) phone = '62' + phone.slice(1);
+            else if (phone.startsWith('+')) phone = phone.slice(1);
+            const message = encodeURIComponent(
+                'Halo, saya ingin mendaftar di MI NU 02 Situwangi. Mohon informasi lebih lanjut.',
+            );
+            return `https://wa.me/${phone}?text=${message}`;
+        };
+
+        const whatsappUrl = getWhatsappUrl();
     // Default facilities data if none provided
     const facilitiesData = facilities;
 
@@ -125,13 +142,14 @@ const AllFacility: React.FC<AllFacilityProps> = ({
                         </p>
                         <div className="flex flex-col justify-center gap-4 sm:flex-row">
                             <a
-                                href="/contact"
+                                href={whatsappUrl ?? '#'}
+                                target='_blank'
                                 className="inline-flex transform items-center justify-center rounded-xl bg-[#2ECC71] px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#27ae60] hover:shadow-xl focus:ring-4 focus:ring-red-500/25 focus:outline-none"
                             >
                                 Hubungi Kami
                             </a>
                             <a
-                                href="/virtual-tour"
+                                href="/school-tour"
                                 className="inline-flex transform items-center justify-center rounded-xl border-2 border-gray-200 bg-white px-8 py-3 font-semibold text-gray-900 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:bg-gray-50 hover:shadow-xl focus:ring-4 focus:ring-gray-500/25 focus:outline-none"
                             >
                                 Tour Virtual
