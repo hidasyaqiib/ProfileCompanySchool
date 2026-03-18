@@ -60,4 +60,9 @@ class PrincipalResource extends Resource
             'edit' => EditPrincipal::route('/{record}/edit'),
         ];
     }
+
+    public static function canCreate(): bool
+    {
+        return Principal::count() === 0;
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Curricula\Pages;
 
 use App\Filament\Resources\Curricula\CurriculumResource;
+use App\Models\Curriculum;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -13,7 +14,8 @@ class ListCurricula extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->hidden (fn (): bool => Curriculum::count() > 0),
         ];
     }
 }

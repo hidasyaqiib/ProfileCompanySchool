@@ -60,4 +60,9 @@ class StructureResource extends Resource
             'edit' => EditStructure::route('/{record}/edit'),
         ];
     }
+
+    public static function canCreate(): bool
+    {
+        return Structure::count() === 0;
+    }
 }

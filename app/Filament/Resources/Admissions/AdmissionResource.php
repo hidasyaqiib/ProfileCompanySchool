@@ -60,4 +60,9 @@ class AdmissionResource extends Resource
             'edit' => EditAdmission::route('/{record}/edit'),
         ];
     }
+
+    public static function canCreate(): bool
+    {
+        return Admission::count() === 0;
+    }
 }

@@ -56,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->ip());
         });
 
-        // Halaman berita dengan search (query LIKE ke DB): lebih ketat
+        // Halaman berita dengan search (query LIKE ke DB): lebih ketat Hanya 30 request/menit per IP
         RateLimiter::for('news-search', function (Request $request) {
             return Limit::perMinute(30)->by($request->ip());
         });

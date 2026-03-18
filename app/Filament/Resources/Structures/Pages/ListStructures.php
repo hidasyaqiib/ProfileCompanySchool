@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Structures\Pages;
 
 use App\Filament\Resources\Structures\StructureResource;
+use App\Models\Structure;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
@@ -13,7 +14,8 @@ class ListStructures extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->hidden (fn (): bool => Structure::count() > 0),
         ];
     }
 }

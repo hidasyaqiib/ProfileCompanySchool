@@ -60,4 +60,9 @@ class ProfileSchoolResource extends Resource
             'edit' => EditProfileSchool::route('/{record}/edit'),
         ];
     }
+
+    public static function canCreate(): bool
+    {
+        return ProfileSchool::count() === 0;
+    }
 }

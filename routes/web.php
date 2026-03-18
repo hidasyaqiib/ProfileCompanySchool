@@ -34,7 +34,7 @@ Route::middleware('throttle:public-pages')->group(function () {
     Route::get('/ppdb', [AdmissionController::class, 'admission'])->name('admission');
 });
 
-// NEWS ROUTES — lebih ketat karena ada query LIKE ke database
+// NEWS ROUTES — lebih ketat karena ada query LIKE ke database Hanya 30 request/menit per IP
 Route::middleware('throttle:news-search')->group(function () {
     Route::get('/berita', [NewsController::class, 'news'])->name('news');
     Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('news.show');

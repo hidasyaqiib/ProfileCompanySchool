@@ -60,4 +60,9 @@ class CurriculumResource extends Resource
             'edit' => EditCurriculum::route('/{record}/edit'),
         ];
     }
+
+    public static function canCreate(): bool
+    {
+        return Curriculum::count() === 0;
+    }
 }

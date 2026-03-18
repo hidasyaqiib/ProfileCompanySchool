@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Phone, Menu, X, ChevronDown } from 'lucide-react';
 import React, { useState, useRef, useCallback } from 'react';
 
@@ -29,11 +29,27 @@ const menus = [
         label: 'Galeri',
         path: '/galeri',
     },
-    { label: "Tour Sekolah", path: "/school-tour" },
-    { label: "PPDB", path: "/ppdb" },
+    { label: 'Tour Sekolah', path: '/school-tour' },
+    { label: 'PPDB', path: '/ppdb' },
 ];
 
 const Navbar: React.FC = () => {
+    const { whatsappNumber } = usePage<{ whatsappNumber?: string | null }>()
+        .props;
+
+    const getWhatsappUrl = (): string | undefined => {
+        if (!whatsappNumber) return undefined;
+        let phone = whatsappNumber.replace(/\D/g, '');
+        if (phone.startsWith('0')) phone = '62' + phone.slice(1);
+        else if (phone.startsWith('+')) phone = phone.slice(1);
+        const message = encodeURIComponent(
+            'Halo, saya ingin mendaftar di MI NU 02 Situwangi. Mohon informasi lebih lanjut.',
+        );
+        return `https://wa.me/${phone}?text=${message}`;
+    };
+
+    const whatsappUrl = getWhatsappUrl();
+
     const [openMenu, setOpenMenu] = useState<number | null>(null);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [mobileSubmenu, setMobileSubmenu] = useState<number | null>(null);
@@ -333,7 +349,8 @@ const Navbar: React.FC = () => {
                 {/* Desktop Action Button */}
                 <div className="ml-8 hidden lg:block">
                     <a
-                        href="/contact-us"
+                        href={whatsappUrl ?? '#'}
+                        target='_blank'
                         className="flex items-center rounded-full bg-gradient-to-b from-[#2ECC71] to-[#27ae60] px-6 py-2 font-semibold text-white transition-all duration-200"
                     >
                         Kontak Kami
