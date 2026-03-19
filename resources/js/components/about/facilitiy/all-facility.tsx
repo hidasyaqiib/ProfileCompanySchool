@@ -17,22 +17,21 @@ const AllFacility: React.FC<AllFacilityProps> = ({
     subtitle = 'Jelajahi berbagai fasilitas modern yang tersedia untuk mendukung pembelajaran dan pengembangan siswa',
     className = '',
 }) => {
-
     const { whatsappNumber } = usePage<{ whatsappNumber?: string | null }>()
-            .props;
+        .props;
 
-        const getWhatsappUrl = (): string | undefined => {
-            if (!whatsappNumber) return undefined;
-            let phone = whatsappNumber.replace(/\D/g, '');
-            if (phone.startsWith('0')) phone = '62' + phone.slice(1);
-            else if (phone.startsWith('+')) phone = phone.slice(1);
-            const message = encodeURIComponent(
-                'Halo, saya ingin mendaftar di MI NU 02 Situwangi. Mohon informasi lebih lanjut.',
-            );
-            return `https://wa.me/${phone}?text=${message}`;
-        };
+    const getWhatsappUrl = (): string | undefined => {
+        if (!whatsappNumber) return undefined;
+        let phone = whatsappNumber.replace(/\D/g, '');
+        if (phone.startsWith('0')) phone = '62' + phone.slice(1);
+        else if (phone.startsWith('+')) phone = phone.slice(1);
+        const message = encodeURIComponent(
+            'Halo, saya ingin mendaftar di MI NU 02 Situwangi. Mohon informasi lebih lanjut.',
+        );
+        return `https://wa.me/${phone}?text=${message}`;
+    };
 
-        const whatsappUrl = getWhatsappUrl();
+    const whatsappUrl = getWhatsappUrl();
     // Default facilities data if none provided
     const facilitiesData = facilities;
 
@@ -109,15 +108,38 @@ const AllFacility: React.FC<AllFacilityProps> = ({
                         />
                     ) : (
                         <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 py-20 text-center">
-                            <svg className="mx-auto mb-4 h-14 w-14 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            <svg
+                                className="mx-auto mb-4 h-14 w-14 text-gray-300"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={1.5}
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                                />
                             </svg>
-                            <h3 className="mb-2 text-lg font-semibold text-gray-700">Belum Ada Fasilitas</h3>
+                            <h3 className="mb-2 text-lg font-semibold text-gray-700">
+                                Belum Ada Fasilitas
+                            </h3>
                             <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
-                                <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                                <svg
+                                    className="h-4 w-4 shrink-0"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z"
+                                    />
                                 </svg>
-                                Data fasilitas belum diisi. Silakan tambahkan melalui panel admin.
+                                Data fasilitas belum diisi. Silakan tambahkan
+                                melalui panel admin.
                             </p>
                         </div>
                     )}
@@ -143,7 +165,7 @@ const AllFacility: React.FC<AllFacilityProps> = ({
                         <div className="flex flex-col justify-center gap-4 sm:flex-row">
                             <a
                                 href={whatsappUrl ?? '#'}
-                                target='_blank'
+                                target="_blank"
                                 className="inline-flex transform items-center justify-center rounded-xl bg-[#2ECC71] px-8 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#27ae60] hover:shadow-xl focus:ring-4 focus:ring-red-500/25 focus:outline-none"
                             >
                                 Hubungi Kami

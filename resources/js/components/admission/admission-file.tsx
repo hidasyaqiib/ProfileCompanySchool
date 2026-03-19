@@ -93,7 +93,7 @@ const AdmissionFile: React.FC = () => {
                 <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
                     {/* ── Left: Sticky Info Panel ── */}
                     <motion.div
-                        className="lg:fixec lg:top-28 lg:w-80 lg:self-start lg:shrink-0"
+                        className="lg:fixec lg:top-28 lg:w-80 lg:shrink-0 lg:self-start"
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
@@ -107,7 +107,7 @@ const AdmissionFile: React.FC = () => {
                         <span className="font-poppins text-xs font-semibold tracking-widest text-[#2ECC71] uppercase">
                             Persyaratan
                         </span>
-                        <h2 className="font-poppins mt-2 text-3xl font-bold leading-tight text-gray-900 md:text-4xl">
+                        <h2 className="font-poppins mt-2 text-3xl leading-tight font-bold text-gray-900 md:text-4xl">
                             Berkas
                             <br />
                             Pendaftaran

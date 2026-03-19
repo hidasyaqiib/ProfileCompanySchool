@@ -42,7 +42,8 @@ const SchoolSchedule: React.FC = () => {
                         Jadwal <span className="text-[#2ECC71]">Sekolah</span>
                     </h2>
                     <p className="text-lg text-gray-600">
-                        Jadwal kegiatan belajar mengajar harian MI NU 02 Situwangi
+                        Jadwal kegiatan belajar mengajar harian MI NU 02
+                        Situwangi
                     </p>
                     <div className="mt-6 flex justify-center">
                         <div className="h-1 w-24 rounded-full bg-gradient-to-r from-[#2ECC71] to-[#27ae60]" />

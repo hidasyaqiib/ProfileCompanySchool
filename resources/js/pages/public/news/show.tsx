@@ -33,21 +33,23 @@ const NewsShow: React.FC<NewsShowPageProps> = ({ news, relatedNews, meta }) => {
      * that editors sometimes embed (which would override our prose text colors).
      */
     const contentWithIds = useMemo(() => {
-        return news.content
-            .replace(
-                /<h([23])([^>]*)>(.*?)<\/h[23]>/gi,
-                (_match, level, attrs, inner) => {
-                    const text = inner.replace(/<[^>]*>/g, '');
-                    const id = text
-                        .toLowerCase()
-                        .replace(/[^\w\s-]/g, '')
-                        .trim()
-                        .replace(/\s+/g, '-');
-                    return `<h${level}${attrs} id="${id}">${inner}</h${level}>`;
-                },
-            )
-            // Strip ALL inline style attributes so our Tailwind prose classes win
-            .replace(/\sstyle="[^"]*"/gi, '');
+        return (
+            news.content
+                .replace(
+                    /<h([23])([^>]*)>(.*?)<\/h[23]>/gi,
+                    (_match, level, attrs, inner) => {
+                        const text = inner.replace(/<[^>]*>/g, '');
+                        const id = text
+                            .toLowerCase()
+                            .replace(/[^\w\s-]/g, '')
+                            .trim()
+                            .replace(/\s+/g, '-');
+                        return `<h${level}${attrs} id="${id}">${inner}</h${level}>`;
+                    },
+                )
+                // Strip ALL inline style attributes so our Tailwind prose classes win
+                .replace(/\sstyle="[^"]*"/gi, '')
+        );
     }, [news.content]);
 
     const copyToClipboard = useCallback(() => {
@@ -60,7 +62,11 @@ const NewsShow: React.FC<NewsShowPageProps> = ({ news, relatedNews, meta }) => {
     const handleShare = useCallback(async () => {
         if (navigator.share) {
             try {
-                await navigator.share({ title: news.title, text: meta.description, url: window.location.href });
+                await navigator.share({
+                    title: news.title,
+                    text: meta.description,
+                    url: window.location.href,
+                });
             } catch {
                 copyToClipboard();
             }
@@ -75,16 +81,24 @@ const NewsShow: React.FC<NewsShowPageProps> = ({ news, relatedNews, meta }) => {
             '@type': 'NewsArticle',
             headline: news.title,
             description: meta.description,
-            image: meta.image || 'https://mi-nu-02-situwangi.com/assets/image/hero-home.webp',
+            image:
+                meta.image ||
+                'https://mi-nu-02-situwangi.com/assets/image/hero-home.webp',
             datePublished: news.published_at,
             dateModified: news.published_at,
             author: { '@type': 'Person', name: news.author },
             publisher: {
                 '@type': 'Organization',
                 name: 'MI NU 02 Situwangi',
-                logo: { '@type': 'ImageObject', url: 'https://mi-nu-02-situwangi.com/assets/image/logo.webp' },
+                logo: {
+                    '@type': 'ImageObject',
+                    url: 'https://mi-nu-02-situwangi.com/assets/image/logo.webp',
+                },
             },
-            mainEntityOfPage: { '@type': 'WebPage', '@id': window.location.href },
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': window.location.href,
+            },
         }),
         [news, meta],
     );
@@ -98,18 +112,36 @@ const NewsShow: React.FC<NewsShowPageProps> = ({ news, relatedNews, meta }) => {
                 <meta property="og:description" content={meta.description} />
                 <meta property="og:type" content="article" />
                 <meta property="og:url" content={window.location.href} />
-                <meta property="og:image" content={meta.image || 'https://mi-nu-02-situwangi.com/assets/image/hero-home.webp'} />
+                <meta
+                    property="og:image"
+                    content={
+                        meta.image ||
+                        'https://mi-nu-02-situwangi.com/assets/image/hero-home.webp'
+                    }
+                />
                 <meta property="og:site_name" content="MI NU 02 Situwangi" />
-                <meta property="article:published_time" content={news.published_at} />
+                <meta
+                    property="article:published_time"
+                    content={news.published_at}
+                />
                 <meta property="article:author" content={news.author} />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={meta.title} />
                 <meta name="twitter:description" content={meta.description} />
-                <meta name="twitter:image" content={meta.image || 'https://mi-nu-02-situwangi.com/assets/image/hero-home.webp'} />
+                <meta
+                    name="twitter:image"
+                    content={
+                        meta.image ||
+                        'https://mi-nu-02-situwangi.com/assets/image/hero-home.webp'
+                    }
+                />
                 <link rel="canonical" href={window.location.href} />
                 <meta name="robots" content="index, follow" />
                 <meta name="author" content={news.author} />
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
             </Head>
 
             <main className="bg-white">
@@ -138,8 +170,6 @@ const NewsShow: React.FC<NewsShowPageProps> = ({ news, relatedNews, meta }) => {
                         </div>
                     </div>
                 </section>
-
-
             </main>
         </MainLayout>
     );

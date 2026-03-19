@@ -46,14 +46,14 @@ const NewsPage: React.FC<NewsPageProps> = ({
             per_page: 9,
             total: 0,
             from: 0,
-            to: 0
+            to: 0,
         },
         links: {
             first: '',
             last: '',
             prev: null,
-            next: null
-        }
+            next: null,
+        },
     },
     filters = {},
     meta = {},
@@ -65,7 +65,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
     const {
         title = 'Berita Terkini',
         description = 'Ikuti perkembangan dan update terbaru seputar kegiatan, prestasi, dan informasi penting MI NU 02 Situwangi. Pusat informasi terpercaya untuk orang tua, siswa, dan masyarakat.',
-        keywords = 'berita sekolah, MI NU 02 Situwangi, informasi sekolah, kegiatan sekolah, prestasi siswa, pengumuman sekolah, update sekolah, news, madrasah ibtidaiyah'
+        keywords = 'berita sekolah, MI NU 02 Situwangi, informasi sekolah, kegiatan sekolah, prestasi siswa, pengumuman sekolah, update sekolah, news, madrasah ibtidaiyah',
     } = meta;
 
     const handleSearch = useCallback((search: string) => {
@@ -121,33 +121,41 @@ const NewsPage: React.FC<NewsPageProps> = ({
         };
     }, [news?.meta]);
 
-    const jsonLd = useMemo(() => ({
-        "@context": "https://schema.org",
-        "@type": "Blog",
-        "name": "Berita MI NU 02 Situwangi",
-        "description": description,
-        "url": "https://mi-nu-02-situwangi.com/berita",
-        "publisher": {
-            "@type": "Organization",
-            "name": "MI NU 02 Situwangi",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://mi-nu-02-situwangi.com/assets/image/logo.webp"
-            }
-        },
-        "blogPost": news?.data?.map(item => ({
-            "@type": "BlogPosting",
-            "headline": item.title,
-            "description": item.content.replace(/<[^>]*>/g, '').substring(0, 160),
-            "url": `https://mi-nu-02-situwangi.com/berita/${item.slug}`,
-            "datePublished": item.published_at,
-            "author": {
-                "@type": "Person",
-                "name": item.author
+    const jsonLd = useMemo(
+        () => ({
+            '@context': 'https://schema.org',
+            '@type': 'Blog',
+            name: 'Berita MI NU 02 Situwangi',
+            description: description,
+            url: 'https://mi-nu-02-situwangi.com/berita',
+            publisher: {
+                '@type': 'Organization',
+                name: 'MI NU 02 Situwangi',
+                logo: {
+                    '@type': 'ImageObject',
+                    url: 'https://mi-nu-02-situwangi.com/assets/image/logo.webp',
+                },
             },
-            "image": item.image_url || "https://mi-nu-02-situwangi.com/assets/image/hero-home.webp"
-        })) || []
-    }), [news?.data, description]);
+            blogPost:
+                news?.data?.map((item) => ({
+                    '@type': 'BlogPosting',
+                    headline: item.title,
+                    description: item.content
+                        .replace(/<[^>]*>/g, '')
+                        .substring(0, 160),
+                    url: `https://mi-nu-02-situwangi.com/berita/${item.slug}`,
+                    datePublished: item.published_at,
+                    author: {
+                        '@type': 'Person',
+                        name: item.author,
+                    },
+                    image:
+                        item.image_url ||
+                        'https://mi-nu-02-situwangi.com/assets/image/hero-home.webp',
+                })) || [],
+        }),
+        [news?.data, description],
+    );
 
     return (
         <MainLayout>
@@ -159,18 +167,30 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://mi-nu-02-situwangi.com/berita" />
-                <meta property="og:image" content="https://mi-nu-02-situwangi.com/assets/image/hero-home.webp" />
+                <meta
+                    property="og:url"
+                    content="https://mi-nu-02-situwangi.com/berita"
+                />
+                <meta
+                    property="og:image"
+                    content="https://mi-nu-02-situwangi.com/assets/image/hero-home.webp"
+                />
                 <meta property="og:site_name" content="MI NU 02 Situwangi" />
 
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={description} />
-                <meta name="twitter:image" content="https://mi-nu-02-situwangi.com/assets/image/hero-home.webp" />
+                <meta
+                    name="twitter:image"
+                    content="https://mi-nu-02-situwangi.com/assets/image/hero-home.webp"
+                />
 
                 {/* Additional SEO */}
-                <link rel="canonical" href="https://mi-nu-02-situwangi.com/berita" />
+                <link
+                    rel="canonical"
+                    href="https://mi-nu-02-situwangi.com/berita"
+                />
                 <meta name="robots" content="index, follow" />
                 <meta name="author" content="MI NU 02 Situwangi" />
 
@@ -192,33 +212,56 @@ const NewsPage: React.FC<NewsPageProps> = ({
             {/* ── Main content ─────────────────────────────────────── */}
             <main className="bg-white">
                 <div className="container mx-auto px-4 py-10">
-
                     {/* Results summary / filter chip */}
                     {(filters.search || paginationInfo.total > 0) && (
                         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <p className="text-sm text-gray-500">
                                 {filters.search ? (
                                     <>
-                                        <span className="font-semibold text-gray-800">{paginationInfo.showing}</span> hasil untuk{' '}
-                                        <span className="font-semibold text-[#27ae60]">&ldquo;{filters.search}&rdquo;</span>
-                                        {' '}dari {paginationInfo.total} berita
+                                        <span className="font-semibold text-gray-800">
+                                            {paginationInfo.showing}
+                                        </span>{' '}
+                                        hasil untuk{' '}
+                                        <span className="font-semibold text-[#27ae60]">
+                                            &ldquo;{filters.search}&rdquo;
+                                        </span>{' '}
+                                        dari {paginationInfo.total} berita
                                     </>
                                 ) : (
                                     <>
                                         Menampilkan{' '}
-                                        <span className="font-semibold text-gray-800">{paginationInfo.showing}</span> dari{' '}
-                                        <span className="font-semibold text-gray-800">{paginationInfo.total}</span> berita
+                                        <span className="font-semibold text-gray-800">
+                                            {paginationInfo.showing}
+                                        </span>{' '}
+                                        dari{' '}
+                                        <span className="font-semibold text-gray-800">
+                                            {paginationInfo.total}
+                                        </span>{' '}
+                                        berita
                                     </>
                                 )}
                             </p>
 
                             {filters.search && (
                                 <button
-                                    onClick={() => { setSearchValue(''); handleSearch(''); }}
+                                    onClick={() => {
+                                        setSearchValue('');
+                                        handleSearch('');
+                                    }}
                                     className="inline-flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-600 transition-colors hover:border-gray-300 hover:bg-gray-50"
                                 >
-                                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    <svg
+                                        className="h-3.5 w-3.5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
                                     </svg>
                                     Hapus Filter
                                 </button>

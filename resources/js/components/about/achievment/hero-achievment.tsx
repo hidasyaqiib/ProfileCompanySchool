@@ -50,7 +50,7 @@ const HeroAchievement: React.FC<HeroAchievementProps> = ({
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
                     {/* Content Column */}
                     <motion.div
-                        className="mt-0 lg:mt-24 space-y-4 lg:pr-8"
+                        className="mt-0 space-y-4 lg:mt-24 lg:pr-8"
                         initial={{ opacity: 0, x: -60 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -115,7 +115,7 @@ const HeroAchievement: React.FC<HeroAchievementProps> = ({
                             <a
                                 href={ctaLink}
                                 onClick={handleCtaClick}
-                                className="inline-flex transform items-center rounded-xl bg-[#2ECC71] px-8 py-4 font-semibold text-[16px] text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#27ae60] hover:shadow-xl"
+                                className="inline-flex transform items-center rounded-xl bg-[#2ECC71] px-8 py-4 text-[16px] font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#27ae60] hover:shadow-xl"
                                 aria-label={`${ctaText} - Lihat semua prestasi`}
                             >
                                 <span>{ctaText}</span>
@@ -139,10 +139,14 @@ const HeroAchievement: React.FC<HeroAchievementProps> = ({
 
                     {/* Image Column */}
                     <motion.div
-                        className="relative mt-12 lg:mt-0 order-first lg:order-last"
+                        className="relative order-first mt-12 lg:order-last lg:mt-0"
                         initial={{ opacity: 0, x: 60 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+                        transition={{
+                            duration: 0.7,
+                            ease: 'easeOut',
+                            delay: 0.2,
+                        }}
                     >
                         {/* 3D Perspective Container */}
                         <div className="perspective-1000 relative rotate-y-12 transform">
@@ -168,7 +172,7 @@ const HeroAchievement: React.FC<HeroAchievementProps> = ({
             </div>
 
             {/* Bottom Wave Separator */}
-             <div className="absolute right-0 bottom-0 left-0 w-full overflow-hidden leading-none">
+            <div className="absolute right-0 bottom-0 left-0 w-full overflow-hidden leading-none">
                 <svg
                     className="relative block h-16 w-full md:h-24 lg:h-32"
                     viewBox="0 0 1440 80"

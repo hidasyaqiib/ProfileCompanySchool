@@ -25,9 +25,7 @@ const HeroSchoolTour: React.FC = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
                     Fasilitas <span className="mx-2 text-black">&gt;</span>{' '}
-                    <span className="font-medium text-black">
-                        Tour Sekolah
-                    </span>
+                    <span className="font-medium text-black">Tour Sekolah</span>
                 </motion.p>
 
                 {/* Title */}

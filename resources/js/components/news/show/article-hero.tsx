@@ -42,16 +42,27 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
         {/* Breadcrumb — top */}
         <div className="absolute inset-x-0 top-4 sm:top-6">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-xs">
-                    <Link href="/" className="font-medium text-white/70 transition-colors hover:text-white">
+                <nav
+                    aria-label="Breadcrumb"
+                    className="flex flex-wrap items-center gap-1.5 text-xs"
+                >
+                    <Link
+                        href="/"
+                        className="font-medium text-white/70 transition-colors hover:text-white"
+                    >
                         Beranda
                     </Link>
                     <ChevronRight className="h-3 w-3 shrink-0 text-white/40" />
-                    <Link href="/berita" className="font-medium text-white/70 transition-colors hover:text-white">
+                    <Link
+                        href="/berita"
+                        className="font-medium text-white/70 transition-colors hover:text-white"
+                    >
                         Berita
                     </Link>
                     <ChevronRight className="h-3 w-3 shrink-0 text-white/40" />
-                    <span className="line-clamp-1 max-w-40 text-white/50 sm:max-w-60">{news.title}</span>
+                    <span className="line-clamp-1 max-w-40 text-white/50 sm:max-w-60">
+                        {news.title}
+                    </span>
                 </nav>
             </div>
         </div>
@@ -65,9 +76,8 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
         >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-5xl">
-
                     {/* Title */}
-                    <h1 className="mb-3 text-xl font-black leading-tight text-white drop-shadow-sm sm:mb-5 sm:text-2xl md:text-4xl lg:text-[2.75rem]">
+                    <h1 className="mb-3 text-xl leading-tight font-black text-white drop-shadow-sm sm:mb-5 sm:text-2xl md:text-4xl lg:text-[2.75rem]">
                         {news.title}
                     </h1>
 
@@ -76,16 +86,23 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
                         <div className="flex items-center gap-2">
                             <div
                                 className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-black text-white"
-                                style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                                style={{
+                                    background:
+                                        'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)',
+                                }}
                             >
                                 {news.author.charAt(0).toUpperCase()}
                             </div>
-                            <span className="font-semibold text-white">{news.author}</span>
+                            <span className="font-semibold text-white">
+                                {news.author}
+                            </span>
                         </div>
                         <span className="text-white/30">·</span>
                         <div className="flex items-center gap-1.5">
                             <Calendar className="h-3.5 w-3.5" />
-                            <time dateTime={news.published_at}>{formatDate(news.published_at)}</time>
+                            <time dateTime={news.published_at}>
+                                {formatDate(news.published_at)}
+                            </time>
                         </div>
                     </div>
 
@@ -111,7 +128,10 @@ const ArticleHero: React.FC<ArticleHeroProps> = ({
                             <button
                                 onClick={onShare}
                                 className="flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-white transition-all hover:opacity-90 active:scale-95"
-                                style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                                style={{
+                                    background:
+                                        'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)',
+                                }}
                             >
                                 <Share2 className="h-3.5 w-3.5" />
                                 Bagikan

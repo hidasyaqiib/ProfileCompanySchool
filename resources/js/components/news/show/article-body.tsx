@@ -36,26 +36,7 @@ const ArticleBody: React.FC<ArticleBodyProps> = ({
 
         {/* Article prose content */}
         <div
-            className="prose prose-base max-w-none
-                prose-headings:scroll-mt-24
-                prose-headings:font-black prose-headings:text-gray-900 prose-headings:tracking-tight
-                prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-                prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-                prose-p:text-gray-800 prose-p:leading-[1.8]
-                prose-a:font-semibold prose-a:text-[#27ae60] prose-a:no-underline hover:prose-a:underline
-                prose-strong:text-gray-900 prose-strong:font-bold
-                prose-ul:text-gray-800 prose-ol:text-gray-800
-                prose-li:leading-relaxed
-                prose-blockquote:border-l-4 prose-blockquote:border-[#2ECC71] prose-blockquote:bg-emerald-50/60 prose-blockquote:rounded-r-2xl prose-blockquote:py-2 prose-blockquote:not-italic
-                prose-blockquote:text-gray-700 prose-blockquote:font-medium
-                prose-img:rounded-2xl prose-img:shadow-lg prose-img:mx-auto
-                prose-figure:my-8
-                prose-figcaption:text-center prose-figcaption:text-xs prose-figcaption:text-gray-400
-                prose-code:text-[#27ae60] prose-code:bg-emerald-50 prose-code:rounded prose-code:px-1 prose-code:py-0.5
-                prose-hr:border-gray-100
-                [&_p]:!text-gray-800
-                [&_li]:!text-gray-800
-                [&_span]:!text-gray-800"
+            className="prose prose-base prose-headings:scroll-mt-24 prose-headings:font-black prose-headings:text-gray-900 prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-gray-800 prose-p:leading-[1.8] prose-a:font-semibold prose-a:text-[#27ae60] prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-strong:font-bold prose-ul:text-gray-800 prose-ol:text-gray-800 prose-li:leading-relaxed prose-blockquote:border-l-4 prose-blockquote:border-[#2ECC71] prose-blockquote:bg-emerald-50/60 prose-blockquote:rounded-r-2xl prose-blockquote:py-2 prose-blockquote:not-italic prose-blockquote:text-gray-700 prose-blockquote:font-medium prose-img:rounded-2xl prose-img:shadow-lg prose-img:mx-auto prose-figure:my-8 prose-figcaption:text-center prose-figcaption:text-xs prose-figcaption:text-gray-400 prose-code:text-[#27ae60] prose-code:bg-emerald-50 prose-code:rounded prose-code:px-1 prose-code:py-0.5 prose-hr:border-gray-100 max-w-none [&_li]:!text-gray-800 [&_p]:!text-gray-800 [&_span]:!text-gray-800"
             dangerouslySetInnerHTML={{ __html: contentWithIds }}
         />
 
@@ -65,13 +46,20 @@ const ArticleBody: React.FC<ArticleBodyProps> = ({
                 <div className="flex items-center gap-4">
                     <div
                         className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-xl font-black text-white"
-                        style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                        style={{
+                            background:
+                                'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)',
+                        }}
                     >
                         {author.charAt(0).toUpperCase()}
                     </div>
                     <div className="min-w-0 flex-1">
-                        <p className="text-sm font-black text-gray-900">{author}</p>
-                        <p className="text-xs text-gray-500">Penulis &mdash; MI NU 02 Situwangi</p>
+                        <p className="text-sm font-black text-gray-900">
+                            {author}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                            Penulis &mdash; MI NU 02 Situwangi
+                        </p>
                     </div>
                     {/* <button
                         onClick={onShare}

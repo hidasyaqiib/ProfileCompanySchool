@@ -163,7 +163,7 @@ const CalendarSection: React.FC<CalendarSectionProps> = ({ events }) => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
                     >
-                        <div className="overflow-hidden rounded-2xl border border-gray-200 text-black font-bold bg-white p-4 shadow-sm lg:p-6">
+                        <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 font-bold text-black shadow-sm lg:p-6">
                             <FullCalendar
                                 plugins={[dayGridPlugin, interactionPlugin]}
                                 initialView="dayGridMonth"

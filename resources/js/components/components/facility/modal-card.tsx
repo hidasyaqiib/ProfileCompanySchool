@@ -75,16 +75,25 @@ const ModalCard: React.FC<ModalCardProps> = ({
         >
             {/* ── Modal card ── */}
             <div className="relative flex max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-2xl shadow-2xl">
-
                 {/* ── Close button ── */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 shadow transition hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                    className="absolute top-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 shadow transition hover:bg-gray-200 focus:ring-2 focus:ring-gray-300 focus:outline-none"
                     aria-label="Tutup modal"
                     type="button"
                 >
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2.5}
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                        />
                     </svg>
                 </button>
 
@@ -108,23 +117,45 @@ const ModalCard: React.FC<ModalCardProps> = ({
                                     <button
                                         onClick={goPrev}
                                         disabled={activeIndex === 0}
-                                        className={`absolute top-1/2 left-3 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow backdrop-blur-sm transition hover:bg-white focus:outline-none ${activeIndex === 0 ? 'cursor-not-allowed opacity-25' : 'cursor-pointer'}`}
+                                        className={`absolute top-1/2 left-3 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow backdrop-blur-sm transition hover:bg-white focus:outline-none ${activeIndex === 0 ? 'cursor-not-allowed opacity-25' : 'cursor-pointer'}`}
                                         aria-label="Foto sebelumnya"
                                         type="button"
                                     >
-                                        <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                        <svg
+                                            className="h-4 w-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth={2.5}
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M15 19l-7-7 7-7"
+                                            />
                                         </svg>
                                     </button>
                                     <button
                                         onClick={goNext}
-                                        disabled={activeIndex === photos.length - 1}
-                                        className={`absolute top-1/2 right-3 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow backdrop-blur-sm transition hover:bg-white focus:outline-none ${activeIndex === photos.length - 1 ? 'cursor-not-allowed opacity-25' : 'cursor-pointer'}`}
+                                        disabled={
+                                            activeIndex === photos.length - 1
+                                        }
+                                        className={`absolute top-1/2 right-3 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow backdrop-blur-sm transition hover:bg-white focus:outline-none ${activeIndex === photos.length - 1 ? 'cursor-not-allowed opacity-25' : 'cursor-pointer'}`}
                                         aria-label="Foto berikutnya"
                                         type="button"
                                     >
-                                        <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        <svg
+                                            className="h-4 w-4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth={2.5}
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M9 5l7 7-7 7"
+                                            />
                                         </svg>
                                     </button>
 
@@ -140,22 +171,28 @@ const ModalCard: React.FC<ModalCardProps> = ({
                     {/* Thumbnail strip */}
                     {hasMultiplePhotos && (
                         <div
-                            className="flex gap-2 overflow-x-auto justify-center px-8 pb-6"
+                            className="flex justify-center gap-2 overflow-x-auto px-8 pb-6"
                             style={{ scrollbarWidth: 'none' }}
                         >
                             {photos.map((src, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setActiveIndex(i)}
-                                    className={`h-12 w-12 flex-none overflow-hidden rounded-lg border-2 transition-all focus:outline-none ${i === activeIndex
+                                    className={`h-12 w-12 flex-none overflow-hidden rounded-lg border-2 transition-all focus:outline-none ${
+                                        i === activeIndex
                                             ? 'border-[#2ECC71] opacity-100'
                                             : 'border-transparent opacity-40 hover:opacity-70'
-                                        }`}
+                                    }`}
                                     aria-label={`Lihat foto ${i + 1}`}
                                     aria-pressed={i === activeIndex}
                                     type="button"
                                 >
-                                    <img src={src} alt={`Thumbnail ${i + 1}`} className="h-full w-full object-cover" loading="lazy" />
+                                    <img
+                                        src={src}
+                                        alt={`Thumbnail ${i + 1}`}
+                                        className="h-full w-full object-cover"
+                                        loading="lazy"
+                                    />
                                 </button>
                             ))}
                         </div>
@@ -165,9 +202,9 @@ const ModalCard: React.FC<ModalCardProps> = ({
                 {/* ══════════════════════
                     RIGHT — Text content
                 ══════════════════════ */}
-                <div className="flex w-[45%] flex-col overflow-y-auto bg-white px-8 py-8 border-l border-gray-100">
+                <div className="flex w-[45%] flex-col overflow-y-auto border-l border-gray-100 bg-white px-8 py-8">
                     {/* Title — pr-10 keeps it clear of the absolute close button */}
-                    <h2 className="pr-10 text-xl font-bold leading-snug tracking-tight text-gray-900 break-all">
+                    <h2 className="pr-10 text-xl leading-snug font-bold tracking-tight break-all text-gray-900">
                         {title}
                     </h2>
 
@@ -176,7 +213,7 @@ const ModalCard: React.FC<ModalCardProps> = ({
                     {/* Description — flex-1 pushes bottom bar down */}
                     <div className="mt-5 flex flex-1 flex-col">
                         {description && (
-                            <p className="text-sm leading-relaxed text-gray-600 break-all">
+                            <p className="text-sm leading-relaxed break-all text-gray-600">
                                 {description}
                             </p>
                         )}
@@ -186,8 +223,18 @@ const ModalCard: React.FC<ModalCardProps> = ({
                     <div className="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
                         {/* Left: photo count */}
                         <div className="flex items-center gap-2 text-xs text-[#2ECC71]">
-                            <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            <svg
+                                className="h-3.5 w-3.5 shrink-0"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth={1.5}
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                />
                             </svg>
                             {photos.length} foto tersedia
                         </div>
@@ -195,17 +242,30 @@ const ModalCard: React.FC<ModalCardProps> = ({
                         {/* Right: date */}
                         {date ? (
                             <div className="flex items-center gap-2 text-xs text-gray-500">
-                                <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                                <svg
+                                    className="h-3.5 w-3.5 shrink-0"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+                                    />
                                 </svg>
-                                {new Date(date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                {new Date(date).toLocaleDateString('id-ID', {
+                                    day: 'numeric',
+                                    month: 'long',
+                                    year: 'numeric',
+                                })}
                             </div>
                         ) : (
                             <div className="invisible text-xs">–</div>
                         )}
                     </div>
                 </div>
-
             </div>
         </div>
     );

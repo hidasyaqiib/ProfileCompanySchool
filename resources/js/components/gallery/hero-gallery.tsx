@@ -54,7 +54,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
                 <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Content Column */}
                     <motion.div
-                        className="mt-8 lg:mt-24 space-y-6 lg:pr-8"
+                        className="mt-8 space-y-6 lg:mt-24 lg:pr-8"
                         initial={{ opacity: 0, x: -60 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -143,18 +143,12 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
                             <a
                                 href={ctaLink}
                                 onClick={handleCtaClick}
-                                className="inline-flex transform items-center rounded-lg
-                   bg-[#2ECC71]
-                   px-5 py-3 text-sm
-                   sm:px-6 sm:py-4 sm:text-base
-                   md:px-8 md:py-4 md:text-sm
-                   font-semibold text-white shadow-lg
-                   transition-all duration-300 hover:bg-[#27AE60]"
+                                className="inline-flex transform items-center rounded-lg bg-[#2ECC71] px-5 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#27AE60] sm:px-6 sm:py-4 sm:text-base md:px-8 md:py-4 md:text-sm"
                                 aria-label={`${ctaText} - Lihat semua galeri`}
                             >
                                 <span>{ctaText}</span>
                                 <svg
-                                    className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300"
+                                    className="ml-2 h-4 w-4 transition-transform duration-300 sm:h-5 sm:w-5"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -173,10 +167,14 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
 
                     {/* Image Column */}
                     <motion.div
-                        className="relative mt-12 lg:mt-0 order-first lg:order-last"
+                        className="relative order-first mt-12 lg:order-last lg:mt-0"
                         initial={{ opacity: 0, x: 60 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+                        transition={{
+                            duration: 0.7,
+                            ease: 'easeOut',
+                            delay: 0.2,
+                        }}
                     >
                         {/* 3D Perspective Container */}
                         <div className="perspective-1000 relative rotate-y-12 transform">

@@ -58,7 +58,8 @@ const Principal: React.FC<PrincipalProps> = ({ chiefs }) => {
                         <div className="flex w-full items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5">
                             <Info className="h-4 w-4 flex-shrink-0 text-amber-500" />
                             <p className="font-poppins text-sm text-amber-700">
-                                Silakan periksa kembali nanti atau hubungi administrator.
+                                Silakan periksa kembali nanti atau hubungi
+                                administrator.
                             </p>
                         </div>
                     </motion.div>

@@ -77,11 +77,11 @@ const NewsCard: React.FC<NewsCardProps> = ({
                             )}
                         </div>
 
-                        <h2 className="mb-3 text-xl font-black leading-tight text-white md:text-2xl lg:text-3xl group-hover:opacity-90 transition-opacity line-clamp-3">
+                        <h2 className="mb-3 line-clamp-3 text-xl leading-tight font-black text-white transition-opacity group-hover:opacity-90 md:text-2xl lg:text-3xl">
                             {title}
                         </h2>
 
-                        <p className="mb-4 line-clamp-2 text-sm text-white/70 leading-relaxed">
+                        <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-white/70">
                             {stripHtml(content)}
                         </p>
 
@@ -95,7 +95,10 @@ const NewsCard: React.FC<NewsCardProps> = ({
                             </div>
                             <div
                                 className="flex h-9 w-9 items-center justify-center rounded-full transition-transform group-hover:scale-110"
-                                style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                                style={{
+                                    background:
+                                        'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)',
+                                }}
                             >
                                 <ArrowUpRight className="h-4 w-4 text-white" />
                             </div>
@@ -108,10 +111,10 @@ const NewsCard: React.FC<NewsCardProps> = ({
 
     return (
         <Link href={`/berita/${slug}`} className="group block h-full">
-        <article className="flex h-full flex-col overflow-hidden rounded-2xl border-2 border-dashed border-gray-200 bg-white transition-all duration-300 hover:border-[#2ECC71]/60">
+            <article className="flex h-full flex-col overflow-hidden rounded-2xl border-2 border-dashed border-gray-200 bg-white transition-all duration-300 hover:border-[#2ECC71]/60">
                 {/* Image */}
                 <div className="p-3 pb-0">
-                    <div className="relative aspect-video w-full h-50 overflow-hidden rounded-xl bg-gray-100">
+                    <div className="relative aspect-video h-50 w-full overflow-hidden rounded-xl bg-gray-100">
                         <img
                             src={image_url || '/assets/image/hero-home.webp'}
                             alt={title}
@@ -123,7 +126,10 @@ const NewsCard: React.FC<NewsCardProps> = ({
                             <div className="absolute top-2 left-2">
                                 <span
                                     className="rounded-full px-2.5 py-1 text-xs font-bold text-white shadow"
-                                    style={{ background: 'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)' }}
+                                    style={{
+                                        background:
+                                            'linear-gradient(135deg, #2ECC71 0%, #27ae60 100%)',
+                                    }}
                                 >
                                     Baru
                                 </span>
@@ -135,16 +141,18 @@ const NewsCard: React.FC<NewsCardProps> = ({
                 {/* Content */}
                 <div className="flex flex-1 flex-col px-5 py-2">
                     {/* Meta */}
-                    <div className="mb-3 flex items-center gap-2 justify-between text-xs text-gray-400">
-                        <span className="flex items-center gap-1 font-medium text-gray-600 truncate">
+                    <div className="mb-3 flex items-center justify-between gap-2 text-xs text-gray-400">
+                        <span className="flex items-center gap-1 truncate font-medium text-gray-600">
                             <User className="h-3 w-3 shrink-0" />
                             {author}
                         </span>
-                        <time dateTime={published_at} className="shrink-0">{formatDate(published_at)}</time>
+                        <time dateTime={published_at} className="shrink-0">
+                            {formatDate(published_at)}
+                        </time>
                     </div>
 
                     {/* Title */}
-                    <h3 className="mb-2.5 line-clamp-1 text-base font-bold leading-snug text-gray-900">
+                    <h3 className="mb-2.5 line-clamp-1 text-base leading-snug font-bold text-gray-900">
                         {title}
                     </h3>
 
@@ -158,9 +166,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
                         <span className="text-xs font-semibold text-[#27ae60]">
                             Baca selengkapnya
                         </span>
-                        <div
-                            className="flex h-7 w-7 items-center justify-center rounded-full"
-                        >
+                        <div className="flex h-7 w-7 items-center justify-center rounded-full">
                             <ArrowUpRight className="h-3.5 w-3.5 text-[#27ae60]" />
                         </div>
                     </div>

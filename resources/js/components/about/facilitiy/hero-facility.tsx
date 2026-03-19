@@ -144,7 +144,11 @@ const HeroFacility: React.FC<HeroFacilityProps> = ({
                         className="relative lg:order-last"
                         initial={{ opacity: 0, x: 60 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+                        transition={{
+                            duration: 0.7,
+                            ease: 'easeOut',
+                            delay: 0.2,
+                        }}
                     >
                         {/* 3D Perspective Container */}
                         <div className="perspective-1000 relative rotate-y-12 transform">

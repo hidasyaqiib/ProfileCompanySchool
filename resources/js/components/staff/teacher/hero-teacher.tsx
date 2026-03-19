@@ -44,8 +44,7 @@ const HeroTeacher: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.4 }}
                 >
-                    Profil {' '}
-                    <span className="text-[#2ECC71]">Guru</span>
+                    Profil <span className="text-[#2ECC71]">Guru</span>
                 </motion.h1>
 
                 <motion.p
@@ -54,10 +53,11 @@ const HeroTeacher: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.5 }}
                 >
-                    Diagram ini menyajikan Profil Guru MI NU 02 Situwangi, yang merinci pembagian tugas dan tanggung jawab
-                    unit kerja. Profil ini berfungsi sebagai kerangka formal
-                    untuk memastikan koordinasi, efisiensi operasional, dan
-                    pencapaian target mutu sekolah.
+                    Diagram ini menyajikan Profil Guru MI NU 02 Situwangi, yang
+                    merinci pembagian tugas dan tanggung jawab unit kerja.
+                    Profil ini berfungsi sebagai kerangka formal untuk
+                    memastikan koordinasi, efisiensi operasional, dan pencapaian
+                    target mutu sekolah.
                 </motion.p>
             </motion.div>
         </section>

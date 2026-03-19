@@ -57,8 +57,18 @@ const Home: React.FC = () => {
         <MainLayout>
             <Head title="Home">
                 {/* Preload kedua LCP image sedini mungkin */}
-                <link rel="preload" as="image" href="/assets/image/hero-home.webp" fetchPriority="high" />
-                <link rel="preload" as="image" href="/assets/image/model-hero-dua.webp" fetchPriority="high" />
+                <link
+                    rel="preload"
+                    as="image"
+                    href="/assets/image/hero-home.webp"
+                    fetchPriority="high"
+                />
+                <link
+                    rel="preload"
+                    as="image"
+                    href="/assets/image/model-hero-dua.webp"
+                    fetchPriority="high"
+                />
             </Head>
             <HeroSection />
             <SpeechSection

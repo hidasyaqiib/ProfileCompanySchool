@@ -350,7 +350,7 @@ const Navbar: React.FC = () => {
                 <div className="ml-8 hidden lg:block">
                     <a
                         href={whatsappUrl ?? '#'}
-                        target='_blank'
+                        target="_blank"
                         className="flex items-center rounded-full bg-gradient-to-b from-[#2ECC71] to-[#27ae60] px-6 py-2 font-semibold text-white transition-all duration-200"
                     >
                         Kontak Kami
