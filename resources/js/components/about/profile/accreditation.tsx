@@ -48,7 +48,7 @@ const Accreditation: React.FC = () => {
                         </header>
 
                         {/* Accreditation Details */}
-                        <div className="prose prose-gray max-w-none">
+                        <div className="prose max-w-none prose-gray">
                             <p className="font-poppins text-sm leading-relaxed text-gray-600 sm:text-base lg:text-lg">
                                 Berdasarkan Keputusan Badan Akreditasi Nasional
                                 Sekolah/Madrasah Nomor:{' '}

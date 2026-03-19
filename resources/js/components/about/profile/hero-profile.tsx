@@ -56,7 +56,7 @@ const HeroProfile: React.FC<HeroProfileProps> = ({
                         </header>
 
                         {/* Description */}
-                        <div className="prose prose-gray max-w-none">
+                        <div className="prose max-w-none prose-gray">
                             {description ? (
                                 <p className="font-poppins text-justify text-sm leading-relaxed font-medium text-gray-700 sm:text-base lg:text-lg">
                                     {description}

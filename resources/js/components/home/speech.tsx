@@ -102,7 +102,7 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
 
                 <div className="space-y-6">
                     <div
-                        className="prose prose-sm font-poppins max-w-none text-justify text-[12px] leading-relaxed text-gray-700 lg:text-[16px] [&_p]:mb-3"
+                        className="font-poppins prose prose-sm max-w-none text-justify text-[12px] leading-relaxed text-gray-700 lg:text-[16px] [&_p]:mb-3"
                         dangerouslySetInnerHTML={{
                             __html: speechData.speech.content,
                         }}

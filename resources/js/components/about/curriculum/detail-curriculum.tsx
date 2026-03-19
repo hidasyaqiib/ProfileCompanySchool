@@ -60,7 +60,7 @@ const DetailCurriculum: React.FC<DetailCurriculumProps> = ({
                         </h3>
 
                         <div
-                            className="prose prose-lg prose-gray mx-auto max-w-3xl text-left leading-relaxed text-gray-600"
+                            className="mx-auto prose prose-lg max-w-3xl text-left leading-relaxed text-gray-600 prose-gray"
                             dangerouslySetInnerHTML={{
                                 __html: curriculum.description,
                             }}
