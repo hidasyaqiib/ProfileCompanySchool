@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Principals\Schemas;
 
-use Faker\Provider\Image;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
@@ -31,7 +30,7 @@ class PrincipalForm
                     ->imageResizeTargetHeight('900')
                     ->imageResizeMode('cover')
                     ->imageEditor()
-                    ->imageEditorAspectRatios(['2:3',])
+                    ->imageEditorAspectRatios(['2:3'])
                     ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
                     ->helperText('Wajib rasio 2:3 (bisa dicrop saat upload). Maksimal 5MB. Format file: jpg, jpeg, png, webp.')

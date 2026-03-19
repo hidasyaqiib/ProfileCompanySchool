@@ -22,7 +22,7 @@ class SubjectResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Pelajaran Sekolah';
 
-     protected static ?string $navigationLabel = 'Pelajaran Sekolah';
+    protected static ?string $navigationLabel = 'Pelajaran Sekolah';
 
     protected static ?string $modelLabel = 'Pelajaran Sekolah';
 

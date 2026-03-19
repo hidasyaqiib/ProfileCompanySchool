@@ -15,7 +15,7 @@ class ListPrincipals extends ListRecords
     {
         return [
             CreateAction::make()
-                ->hidden (fn (): bool => Principal::count() > 0),
+                ->hidden(fn (): bool => Principal::count() > 0),
         ];
     }
 }

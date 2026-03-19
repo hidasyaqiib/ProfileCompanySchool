@@ -16,7 +16,7 @@ class SubjectForm
                     ->label('Nama Pelajaran')
                     ->required()
                     ->maxLength(255)
-                    ->placeholder("Contoh: Matematika, Bahasa Indonesia, dll."),
+                    ->placeholder('Contoh: Matematika, Bahasa Indonesia, dll.'),
                 Select::make('category')
                     ->label('Kategori Pelajaran')
                     ->required()
@@ -25,13 +25,13 @@ class SubjectForm
                         'Pelajaran Umum' => 'Pelajaran Umum',
                         'Muatan Lokal' => 'Muatan Lokal',
                     ])
-                    ->placeholder("Pilih kategori pelajaran...")
+                    ->placeholder('Pilih kategori pelajaran...')
                     ->native(false),
                 TextInput::make('description')
                     ->label('Deskripsi Pelajaran')
                     ->required()
                     ->maxLength(255)
-                    ->placeholder("Contoh: Deskripsi tentang pelajaran ini...")
+                    ->placeholder('Contoh: Deskripsi tentang pelajaran ini...')
                     ->columnSpanFull(),
 
             ]);

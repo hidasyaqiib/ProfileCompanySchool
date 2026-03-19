@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
@@ -31,13 +31,13 @@ class Admission extends Model
 
                 if ($disk->exists($originalPath)) {
                     try {
-                        $manager = new ImageManager(new Driver());
+                        $manager = new ImageManager(new Driver);
 
                         $image = $manager->read($disk->path($originalPath));
 
                         $pathInfo = pathinfo($originalPath);
-                        $newFilename = $pathInfo['filename'] . '.webp';
-                        $newPath = $pathInfo['dirname'] . '/' . $newFilename;
+                        $newFilename = $pathInfo['filename'].'.webp';
+                        $newPath = $pathInfo['dirname'].'/'.$newFilename;
 
                         $encoded = $image->toWebp(quality: 100);
 
@@ -49,7 +49,7 @@ class Admission extends Model
                             $disk->delete($originalPath);
                         }
                     } catch (\Exception $e) {
-                        \Log::error('Image conversion failed: ' . $e->getMessage());
+                        \Log::error('Image conversion failed: '.$e->getMessage());
                     }
                 }
             }
@@ -61,10 +61,11 @@ class Admission extends Model
             }
         });
     }
+
     public function getImageUrlAttribute(): ?string
     {
         return $this->image
-            ? asset('storage/' . $this->image)
+            ? asset('storage/'.$this->image)
             : null;
     }
 }

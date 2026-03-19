@@ -34,13 +34,14 @@ class AchievementsTable
                         if (is_array($names) && count($names) === 1 && str_contains($names[0] ?? '', ',')) {
                             return explode(',', $names[0]);
                         }
+
                         return $names;
                     })
                     ->searchable(),
 
                 TextColumn::make('description')
                     ->label('Deskripsi')
-                    ->formatStateUsing(fn(string $state): string => Str::limit(strip_tags($state), 50))
+                    ->formatStateUsing(fn (string $state): string => Str::limit(strip_tags($state), 50))
                     ->wrap(),
 
                 TextColumn::make('date_achievement')

@@ -15,7 +15,7 @@ class ListAdmissions extends ListRecords
     {
         return [
             CreateAction::make()
-                ->hidden (fn (): bool => Admission::count() > 0),
+                ->hidden(fn (): bool => Admission::count() > 0),
         ];
     }
 }

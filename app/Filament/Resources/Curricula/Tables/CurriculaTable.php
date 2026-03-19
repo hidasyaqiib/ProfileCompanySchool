@@ -25,9 +25,9 @@ class CurriculaTable
                     ->searchable()
                     ->html()
                     ->html()
-                    ->formatStateUsing(fn(string $state): string => Str::limit(strip_tags($state), 100))
+                    ->formatStateUsing(fn (string $state): string => Str::limit(strip_tags($state), 100))
                     ->wrap()
-                    ->tooltip(fn($record): string => strip_tags($record->description)),
+                    ->tooltip(fn ($record): string => strip_tags($record->description)),
             ])
             ->filters([
                 //

@@ -5,9 +5,9 @@ namespace App\Filament\Widgets;
 use App\Models\Achievement;
 use App\Models\News;
 use App\Models\Teacher;
+use Filament\Widgets\AccountWidget as BaseAccountWidget;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Filament\Widgets\AccountWidget as BaseAccountWidget;
 
 class StatsOverview extends StatsOverviewWidget
 {
@@ -29,5 +29,5 @@ class StatsOverview extends StatsOverviewWidget
 
 class CustomAccountWidget extends BaseAccountWidget
 {
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 }

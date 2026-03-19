@@ -41,15 +41,15 @@ class Teacher extends Model
 
                 if ($disk->exists($originalPath)) {
                     try {
-                        $manager = new ImageManager(new Driver());
+                        $manager = new ImageManager(new Driver);
 
                         $image = $manager->read($disk->path($originalPath));
 
                         $image->scaleDown(width: 1080);
 
                         $pathInfo = pathinfo($originalPath);
-                        $newFilename = $pathInfo['filename'] . '.webp';
-                        $newPath = $pathInfo['dirname'] . '/' . $newFilename;
+                        $newFilename = $pathInfo['filename'].'.webp';
+                        $newPath = $pathInfo['dirname'].'/'.$newFilename;
 
                         $encoded = $image->toWebp(quality: 80);
 
@@ -61,7 +61,7 @@ class Teacher extends Model
                             $disk->delete($originalPath);
                         }
                     } catch (\Exception $e) {
-                        \Log::error('Image conversion failed: ' . $e->getMessage());
+                        \Log::error('Image conversion failed: '.$e->getMessage());
                     }
                 }
             }
@@ -73,10 +73,11 @@ class Teacher extends Model
             }
         });
     }
+
     public function getImageUrlAttribute(): ?string
     {
         return $this->photo
-        ? asset('storage/' . $this->photo)
+        ? asset('storage/'.$this->photo)
         : null;
     }
 }

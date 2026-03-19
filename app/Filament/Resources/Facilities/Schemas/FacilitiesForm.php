@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\Facilities\Schemas;
 
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
@@ -42,7 +42,7 @@ class FacilitiesForm
                     ->imageResizeTargetHeight('720')
                     ->imageResizeMode('cover')
                     ->imageEditor()
-                    ->imageEditorAspectRatios(['16:9',])
+                    ->imageEditorAspectRatios(['16:9'])
                     ->maxSize(5120)
                     ->maxFiles(10)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])

@@ -5,8 +5,8 @@ namespace App\Filament\Resources\News\Schemas;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class NewsForm
@@ -58,7 +58,7 @@ class NewsForm
                     ->imageResizeTargetHeight('900')
                     ->imageResizeMode('cover')
                     ->imageEditor()
-                    ->imageEditorAspectRatios(['4:5',])
+                    ->imageEditorAspectRatios(['4:5'])
                     ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/svg+xml'])
                     ->helperText('Wajib rasio 4:5 (bisa dicrop saat upload). Maksimal ukuran file 5MB. Tipe file yang diperbolehkan: jpeg, png, jpg, webp, svg.')

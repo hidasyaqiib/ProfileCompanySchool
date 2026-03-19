@@ -19,7 +19,7 @@ class AdmissionsTable
             ->columns([
                 TextColumn::make('whatsapp_number')
                     ->label('Nomor WhatsApp'),
-                    
+
                 ImageColumn::make('image')
                     ->label('Flyer Persyaratan')
                     ->disk('public')

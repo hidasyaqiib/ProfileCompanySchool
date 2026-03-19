@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\ProfileSchools\Schemas;
 
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
 
@@ -25,7 +24,7 @@ class ProfileSchoolForm
                     ->disk('public')
                     ->visibility('public')
                     ->imageEditor()
-                    ->imageEditorAspectRatios(['5:4',])
+                    ->imageEditorAspectRatios(['5:4'])
                     ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
                     ->helperText('Maksimal 5MB. Format file: jpg, jpeg, png, webp.')

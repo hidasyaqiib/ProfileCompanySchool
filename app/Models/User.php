@@ -58,7 +58,7 @@ class User extends Authenticatable implements FilamentUser
     {
         $canAccess = str_ends_with($this->email, '@gmail.com');
 
-        if (!$canAccess) {
+        if (! $canAccess) {
             // Logout user terlebih dahulu
             Auth::logout();
 

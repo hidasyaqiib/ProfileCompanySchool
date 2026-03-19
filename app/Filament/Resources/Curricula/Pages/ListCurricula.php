@@ -15,7 +15,7 @@ class ListCurricula extends ListRecords
     {
         return [
             CreateAction::make()
-                ->hidden (fn (): bool => Curriculum::count() > 0),
+                ->hidden(fn (): bool => Curriculum::count() > 0),
         ];
     }
 }

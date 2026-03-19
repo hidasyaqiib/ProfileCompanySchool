@@ -15,7 +15,7 @@ class ListProfileSchools extends ListRecords
     {
         return [
             CreateAction::make()
-                ->hidden (fn (): bool => Profileschool::count() > 0),
+                ->hidden(fn (): bool => Profileschool::count() > 0),
         ];
     }
 }

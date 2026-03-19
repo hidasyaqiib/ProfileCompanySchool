@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schooltour;
-use Illuminate\Http\Request;
 
 class SchooltourController extends Controller
 {
@@ -14,8 +13,8 @@ class SchooltourController extends Controller
                 'id' => $item->id,
                 'title' => $item->title,
                 'description' => $item->description,
-                'cover_image' => asset('storage/' . $item->cover_image),
-                'panorama_image' => asset('storage/' . $item->panorama_image),
+                'cover_image' => asset('storage/'.$item->cover_image),
+                'panorama_image' => asset('storage/'.$item->panorama_image),
             ];
         });
 

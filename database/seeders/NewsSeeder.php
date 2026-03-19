@@ -4,9 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\News;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class NewsSeeder extends Seeder
 {

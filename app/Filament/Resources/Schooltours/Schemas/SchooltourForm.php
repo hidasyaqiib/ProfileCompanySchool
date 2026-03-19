@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Schooltours\Schemas;
 
-use Dom\Text;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
@@ -34,7 +33,7 @@ class SchooltourForm
                     ->imageResizeTargetHeight('720')
                     ->imageResizeMode('cover')
                     ->imageEditor()
-                    ->imageEditorAspectRatios(['16:9',])
+                    ->imageEditorAspectRatios(['16:9'])
                     ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
                     ->helperText('Wajib rasio 16:9 (bisa dicrop saat upload). Maksimal 5MB.')
@@ -49,7 +48,7 @@ class SchooltourForm
                     ->visibility('public')
                     ->maxSize(20480)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
-                    ->helperText('Maksimal 20MB. Bisa Menggunakan Tipe File JPG, JPEG, PNG, atau WEBP.')
+                    ->helperText('Maksimal 20MB. Bisa Menggunakan Tipe File JPG, JPEG, PNG, atau WEBP.'),
             ]);
     }
 }

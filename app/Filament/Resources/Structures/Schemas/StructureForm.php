@@ -16,7 +16,6 @@ class StructureForm
                     ->label('Judul Struktur')
                     ->required(),
 
-
                 FileUpload::make('photo')
                     ->label('Gambar Struktur')
                     ->image()

@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Structure;
 use App\Models\Teacher;
-use Illuminate\Http\Request;
 
 class StaffController extends Controller
 {
@@ -12,7 +12,7 @@ class StaffController extends Controller
         $structures = Structure::latest()->get();
 
         return inertia('public/staff/structure', [
-            'structures' => $structures
+            'structures' => $structures,
         ]);
     }
 

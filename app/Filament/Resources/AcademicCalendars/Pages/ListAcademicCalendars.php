@@ -27,10 +27,10 @@ class ListAcademicCalendars extends Page
         return [
             CreateAction::make()
                 ->model(AcademicCalendar::class)
-                ->form(fn(Schema $schema) => AcademicCalendarForm::configure($schema))
+                ->form(fn (Schema $schema) => AcademicCalendarForm::configure($schema))
                 ->modalHeading('Tambah Agenda Baru')
                 ->modalSubmitActionLabel('Simpan')
-                ->after(fn() => $this->dispatch('calendar-refresh')),
+                ->after(fn () => $this->dispatch('calendar-refresh')),
         ];
     }
 
@@ -43,16 +43,15 @@ class ListAcademicCalendars extends Page
             ->label('Edit Agenda')
             ->modalHeading('Edit Agenda')
             ->modalSubmitActionLabel('Simpan Perubahan')
-            ->form(fn(Schema $schema) => AcademicCalendarForm::configure($schema))
+            ->form(fn (Schema $schema) => AcademicCalendarForm::configure($schema))
             ->fillForm(
-                fn(array $arguments): array =>
-                AcademicCalendar::find($arguments['id'] ?? 0)?->attributesToArray() ?? []
+                fn (array $arguments): array => AcademicCalendar::find($arguments['id'] ?? 0)?->attributesToArray() ?? []
             )
             ->action(function (array $data, array $arguments): void {
                 AcademicCalendar::find($arguments['id'])?->update($data);
                 $this->dispatch('calendar-refresh');
             })
-            ->extraModalFooterActions(fn(array $arguments): array => [
+            ->extraModalFooterActions(fn (array $arguments): array => [
                 Action::make('deleteCalendarEvent')
                     ->label('Hapus Agenda')
                     ->color('danger')
@@ -75,12 +74,12 @@ class ListAcademicCalendars extends Page
             ->label('Tambah Agenda')
             ->modalHeading('Tambah Agenda Baru')
             ->modalSubmitActionLabel('Simpan')
-            ->form(fn(Schema $schema) => AcademicCalendarForm::configure($schema))
+            ->form(fn (Schema $schema) => AcademicCalendarForm::configure($schema))
             ->fillForm(function (array $arguments): array {
                 $start = $arguments['start'] ?? null;
                 $endDate = null;
 
-                if (!empty($arguments['end'])) {
+                if (! empty($arguments['end'])) {
                     // FullCalendar exclusive end → convert to inclusive
                     $parsed = Carbon::parse($arguments['end'])->subDay()->toDateString();
                     $endDate = ($parsed !== $start) ? $parsed : null;
@@ -100,7 +99,7 @@ class ListAcademicCalendars extends Page
     public function eventDropped(int $id, string $start, ?string $end = null): void
     {
         $record = AcademicCalendar::find($id);
-        if (!$record) {
+        if (! $record) {
             return;
         }
 
@@ -121,7 +120,7 @@ class ListAcademicCalendars extends Page
     public function getCalendarEvents(): array
     {
         return AcademicCalendar::all()
-            ->map(fn(AcademicCalendar $event) => [
+            ->map(fn (AcademicCalendar $event) => [
                 'id' => $event->id,
                 'title' => $event->title,
                 'start' => Carbon::parse($event->start_date)->toDateString(),

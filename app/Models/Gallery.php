@@ -32,15 +32,15 @@ class Gallery extends Model
 
                 if ($disk->exists($originalPath)) {
                     try {
-                        $manager = new ImageManager(driver: new Driver());
+                        $manager = new ImageManager(driver: new Driver);
 
                         $image = $manager->read($disk->path($originalPath));
 
                         $image->scaleDown(width: 1080);
 
                         $pathInfo = pathinfo($originalPath);
-                        $newFilename = $pathInfo['filename'] . '.webp';
-                        $newPath = $pathInfo['dirname'] . '/' . $newFilename;
+                        $newFilename = $pathInfo['filename'].'.webp';
+                        $newPath = $pathInfo['dirname'].'/'.$newFilename;
 
                         $encoded = $image->toWebp(quality: 80);
 
@@ -52,7 +52,7 @@ class Gallery extends Model
                             $disk->delete($originalPath);
                         }
                     } catch (\Exception $e) {
-                        \Log::error('Image conversion failed: ' . $e->getMessage());
+                        \Log::error('Image conversion failed: '.$e->getMessage());
                     }
                 }
             }
@@ -64,10 +64,11 @@ class Gallery extends Model
             }
         });
     }
+
     public function getImageUrlAttribute(): ?string
     {
         return $this->image
-        ? asset('storage/' . $this->image)
+        ? asset('storage/'.$this->image)
         : null;
     }
 }

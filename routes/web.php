@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\SchooltourController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -45,4 +45,4 @@ Route::get('dashboard', function () {
     return Inertia::render('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';

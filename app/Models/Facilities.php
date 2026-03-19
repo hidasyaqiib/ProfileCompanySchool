@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
@@ -35,17 +35,18 @@ class Facilities extends Model
                         try {
                             if (str_ends_with($imagePath, '.webp')) {
                                 $convertedImages[] = $imagePath;
+
                                 continue;
                             }
 
-                            $manager = new ImageManager(new Driver());
+                            $manager = new ImageManager(new Driver);
                             $image = $manager->read($disk->path($imagePath));
 
                             $image->scaleDown(width: 1200);
 
                             $pathInfo = pathinfo($imagePath);
-                            $newFilename = $pathInfo['filename'] . '.webp';
-                            $newPath = $pathInfo['dirname'] . '/' . $newFilename;
+                            $newFilename = $pathInfo['filename'].'.webp';
+                            $newPath = $pathInfo['dirname'].'/'.$newFilename;
 
                             $encoded = $image->toWebp(quality: 80);
                             $disk->put($newPath, (string) $encoded);
@@ -56,7 +57,7 @@ class Facilities extends Model
                                 $disk->delete($imagePath);
                             }
                         } catch (\Exception $e) {
-                            \Log::error('Image conversion failed: ' . $e->getMessage());
+                            \Log::error('Image conversion failed: '.$e->getMessage());
                             $convertedImages[] = $imagePath;
                         }
                     }
@@ -91,21 +92,21 @@ class Facilities extends Model
 
     public function getImageUrlsAttribute(): array
     {
-        if (!$this->image || !is_array($this->image)) {
+        if (! $this->image || ! is_array($this->image)) {
             return [];
         }
 
         return array_map(function ($path) {
-            return asset('storage/' . $path);
+            return asset('storage/'.$path);
         }, $this->image);
     }
 
     public function getFirstImageUrlAttribute(): ?string
     {
-        if (!$this->image || !is_array($this->image) || empty($this->image)) {
+        if (! $this->image || ! is_array($this->image) || empty($this->image)) {
             return null;
         }
 
-        return asset('storage/' . $this->image[0]);
+        return asset('storage/'.$this->image[0]);
     }
 }

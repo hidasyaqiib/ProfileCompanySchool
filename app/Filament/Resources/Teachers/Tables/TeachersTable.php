@@ -32,7 +32,7 @@ class TeachersTable
                 TextColumn::make('type')
                     ->label('Tipe')
                     ->badge()
-                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
                         'Teacher' => 'Guru Pengajar',
                         'Staff' => 'Pengurus dan Administrasi',
                         'Chief' => 'Kepala Sekolah',

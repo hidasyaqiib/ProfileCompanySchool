@@ -22,7 +22,7 @@ class Schooltour extends Model
     {
         static::saving(function (Schooltour $record) {
             $disk = Storage::disk('public');
-            $manager = new ImageManager(new Driver());
+            $manager = new ImageManager(new Driver);
 
             // Handle cover_image
             if ($record->cover_image && $record->isDirty('cover_image')) {
@@ -40,8 +40,8 @@ class Schooltour extends Model
                         $image->scaleDown(width: 1080);
 
                         $pathInfo = pathinfo($originalPath);
-                        $newFilename = $pathInfo['filename'] . '.webp';
-                        $newPath = $pathInfo['dirname'] . '/' . $newFilename;
+                        $newFilename = $pathInfo['filename'].'.webp';
+                        $newPath = $pathInfo['dirname'].'/'.$newFilename;
 
                         $encoded = $image->toWebp(quality: 80);
 
@@ -53,7 +53,7 @@ class Schooltour extends Model
                             $disk->delete($originalPath);
                         }
                     } catch (\Exception $e) {
-                        \Log::error('Cover image conversion failed: ' . $e->getMessage());
+                        \Log::error('Cover image conversion failed: '.$e->getMessage());
                     }
                 }
             }
@@ -72,8 +72,8 @@ class Schooltour extends Model
                         $image = $manager->read($disk->path($originalPath));
 
                         $pathInfo = pathinfo($originalPath);
-                        $newFilename = $pathInfo['filename'] . '.webp';
-                        $newPath = $pathInfo['dirname'] . '/' . $newFilename;
+                        $newFilename = $pathInfo['filename'].'.webp';
+                        $newPath = $pathInfo['dirname'].'/'.$newFilename;
 
                         $encoded = $image->toWebp(quality: 100);
 
@@ -85,7 +85,7 @@ class Schooltour extends Model
                             $disk->delete($originalPath);
                         }
                     } catch (\Exception $e) {
-                        \Log::error('Panorama image conversion failed: ' . $e->getMessage());
+                        \Log::error('Panorama image conversion failed: '.$e->getMessage());
                     }
                 }
             }
@@ -107,14 +107,14 @@ class Schooltour extends Model
     public function getCoverImageUrlAttribute(): ?string
     {
         return $this->cover_image
-            ? asset('storage/' . $this->cover_image)
+            ? asset('storage/'.$this->cover_image)
             : null;
     }
 
     public function getPanoramaImageUrlAttribute(): ?string
     {
         return $this->panorama_image
-            ? asset('storage/' . $this->panorama_image)
+            ? asset('storage/'.$this->panorama_image)
             : null;
     }
 }

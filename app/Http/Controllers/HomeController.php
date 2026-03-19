@@ -18,7 +18,7 @@ class HomeController extends Controller
             ->orderByDesc('published_at')
             ->limit(4)
             ->get()
-            ->map(fn(News $news) => [
+            ->map(fn (News $news) => [
                 'id' => $news->id,
                 'title' => $news->title,
                 'content' => \Illuminate\Support\Str::limit(strip_tags($news->content), 150),
@@ -35,7 +35,7 @@ class HomeController extends Controller
             ->orderByDesc('created_at')
             ->limit(4)
             ->get()
-            ->map(fn(Facilities $facility) => [
+            ->map(fn (Facilities $facility) => [
                 'id' => $facility->id,
                 'name' => $facility->name,
                 'description' => \Illuminate\Support\Str::limit(strip_tags($facility->description), 150),
@@ -55,7 +55,7 @@ class HomeController extends Controller
             ->orderBy('start_date')
             ->limit(5)
             ->get()
-            ->map(fn(AcademicCalendar $e) => [
+            ->map(fn (AcademicCalendar $e) => [
                 'id' => $e->id,
                 'title' => $e->title,
                 'description' => $e->description,
@@ -63,7 +63,6 @@ class HomeController extends Controller
                 'end' => $e->end_date?->format('Y-m-d'),
                 'category' => $e->category,
             ]);
-
 
         return Inertia::render('public/home/home', [
             'latestNews' => $latestNews,

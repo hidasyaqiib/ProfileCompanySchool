@@ -25,7 +25,7 @@ class SubjectsTable
                 TextColumn::make('category')
                     ->label('Kategori')
                     ->badge()
-                    ->color(fn(string $state): string => match ($state) {
+                    ->color(fn (string $state): string => match ($state) {
                         'Pelajaran Agama' => 'success',
                         'Pelajaran Umum' => 'info',
                         'Muatan Lokal' => 'warning',
@@ -35,16 +35,16 @@ class SubjectsTable
                 TextColumn::make('description')
                     ->label('Deskripsi')
                     ->limit(50)
-                    ->tooltip(fn($record) => $record->description),
+                    ->tooltip(fn ($record) => $record->description),
             ])
             ->filters([
                 SelectFilter::make('category')
-                ->label('Filter Kategori')
-                ->options([
-                    'Pelajaran Agama' => 'Pelajaran Agama',
-                    'Pelajaran Umum' => 'Pelajaran Umum',
-                    'Muatan Lokal' => 'Muatan Lokal',
-                ]),
+                    ->label('Filter Kategori')
+                    ->options([
+                        'Pelajaran Agama' => 'Pelajaran Agama',
+                        'Pelajaran Umum' => 'Pelajaran Umum',
+                        'Muatan Lokal' => 'Muatan Lokal',
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),

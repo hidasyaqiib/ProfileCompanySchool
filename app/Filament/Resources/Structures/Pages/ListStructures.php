@@ -15,7 +15,7 @@ class ListStructures extends ListRecords
     {
         return [
             CreateAction::make()
-                ->hidden (fn (): bool => Structure::count() > 0),
+                ->hidden(fn (): bool => Structure::count() > 0),
         ];
     }
 }
