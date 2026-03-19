@@ -33,22 +33,31 @@ const NewsShow: React.FC<NewsShowPageProps> = ({ news, relatedNews, meta }) => {
      * that editors sometimes embed (which would override our prose text colors).
      */
     const contentWithIds = useMemo(() => {
-        return (
-            news.content
-                .replace(
-                    /<h([23])([^>]*)>(.*?)<\/h[23]>/gi,
-                    (_match, level, attrs, inner) => {
-                        const text = inner.replace(/<[^>]*>/g, '');
-                        const id = text
-                            .toLowerCase()
-                            .replace(/[^\w\s-]/g, '')
-                            .trim()
-                            .replace(/\s+/g, '-');
-                        return `<h${level}${attrs} id="${id}">${inner}</h${level}>`;
-                    },
-                )
-                // Strip ALL inline style attributes so our Tailwind prose classes win
-                .replace(/\sstyle="[^"]*"/gi, '')
+        const rawContent = (news.content ?? '').trim();
+
+        // Fallback jika suatu saat konten bukan HTML (plain text dari textarea)
+        const normalizedContent = /<[^>]+>/.test(rawContent)
+            ? rawContent
+            : rawContent
+                  .split(/\n{2,}/)
+                  .map(
+                      (paragraph) =>
+                          `<p>${paragraph.replace(/\n/g, '<br /></p>')}`,
+                  )
+                  .join('');
+
+        return normalizedContent.replace(
+            /<h([23])([^>]*)>(.*?)<\/h[23]>/gi,
+            (_match, level, attrs, inner) => {
+                const text = inner.replace(/<[^>]*>/g, '');
+                const id = text
+                    .toLowerCase()
+                    .replace(/[^\w\s-]/g, '')
+                    .trim()
+                    .replace(/\s+/g, '-');
+
+                return `<h${level}${attrs} id="${id}">${inner}</h${level}>`;
+            },
         );
     }, [news.content]);
 
