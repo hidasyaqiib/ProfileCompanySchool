@@ -1,4 +1,5 @@
-import React from "react";
+import { motion } from 'framer-motion';
+import React from 'react';
 
 interface Headmaster {
     name: string;
@@ -8,9 +9,7 @@ interface Headmaster {
 }
 
 interface Speech {
-    greeting: string;
-    content: string[];
-    closing: string;
+    content: string;
 }
 
 interface SpeechData {
@@ -27,40 +26,65 @@ interface SpeechSectionProps {
 
 const SpeechSection: React.FC<SpeechSectionProps> = ({
     data,
-    className = "",
-    imagePosition = 'left'
+    className = '',
+    imagePosition = 'left',
 }) => {
-    // Default data fallback
-    const defaultData: SpeechData = {
-        title: "Sambutan Kepala Madrasah",
-        headmaster: {
-            name: "Rahmawati, S.Pd.I., M.Pd.",
-            position: "Kepala Madrasah",
-            school: "MI NU 02 Situwangi",
-            image: "/assets/image/headmaster.webp"
-        },
-        speech: {
-            greeting: "Assalamu'alaikum warahmatullahi wabarakatuh",
-            content: [
-                "Alhamdulillahi robbil'alamiin, segala puji syukur kita panjatkan ke hadirat Alloh SWT karena atas rahmat dan karunia-Nya, website resmi MI NU 02 Situwangi ini dapat hadir sebagai sarana informasi, komunikasi, dan publikasi bagi seluruh warga madrasah/sekolah serta masyarakat luas.",
-                "Website madrasah ini kami kembangkan sebagai wujud komitmen dalam meningkatkan layanan pendidikan yang transparan, informatif, dan adaptif terhadap perkembangan teknologi informasi. Melalui media ini, kami berharap berbagai informasi terkait kegiatan madrasah, prestasi peserta didik, tenaga pendidik, serta program-program unggulan madrasah dapat diakses dengan mudah dan cepat.",
-                "MI NU 02 Situwangi senantiasa berupaya menciptakan lingkungan belajar yang rapi, bersih dan berkarakter, guna membentuk peserta didik yang berilmu, berakhlaklakul karimah, mampu membaca Al Quran, menguasai teknologi serta berwawasan lingkungan. Peran serta orang tua, alumni, dan masyarakat sangat kami harapkan demi kemajuan dan keberhasilan pendidikan di madrasah ini.",
-                "Akhir kata, kami mengucapkan terima kasih kepada seluruh pihak yang telah berkontribusi dalam pengembangan website madrasah ini. Semoga dapat memberikan manfaat dan menjadi jembatan komunikasi yang efektif bagi kita semua."
-            ],
-            closing: "Wassalamu'alaikum warahmatullahi wabarakatuh."
-        }
-    };
+    if (!data) {
+        return (
+            <section
+                className={`relative bg-gradient-to-br from-gray-50 to-white py-16 ${className}`}
+            >
+                <div className="container mx-auto px-4">
+                    <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 py-20 text-center">
+                        <svg
+                            className="mx-auto mb-4 h-14 w-14 text-gray-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={1.5}
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                            />
+                        </svg>
+                        <h3 className="mb-2 text-lg font-semibold text-gray-700">
+                            Sambutan Kepala Madrasah
+                        </h3>
+                        <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
+                            <svg
+                                className="h-4 w-4 shrink-0"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z"
+                                />
+                            </svg>
+                            Data sambutan belum diisi. Silakan tambahkan melalui
+                            panel admin.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
-    const speechData = data || defaultData;
+    const speechData = data;
 
     const ImageSection = () => (
         <div className="flex items-center justify-center p-4 lg:p-8">
-            <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-600 to-green-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+            <div className="group relative">
+                <div className="absolute inset-0 w-full min-w-full"></div>
                 <img
                     src={speechData.headmaster.image}
                     alt={`${speechData.headmaster.name} - ${speechData.headmaster.position}`}
-                    className="relative rounded-2xl shadow-2xl max-h-[70vh] w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="relative max-h-[50vh] w-full object-cover sm:max-h-[60vh] lg:max-h-[100vh]"
                     loading="lazy"
                 />
             </div>
@@ -71,40 +95,28 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
         <div className="flex items-center justify-center p-4 lg:p-8">
             <div className="max-w-2xl">
                 <div className="mb-8">
-                    <h2 className="font-poppins text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                    <h2 className="font-poppins mb-2 text-3xl font-bold text-gray-900 lg:text-4xl">
                         {speechData.title}
                     </h2>
                 </div>
 
                 <div className="space-y-6">
-                    <p className="font-poppins text-lg text-gray-700 font-medium italic">
-                        {speechData.speech.greeting}
-                    </p>
+                    <div
+                        className="font-poppins prose prose-sm max-w-none text-justify text-[12px] leading-relaxed text-gray-700 lg:text-[16px] [&_p]:mb-3"
+                        dangerouslySetInnerHTML={{
+                            __html: speechData.speech.content,
+                        }}
+                    />
 
-                    <div className="space-y-4">
-                        {speechData.speech.content.map((paragraph, index) => (
-                            <p
-                                key={index}
-                                className="font-poppins text-gray-700 text-base lg:text-lg leading-relaxed text-justify"
-                            >
-                                {paragraph}
-                            </p>
-                        ))}
-                    </div>
-
-                    <p className="font-poppins text-lg text-gray-700 font-medium italic">
-                        {speechData.speech.closing}
-                    </p>
-
-                    <div className="mt-8 pt-6 border-t border-gray-200">
-                        <div className="text-right">
-                            <p className="font-poppins text-gray-800 font-semibold text-lg">
+                    <div className="mt-8 border-t border-gray-200 pt-6">
+                        <div className="text-left">
+                            <p className="font-poppins text-lg font-semibold text-gray-800">
                                 {speechData.headmaster.name}
                             </p>
-                            <p className="font-poppins text-gray-600 text-sm">
+                            <p className="font-poppins text-sm text-gray-600">
                                 {speechData.headmaster.position}
                             </p>
-                            <p className="font-poppins text-gray-600 text-sm">
+                            <p className="font-poppins text-sm text-gray-600">
                                 {speechData.headmaster.school}
                             </p>
                         </div>
@@ -114,17 +126,46 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
         </div>
     );
 
+    const imageFrom = imagePosition === 'right' ? 60 : -60;
+
     return (
-        <section className={`relative min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 lg:py-24 ${className} overflow-visible`}>
+        <section
+            className={`relative min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 pt-24 lg:py-24 ${className} overflow-visible`}
+        >
             <div className="container mx-auto px-4">
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${imagePosition === 'right' ? 'lg:grid-flow-col-dense' : ''
-                    }`}>
-                    <div className={imagePosition === 'right' ? 'lg:col-start-2' : ''}>
+                <div
+                    className={`grid grid-cols-1 items-center gap-2 lg:grid-cols-2 lg:gap-12 ${
+                        imagePosition === 'right'
+                            ? 'lg:grid-flow-col-dense'
+                            : ''
+                    }`}
+                >
+                    <motion.div
+                        initial={{ opacity: 0, x: imageFrom }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                        viewport={{ once: true, margin: '-80px' }}
+                        className={
+                            imagePosition === 'right' ? 'lg:col-start-2' : ''
+                        }
+                    >
                         <ImageSection />
-                    </div>
-                    <div className={imagePosition === 'right' ? 'lg:col-start-1' : ''}>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -imageFrom }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{
+                            duration: 0.6,
+                            ease: 'easeOut',
+                            delay: 0.15,
+                        }}
+                        viewport={{ once: true, margin: '-80px' }}
+                        className={
+                            imagePosition === 'right' ? 'lg:col-start-1' : ''
+                        }
+                    >
                         <ContentSection />
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

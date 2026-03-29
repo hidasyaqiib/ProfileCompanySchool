@@ -1,108 +1,100 @@
+import { motion } from 'framer-motion';
 import React from 'react';
+import type { FacilityItem } from '../components/facility/facility-carousel';
+import FacilityCarousel from '../components/facility/facility-carousel';
 
-const FacilityInShort: React.FC = () => {
-    const facilities = [
-        {
-            id: 1,
-            icon: '💻',
-            title: 'School of Digital Era',
-            description: 'Fokus pada kurikulum digital dan keterampilan teknologi masa depan.',
-            featured: false
-        },
-        {
-            id: 2,
-            icon: '🎯',
-            title: 'Program Digital Talent',
-            description: 'Pembekalan skill digital yang sesuai kebutuhan industri dan startup.',
-            featured: true
-        },
-        {
-            id: 3,
-            icon: '🏆',
-            title: 'Akreditasi A - Unggul',
-            description: 'Diakui secara nasional dengan standar kualitas terbaik oleh BAN-S/M.',
-            featured: false
-        },
-        {
-            id: 4,
-            icon: '📋',
-            title: 'ISO 21001:2018',
-            description: 'Telah menerapkan standar manajemen pendidikan internasional.',
-            featured: false
-        },
-        {
-            id: 5,
-            icon: '🔗',
-            title: 'Program OPES',
-            description: 'Jalur pendidikan berkelanjutan dari SMK hingga perguruan tinggi Telkom.',
-            featured: false
-        },
-        {
-            id: 6,
-            icon: '🎓',
-            title: 'Yayasan Pendidikan Telkom',
-            description: 'Bagian dari grup pendidikan terpercaya di bawah naungan Telkom Indonesia.',
-            featured: false
-        }
-    ];
+interface FacilityInShortProps {
+    facilities?: FacilityItem[];
+}
+
+const FacilityInShortSection: React.FC<FacilityInShortProps> = ({
+    facilities = [],
+}) => {
+    const displayFacilities = facilities;
 
     return (
-        <section className="py-16 px-4 bg-gray-50">
-            <div className="max-w-7xl mx-auto">
-                <div className="flex items-center justify-between mb-12">
-
-                    <h2 className="text-4xl font-bold text-gray-900">
-                        Mengapa memilih <br />
-                        <span className="text-teal-700">MI NU 02 Situwangi?</span>
+        <section className="overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-20 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl">
+                {/* Section Header */}
+                <motion.header
+                    className="mb-16 text-center"
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.55, ease: 'easeOut' }}
+                    viewport={{ once: true, margin: '-80px' }}
+                >
+                    <h2 className="mb-6 text-4xl leading-tight font-bold text-gray-900 md:text-5xl">
+                        Fasilitas
+                        <span className="bg-gradient-to-r from-[#2ECC71] to-[#27ae60] bg-clip-text text-transparent">
+                            {' '}
+                            Unggulan{' '}
+                        </span>
+                        Kami
                     </h2>
+                    <p className="mx-auto max-w-3xl text-xl leading-relaxed text-gray-600">
+                        Kami menyediakan fasilitas terbaik untuk mendukung
+                        proses belajar mengajar yang efektif dan menyenangkan
+                        bagi seluruh siswa.
+                    </p>
+                </motion.header>
 
-                    <button className="bg-teal-700 text-white px-6 py-3 rounded-full font-medium hover:bg-teal-800 transition-colors duration-200 flex items-center gap-2">
-                        Lihat Selengkapnya
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {facilities.map((facility) => (
-                        <div
-                            key={facility.id}
-                            className={`relative p-6 rounded-2xl border-2 border-dashed transition-all duration-300 hover:shadow-lg ${facility.featured
-                                    ? 'bg-teal-700 text-white border-teal-700'
-                                    : 'bg-white text-gray-900 border-gray-200 hover:border-teal-300'
-                                }`}
-                        >
-                            {facility.featured && (
-                                <div className="absolute top-4 right-4">
-                                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </div>
-                            )}
-
-                            <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${facility.featured ? 'bg-white/20' : 'bg-teal-100'
-                                }`}>
-                                <span className="text-2xl">{facility.icon}</span>
-                            </div>
-
-                            <h3 className={`text-xl font-semibold mb-3 ${facility.featured ? 'text-white' : 'text-gray-900'
-                                }`}>
-                                {facility.title}
+                {/* Facilities Carousel / Empty State */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                >
+                    {displayFacilities.length > 0 ? (
+                        <FacilityCarousel
+                            facilities={displayFacilities}
+                            itemsPerPage={4}
+                            showNavigation={displayFacilities.length > 4}
+                            showPagination={displayFacilities.length > 4}
+                            ariaLabel="School facilities showcase"
+                            className="facility-carousel"
+                        />
+                    ) : (
+                        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-white/60 py-16 text-center">
+                            <svg
+                                className="mx-auto mb-4 h-12 w-12 text-gray-300"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={1.5}
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                                />
+                            </svg>
+                            <h3 className="mb-2 text-base font-semibold text-gray-600">
+                                Belum Ada Fasilitas Unggulan
                             </h3>
-
-                            <p className={`text-sm leading-relaxed ${facility.featured ? 'text-white/90' : 'text-gray-600'
-                                }`}>
-                                {facility.description}
+                            <p className="inline-flex items-center gap-1.5 rounded-md border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm text-yellow-700">
+                                <svg
+                                    className="h-4 w-4 shrink-0"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z"
+                                    />
+                                </svg>
+                                Aktifkan toggle fasilitas unggulan melalui panel
+                                admin.
                             </p>
                         </div>
-                    ))}
-                </div>
+                    )}
+                </motion.div>
             </div>
         </section>
     );
 };
 
-export default FacilityInShort;
-
+export default FacilityInShortSection;

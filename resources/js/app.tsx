@@ -8,7 +8,7 @@ import { initializeTheme } from './hooks/use-appearance';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
-    title: (title) => (title ? `${title} - ${appName}` : appName),
+    title: () => 'Mi NU 02 Situwangi',
     resolve: (name) =>
         resolvePageComponent(
             `./pages/${name}.tsx`,
@@ -24,7 +24,8 @@ createInertiaApp({
         );
     },
     progress: {
-        color: '#4B5563',
+        color: '#2ECC71',
+        showSpinner: true,
     },
 });
 
