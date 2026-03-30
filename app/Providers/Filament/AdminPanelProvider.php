@@ -26,7 +26,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('portal-admin')
+            ->path('portal-admin-minusitu')
             ->brandName('MI NU 02 Situwangi')
             ->brandLogo(asset('assets/image/logo-mi-light.webp'))
             ->darkModeBrandLogo(asset('assets/image/logo-mi-dark.webp'))
