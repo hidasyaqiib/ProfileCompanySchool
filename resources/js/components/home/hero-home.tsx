@@ -197,7 +197,7 @@ const HeroSection: React.FC = () => {
                 decoding="async"
                 onLoad={() => setHeroImageLoaded(true)}
                 style={{ willChange: 'opacity' }}
-                className={`absolute bottom-0 left-1/2 h-auto w-80 -translate-x-1/2 object-contain transition-opacity duration-[1500ms] ease-out md:w-96 lg:w-xl ${
+                className={`absolute bottom-0 left-1/2 hidden h-auto w-80 -translate-x-1/2 object-contain transition-opacity duration-[1500ms] ease-out sm:block md:w-96 lg:w-xl ${
                     heroImageLoaded ? 'opacity-100' : 'opacity-0'
                 }`}
             />
