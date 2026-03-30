@@ -31,6 +31,7 @@
         </style>
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <meta name="description" content="Website Resmi MI NU 02 Situwangi, Banjarnegara. Temukan informasi akademik, pendaftaran siswa baru, profil sekolah, dan berita terkini.">
 
         <link rel="icon" type="image/webp" href="{{ asset('assets/image/logo-kemenag.webp') }}">
 
