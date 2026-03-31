@@ -34,7 +34,6 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('assets/image/logo-kemenag.webp'))
             ->sidebarCollapsibleOnDesktop()
             ->login()
-            ->passwordReset()
             ->navigationGroups([
                 NavigationGroup::make('Publikasi & Informasi'),
                 NavigationGroup::make('Profil Madrasah'),
