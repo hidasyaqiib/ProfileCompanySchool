@@ -7,14 +7,14 @@ use App\Models\Achievement;
 use App\Models\Curriculum;
 use App\Models\Extracurricular;
 use App\Models\Facilities;
-use App\Models\Profileschool;
+use App\Models\ProfileSchool;
 use App\Models\Subject;
 
 class AboutUsController extends Controller
 {
     public function profile()
     {
-        $profile = Profileschool::latest()->first();
+        $profile = ProfileSchool::latest()->first();
 
         return inertia('public/about/profile', [
             'profile' => $profile ? [

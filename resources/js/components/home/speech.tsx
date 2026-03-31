@@ -152,8 +152,8 @@ const SpeechSection: React.FC<SpeechSectionProps> = ({
                         <ImageSection />
                     </motion.div>
                     <motion.div
-                        initial={{ opacity: 0, x: -imageFrom }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         transition={{
                             duration: 0.6,
                             ease: 'easeOut',

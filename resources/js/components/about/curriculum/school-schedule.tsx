@@ -4,26 +4,30 @@ import { motion } from 'framer-motion';
 const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
 const timeSlots = [
-    { period: '1', start: '07.00', end: '07.45', isBreak: false },
-    { period: '2', start: '07.45', end: '08.30', isBreak: false },
-    { period: '3', start: '08.30', end: '09.15', isBreak: false },
+    { period: '1', start: '07.00', end: '07.15', isBreak: false },
+    { period: '2', start: '07.15', end: '07.50', isBreak: false },
+    { period: '3', start: '07.50', end: '08.25', isBreak: false },
+    { period: '4', start: '08.25', end: '09.00', isBreak: false },
     {
         period: null,
-        start: '09.15',
-        end: '09.30',
+        start: '09.00',
+        end: '09.15',
         isBreak: true,
-        label: 'Istirahat',
+        label: 'ISTIRAHAT',
     },
-    { period: '4', start: '09.30', end: '10.15', isBreak: false },
-    { period: '5', start: '10.15', end: '11.00', isBreak: false },
-    { period: '6', start: '11.00', end: '11.45', isBreak: false },
+    { period: '5', start: '09.15', end: '09.50', isBreak: false },
+    { period: '6', start: '09.50', end: '10.25', isBreak: false },
+    { period: '7', start: '10.25', end: '11.00', isBreak: false },
     {
         period: null,
-        start: '11.45',
-        end: '12.00',
+        start: '11.00',
+        end: '11.15',
         isBreak: true,
-        label: 'Istirahat',
+        label: 'ISTIRAHAT',
     },
+    { period: '8', start: '11.15', end: '11.50', isBreak: false },
+    { period: '9', start: '11.50', end: '12.25', isBreak: false },
+    { period: '10', start: '12.25', end: '13.00', isBreak: false },
 ] as const;
 
 const SchoolSchedule: React.FC = () => {
