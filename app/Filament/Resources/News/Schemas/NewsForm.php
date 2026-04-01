@@ -35,7 +35,8 @@ class NewsForm
                 DatePicker::make('published_at')
                     ->label('Tanggal Publikasi')
                     ->required()
-                    ->default(now()),
+                    ->default(now())
+                    ->native(false),
 
                 Select::make('status')
                     ->label('Status Berita')
@@ -44,7 +45,8 @@ class NewsForm
                         'Published' => 'Published',
                         'Archived' => 'Archived',
                     ])
-                    ->required(),
+                    ->required()
+                    ->native(false),
 
                 FileUpload::make('thumbnail')
                     ->label('Gambar Utama Berita')

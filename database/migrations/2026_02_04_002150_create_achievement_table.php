@@ -17,7 +17,7 @@ return new class extends Migration
             $table->json('name_student')->nullable();
             $table->text('description')->nullable();
             $table->date('date_achievement');
-            $table->enum('level_achievement', ['District', 'Provincial', 'National', 'International']);
+        $table->enum('level_achievement', ['District', 'Regency', 'Provincial', 'National', 'International']);
             $table->string('image')->nullable();
             $table->timestamps();
         });

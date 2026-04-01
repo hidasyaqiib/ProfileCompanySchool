@@ -31,7 +31,8 @@ class TeacherForm
                         'Chief' => 'Kepala Sekolah',
                     ])
                     ->required()
-                    ->live(),
+                    ->live()
+                    ->native(false),
 
                 TextInput::make('motto')
                     ->label('Motto Hidup')
