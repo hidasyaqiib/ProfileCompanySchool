@@ -23,7 +23,7 @@ const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 const SCHOOL_STATS: StatItem[] = [
     { value: 'A', label: 'Terakreditasi', type: 'letter' },
-    { value: '30+', label: 'Tenaga Pendidik', type: 'number' },
+    { value: '10+', label: 'Tenaga Pendidik', type: 'number' },
     { value: '20+', label: 'Prestasi Tahun Ini', type: 'number' },
 ];
 
