@@ -65,7 +65,7 @@ const ModalCard: React.FC<ModalCardProps> = ({
     const modal = (
         /* Backdrop */
         <div
-            className="fixed inset-0 z-200000 flex items-center justify-center bg-black/40 p-6 backdrop-blur-sm"
+            className="fixed inset-0 z-200000 flex items-center justify-center bg-black/40 p-3 backdrop-blur-sm sm:p-6"
             role="dialog"
             aria-modal="true"
             aria-label={title}
@@ -74,7 +74,7 @@ const ModalCard: React.FC<ModalCardProps> = ({
             }}
         >
             {/* ── Modal card ── */}
-            <div className="relative flex max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-2xl shadow-2xl">
+            <div className="relative flex max-h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl md:max-h-[88vh] md:flex-row">
                 {/* ── Close button ── */}
                 <button
                     onClick={onClose}
@@ -100,9 +100,9 @@ const ModalCard: React.FC<ModalCardProps> = ({
                 {/* ══════════════════════
                     LEFT — Photo viewer
                 ══════════════════════ */}
-                <div className="flex w-[55%] flex-col bg-gray-50">
+                <div className="flex w-full flex-col bg-gray-50 md:w-[55%]">
                     {/* Image wrapper — padded so photo doesn't bleed to edges */}
-                    <div className="flex flex-1 items-center justify-center p-8 pb-8">
+                    <div className="flex flex-1 items-center justify-center p-4 pb-3 md:p-8 md:pb-8">
                         <div className="relative w-full overflow-hidden rounded-xl bg-gray-200 shadow-lg">
                             <img
                                 key={activeIndex}
@@ -171,7 +171,7 @@ const ModalCard: React.FC<ModalCardProps> = ({
                     {/* Thumbnail strip */}
                     {hasMultiplePhotos && (
                         <div
-                            className="flex justify-center gap-2 overflow-x-auto px-8 pb-6"
+                            className="flex justify-center gap-2 overflow-x-auto px-4 pb-4 md:px-8 md:pb-6"
                             style={{ scrollbarWidth: 'none' }}
                         >
                             {photos.map((src, i) => (
@@ -202,9 +202,9 @@ const ModalCard: React.FC<ModalCardProps> = ({
                 {/* ══════════════════════
                     RIGHT — Text content
                 ══════════════════════ */}
-                <div className="flex w-[45%] flex-col overflow-y-auto border-l border-gray-100 bg-white px-8 py-8">
+                <div className="flex w-full flex-1 flex-col overflow-y-auto border-t border-gray-100 bg-white px-4 py-5 md:w-[45%] md:border-t-0 md:border-l md:px-8 md:py-8">
                     {/* Title — pr-10 keeps it clear of the absolute close button */}
-                    <h2 className="pr-10 text-xl leading-snug font-bold tracking-tight break-all text-gray-900">
+                    <h2 className="pr-10 text-xl leading-snug font-bold tracking-tight break-words text-gray-900">
                         {title}
                     </h2>
 
@@ -213,14 +213,14 @@ const ModalCard: React.FC<ModalCardProps> = ({
                     {/* Description — flex-1 pushes bottom bar down */}
                     <div className="mt-5 flex flex-1 flex-col">
                         {description && (
-                            <p className="text-sm leading-relaxed break-all text-gray-600">
+                            <p className="text-sm leading-relaxed break-words text-gray-600">
                                 {description}
                             </p>
                         )}
                     </div>
 
                     {/* Bottom bar — foto tersedia (left) | date (right) */}
-                    <div className="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                    <div className="mt-6 flex flex-col items-start gap-2 border-t border-gray-100 pt-4 sm:flex-row sm:items-center sm:justify-between">
                         {/* Left: photo count */}
                         <div className="flex items-center gap-2 text-xs text-[#2ECC71]">
                             <svg

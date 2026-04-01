@@ -18,7 +18,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
     title = 'Galeri MI NU 02 Situwangi',
     description = 'Jelajahi momen-momen terbaik, kegiatan sekolah, prestasi siswa, dan fasilitas modern MI NU 02 Situwangi melalui dokumentasi visual yang menginspirasi. Saksikan perjalanan pendidikan teknologi informasi terdepan.',
     ctaText = 'Jelajahi Galeri',
-    ctaLink = '#gallery-showcase',
+    ctaLink = '#all-gallery',
     heroImage = '/images/gallery-hero.jpg',
     className = '',
     totalImages = 150,
@@ -27,8 +27,13 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
     const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         if (ctaLink?.startsWith('#')) {
             e.preventDefault();
-            const element = document.querySelector(ctaLink);
-            element?.scrollIntoView({
+            const targetElement =
+                document.querySelector(ctaLink) ??
+                (ctaLink === '#all-gallery'
+                    ? document.querySelector('#gallery-grid')
+                    : null);
+
+            targetElement?.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
             });
@@ -37,7 +42,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
 
     return (
         <section
-            className={`relative min-h-screen overflow-hidden bg-gray-50 ${className}`}
+            className={`relative min-h-[135vh] overflow-hidden bg-gray-50 lg:min-h-screen ${className}`}
         >
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
@@ -200,7 +205,7 @@ const HeroGallery: React.FC<HeroGalleryProps> = ({
             </div>
 
             {/* Bottom Wave Separator */}
-            <div className="absolute right-0 bottom-0 left-0 w-full overflow-hidden leading-none">
+            <div className="pointer-events-none absolute right-0 bottom-0 left-0 w-full overflow-hidden leading-none">
                 <svg
                     className="relative block h-16 w-full md:h-24 lg:h-32"
                     viewBox="0 0 1440 80"
