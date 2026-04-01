@@ -28,17 +28,20 @@ class AchievementForm
 
                 DatePicker::make('date_achievement')
                     ->label('Tanggal Perolehan')
-                    ->required(),
+                    ->required()
+                    ->native(false),
 
                 Select::make('level_achievement')
                     ->label('Level Prestasi')
                     ->options([
                         'District' => 'Kecamatan',
+                        'Regency' => 'Kabupaten',
                         'Provincial' => 'Provinsi',
                         'National' => 'Nasional',
                         'International' => 'Internasional',
                     ])
-                    ->required(),
+                    ->required()
+                    ->native(false),
 
                 FileUpload::make('image')
                     ->label('Bukti Foto')

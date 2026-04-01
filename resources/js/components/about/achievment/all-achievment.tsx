@@ -11,9 +11,19 @@ export interface AchievementItem {
     date: string; // ← add this
     level: string;
     description: string;
-    image?: string;
+    image?: string | null;
     award?: string;
 }
+
+const DEFAULT_ACHIEVEMENT_IMAGE = '/assets/image/default-image.webp';
+
+const LEVEL_LABEL_MAP: Record<string, string> = {
+    District: 'Kecamatan',
+    Regency: 'Kabupaten',
+    Provincial: 'Provinsi',
+    National: 'Nasional',
+    International: 'Internasional',
+};
 
 interface AllAchievementProps {
     achievements?: AchievementItem[];
@@ -68,6 +78,19 @@ const AllAchievement: React.FC<AllAchievementProps> = ({
     const stripHtml = (html: string): string =>
         html.replace(/<[^>]*>/g, '').trim();
 
+    const getAchievementImage = (image?: string | null): string => {
+        if (!image || !image.trim()) {
+            return DEFAULT_ACHIEVEMENT_IMAGE;
+        }
+
+        return image;
+    };
+
+    const getTranslatedLevel = (level: string): string => {
+        const normalizedLevel = level.trim();
+        return LEVEL_LABEL_MAP[normalizedLevel] ?? normalizedLevel;
+    };
+
     return (
         <section
             id="all-achievements"
@@ -119,11 +142,10 @@ const AllAchievement: React.FC<AllAchievementProps> = ({
                                 >
                                     <FacilityCard
                                         title={achievement.title}
-                                        image={
-                                            achievement.image ||
-                                            '/images/achievements/default.jpg'
-                                        }
-                                        description={`${achievement.category} • ${achievement.year} • ${achievement.level}${achievement.award ? ` • ${achievement.award}` : ''} — ${stripHtml(achievement.description)}`}
+                                        image={getAchievementImage(
+                                            achievement.image,
+                                        )}
+                                        description={`${achievement.category} • ${achievement.year} • ${getTranslatedLevel(achievement.level)}${achievement.award ? ` • ${achievement.award}` : ''} — ${stripHtml(achievement.description)}`}
                                         date={achievement.date}
                                         className="mb-0 h-80"
                                     />

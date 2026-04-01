@@ -41,7 +41,7 @@ class AchievementsTable
 
                 TextColumn::make('description')
                     ->label('Deskripsi')
-                    ->formatStateUsing(fn (string $state): string => Str::limit(strip_tags($state), 50))
+                    ->formatStateUsing(fn(string $state): string => Str::limit(strip_tags($state), 50))
                     ->wrap(),
 
                 TextColumn::make('date_achievement')
@@ -51,7 +51,24 @@ class AchievementsTable
 
                 TextColumn::make('level_achievement')
                     ->label('Level Prestasi')
-                    ->sortable(),
+                    ->sortable()
+                    ->badge() // Mengubah tampilan menjadi seperti widget/pill
+                    ->formatStateUsing(fn(string $state): string => match ($state) {
+                        'District' => 'Kecamatan',
+                        'Regency' => 'Kabupaten',
+                        'Provincial' => 'Provinsi',
+                        'National' => 'Nasional',
+                        'International' => 'Internasional',
+                        default => $state,
+                    })
+                    ->color(fn(string $state): string => match ($state) {
+                        'District' => 'gray',
+                        'Regency' => 'info',
+                        'Provincial' => 'success',
+                        'National' => 'warning',
+                        'International' => 'danger',
+                        default => 'primary',
+                    }),
 
                 ImageColumn::make('image')
                     ->label('Bukti Foto')

@@ -19,7 +19,8 @@ class GalleryForm
 
                 DatePicker::make('date')
                     ->label('Tanggal')
-                    ->required(),
+                    ->required()
+                    ->native(false),
 
                 FileUpload::make('image')
                     ->label('Gambar')
