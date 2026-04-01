@@ -533,7 +533,9 @@ const Navbar: React.FC = () => {
                         }}
                     >
                         <a
-                            href="/contact-us"
+                            href={whatsappUrl ?? '#'}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="flex w-full items-center justify-center rounded-full bg-gradient-to-b from-[#2ECC71] to-[#27ae60] px-6 py-3 font-semibold text-white transition-all duration-200 hover:shadow-lg"
                             onClick={closeMobileMenu}
                         >
