@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,7 +16,7 @@ return new class extends Migration
             $table->json('name_student')->nullable();
             $table->text('description')->nullable();
             $table->date('date_achievement');
-        $table->enum('level_achievement', ['District', 'Regency', 'Provincial', 'National', 'International']);
+            $table->enum('level_achievement', ['District', 'Regency', 'Provincial', 'National', 'International']);
             $table->string('image')->nullable();
             $table->timestamps();
         });
