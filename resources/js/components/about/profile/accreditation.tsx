@@ -30,8 +30,8 @@ const Accreditation: React.FC = () => {
                     {/* Content Column */}
                     <motion.div
                         className="order-1 flex flex-col justify-center space-y-6 lg:order-2"
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         transition={{
                             duration: 0.6,
                             ease: 'easeOut',
