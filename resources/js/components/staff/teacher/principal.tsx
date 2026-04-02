@@ -123,16 +123,16 @@ const Principal: React.FC<PrincipalProps> = ({ chiefs }) => {
 
                             {/* Info */}
                             <motion.div
-                                initial={{ opacity: 0, x: 40 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.7, delay: 0.3 }}
                                 className="flex-1"
                             >
                                 {/* Badge */}
                                 <motion.p
-                                    initial={{ opacity: 0, y: -10 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: 0.4 }}
                                     className="font-poppins mb-2 text-lg text-gray-500"
@@ -145,8 +145,8 @@ const Principal: React.FC<PrincipalProps> = ({ chiefs }) => {
 
                                 {/* Name */}
                                 <motion.h2
-                                    initial={{ opacity: 0, y: 10 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6, delay: 0.45 }}
                                     className="font-poppins text-4xl font-bold text-gray-900 md:text-5xl"
@@ -165,8 +165,8 @@ const Principal: React.FC<PrincipalProps> = ({ chiefs }) => {
 
                                 {/* Info Grid */}
                                 <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.6, delay: 0.6 }}
                                     className="grid grid-cols-1 gap-8 sm:grid-cols-2"
