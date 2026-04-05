@@ -75,7 +75,7 @@ class Schooltour extends Model
                         $newFilename = $pathInfo['filename'].'.webp';
                         $newPath = $pathInfo['dirname'].'/'.$newFilename;
 
-                        $encoded = $image->toWebp(quality: 100);
+                        $encoded = $image->toWebp(quality: 80);
 
                         $disk->put($newPath, (string) $encoded);
 

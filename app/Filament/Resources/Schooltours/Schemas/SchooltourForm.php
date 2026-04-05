@@ -48,6 +48,9 @@ class SchooltourForm
                     ->visibility('public')
                     ->maxSize(20480)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp'])
+                    ->imageResizeMode('force')
+                    ->imageResizeTargetWidth('4096')
+                    ->imageResizeTargetHeight('2048')
                     ->helperText('Maksimal 20MB. Bisa Menggunakan Tipe File JPG, JPEG, PNG, atau WEBP.'),
             ]);
     }
