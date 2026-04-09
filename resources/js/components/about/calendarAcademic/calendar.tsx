@@ -36,9 +36,9 @@ export const CATEGORY_CONFIG = {
 
 // FullCalendar's `end` is exclusive, so add 1 day for multi-day events
 function toFCEnd(dateStr: string): string {
-    const d = new Date(dateStr + 'T00:00:00');
-    d.setDate(d.getDate() + 1);
-    return d.toISOString().split('T')[0];
+    const [year, month, day] = dateStr.split('-').map(Number);
+    const utcDate = new Date(Date.UTC(year, month - 1, day + 1));
+    return utcDate.toISOString().slice(0, 10);
 }
 
 export function formatDateRange(start: string, end?: string | null): string {
